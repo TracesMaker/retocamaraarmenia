@@ -14,6 +14,8 @@ function actividadesfundamentales(baseUrl){
 					alert("Error al agregar");
 				} else {
 					$('#newactividadesfundamentales').modal('hide');
+					$('body').removeClass('modal-open');
+					$('.modal-backdrop').remove();
 					var Content_actividadesfundamentales = $("#div-actividadesfundamentales");
                     Request_actividadesfundamentales = baseUrl+"/reto/actividadesfundamentales/list";
       				Content_actividadesfundamentales.load(Request_actividadesfundamentales,function(response, status, xhr) {});
@@ -77,6 +79,9 @@ function riesgos(baseUrl){
 				if (data.id<0) {
 					alert("Error al agregar");
 				} else {
+					$('#newriesgos').modal('hide');
+					$('body').removeClass('modal-open');
+					$('.modal-backdrop').remove();
 					var Content_riesgos = $("#div-riesgos");
                     Request_riesgos = baseUrl+"/reto/riesgos/list";
       				Content_riesgos.load(Request_riesgos,function(response, status, xhr) {});
@@ -142,6 +147,9 @@ function caracteristicasprincipalessolucion(baseUrl){
 				if (data.id<0) {
 					alert("Error al agregar");
 				} else {
+					$('#newcaracteristicasprincipalessolucion').modal('hide');
+					$('body').removeClass('modal-open');
+					$('.modal-backdrop').remove();
 					var Content_caracteristicasprincipalessolucion = $("#div-caracteristicasprincipalessolucion");
                     Request_caracteristicasprincipalessolucion = baseUrl+"/reto/caracteristicasprincipalessolucion/list";
       				Content_caracteristicasprincipalessolucion.load(Request_caracteristicasprincipalessolucion,function(response, status, xhr) {});
@@ -206,6 +214,9 @@ function elementostangibles(baseUrl){
 				if (data.id<0) {
 					alert("Error al agregar");
 				} else {
+					$('#newelementostangibles').modal('hide');
+					$('body').removeClass('modal-open');
+					$('.modal-backdrop').remove();
 					var Content_elementostangibles = $("#div-elementostangibles");
                     Request_elementostangibles = baseUrl+"/reto/elementostangibles/list";
       				Content_elementostangibles.load(Request_elementostangibles,function(response, status, xhr) {});
@@ -268,6 +279,9 @@ function indicadores(baseUrl){
 				if (data.id<0) {
 					alert("Error al agregar");
 				} else {
+					$('#newindicadores').modal('hide');
+					$('body').removeClass('modal-open');
+					$('.modal-backdrop').remove();
 					var Content_indicadores = $("#div-indicadores");
                     Request_indicadores = baseUrl+"/reto/indicadores/list";
       				Content_indicadores.load(Request_indicadores,function(response, status, xhr) {});
@@ -329,6 +343,9 @@ function caracteristicasprincipalesimplementacion(baseUrl){
 				if (data.id<0) {
 					alert("Error al agregar");
 				} else {
+					$('#newcaracteristicasprincipalesimplementacion').modal('hide');
+					$('body').removeClass('modal-open');
+					$('.modal-backdrop').remove();
 					var Content_caracteristicasprincipalesimplementacion = $("#div-caracteristicasprincipalesimplementacion");
                     Request_caracteristicasprincipalesimplementacion = baseUrl+"/reto/caracteristicasprincipalesimplementacion/list";
       				Content_caracteristicasprincipalesimplementacion.load(Request_caracteristicasprincipalesimplementacion,function(response, status, xhr) {});
@@ -343,6 +360,8 @@ function caracteristicasprincipalesimplementacion(baseUrl){
 		if (confirm("¿Esta seguro de eliminar el registro seleccionado?")){
 			$.post( _request, function(data){ 
 				if(data.id > 0){
+					$('body').removeClass('modal-open');
+					$('.modal-backdrop').remove();
 					var Content = $("#div-caracteristicasprincipalesimplementacion");
                     Request = baseUrl+"/reto/caracteristicasprincipalesimplementacion/list";
       				Content.load(Request,function(response, status, xhr) {});
@@ -393,6 +412,8 @@ function otrosdesarrollos(baseUrl){
 				if (data.id<0) {
 					alert("Error al agregar");
 				} else {
+					$('body').removeClass('modal-open');
+					$('.modal-backdrop').remove();
 					var Content_otrosdesarrollos = $("#div-otrosdesarrollos");
                     Request_otrosdesarrollos = baseUrl+"/reto/otrosdesarrollos/list";
       				Content_otrosdesarrollos.load(Request_otrosdesarrollos,function(response, status, xhr) {});
@@ -453,6 +474,8 @@ function riesgostecnicos(baseUrl){
 				if (data.id<0) {
 					alert("Error al agregar");
 				} else {
+					$('body').removeClass('modal-open');
+					$('.modal-backdrop').remove();
 					var Content_riesgostecnicos = $("#div-riesgostecnicos");
                     Request_riesgostecnicos = baseUrl+"/reto/riesgostecnicos/list";
       				Content_riesgostecnicos.load(Request_riesgostecnicos,function(response, status, xhr) {});
@@ -519,6 +542,8 @@ function solucionessimilares(baseUrl){
 				if (data.id<0) {
 					alert("Error al agregar");
 				} else {
+					$('body').removeClass('modal-open');
+					$('.modal-backdrop').remove();
 					var Content_solucionessimilares = $("#div-solucionessimilares");
                     Request_solucionessimilares = baseUrl+"/reto/solucionessimilares/list";
       				Content_solucionessimilares.load(Request_solucionessimilares,function(response, status, xhr) {});
