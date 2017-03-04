@@ -1,0 +1,46 @@
+<div class="page-header">
+    <h2>Agregando Qué riesgos técnicos o de funcionalidad se pueden presentar cuando la solución esté completamente implementada</h2>
+</div>
+<div id="formriesgostecnicos" > <?php echo $this->form; ?> </div>
+<script> 
+$(document).ready(function(){
+	loadpage(); 
+
+
+	reloadriesgostecnicos();
+})
+function clicksaveformriesgostecnicos()
+{
+	var buttonSelect = $(this);	
+	buttonSelect.parents(".form-actions").find("button").button('loading');
+	if ($("#riesgostecnicosform").valid()) {
+		$.post("<?php echo $this->baseUrl()?>/reto/riesgostecnicos/add", $("#riesgostecnicosform").serialize(),
+			function(data) {
+				if (data.id<0) {
+					$("#riesgostecnicosform").parent().html(data.form);					
+					reloadriesgostecnicos();
+					buttonSelect.parents(".form-actions").find("button").button('reset');
+				} else {
+			        $('.notify').notify({message: { text: '  Registro agregado con éxito ' }}).show();
+			        show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/riesgostecnicos/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+				}
+			}
+		)
+	} else {
+		buttonSelect.parents(".form-actions").find("button").button('reset');
+		alert("Formulario invalido");
+	}
+}
+function reloadriesgostecnicos(){
+	$("#submitriesgostecnicos").click(clicksaveformriesgostecnicos);
+}
+</script>

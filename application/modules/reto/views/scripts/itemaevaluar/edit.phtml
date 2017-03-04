@@ -1,0 +1,47 @@
+<div class="page-header">
+    <h2>Editando Items a evaluar</h2>
+</div>
+<div id="formitemaevaluar" > 
+<?php echo $this->form; ?> 
+</div>
+<script>
+$(document).ready(function(){
+	loadpage(); 
+
+	reloaditemaevaluar();	
+})
+function clicksaveformitemaevaluar()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+    if ($("#itemaevaluarform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/itemaevaluar/edit", $("#itemaevaluarform").serialize(),
+            function(data) {
+                if (data.id<0) {
+                    $("#itemaevaluarform").parent().html(data.form);                  
+                    reloaditemaevaluar();
+                    buttonSelect.parents(".form-actions").find("button").button('reset');
+                } else {
+                    $('.notify').notify({message: { text: '  Registro actualizado con éxito ' }}).show();
+                    show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/itemaevaluar/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+                }
+            }
+        )
+    } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+function reloaditemaevaluar(){
+	$("#submititemaevaluar").click(clicksaveformitemaevaluar);
+}
+</script>

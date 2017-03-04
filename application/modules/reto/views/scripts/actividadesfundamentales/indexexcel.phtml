@@ -1,0 +1,33 @@
+<?php
+	header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+	header("Content-type:   application/x-msexcel; charset=utf-8");
+	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("content-disposition: attachment;filename=actividadesfundamentales_". date("Y_m_d_H_i_s",time()).".xls");
+?>
+<table border="1" align="center">
+	<thead >
+		<tr><th colspan="3" style="font-weight: bold;font-style: italic;">Listado de Cuáles son las actividades fundamentales que se deben desarrolla en propuesta? </th></tr>
+		<tr style="background-color: #C4C9DF; color:black;">
+			<th>Nombre de la actividad</th>
+			<th>Qué se espera obtener de esta actividad</th>
+			<th>Cuanto tiempo dura la actividad?</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($this->pagination as $key => $obj) : ?>
+		<?php $class = fmod($key, 2) == 0 ? ' background-color: #F9F9F9;' : ''; ?>
+		<tr style="<?php echo $class; ?>">
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getActividades(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getResultadoactividad(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getTiempoactividad(); ?>
+			</td>
+		</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

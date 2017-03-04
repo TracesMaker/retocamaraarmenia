@@ -1,0 +1,46 @@
+<div class="page-header">
+    <h2>Agregando Qué indicadores se podrían usar para medir la eficiencia de esta solución cuando esta esté en funcionamiento</h2>
+</div>
+<div id="formindicadores" > <?php echo $this->form; ?> </div>
+<script> 
+$(document).ready(function(){
+	loadpage(); 
+
+
+	reloadindicadores();
+})
+function clicksaveformindicadores()
+{
+	var buttonSelect = $(this);	
+	buttonSelect.parents(".form-actions").find("button").button('loading');
+	if ($("#indicadoresform").valid()) {
+		$.post("<?php echo $this->baseUrl()?>/reto/indicadores/add", $("#indicadoresform").serialize(),
+			function(data) {
+				if (data.id<0) {
+					$("#indicadoresform").parent().html(data.form);					
+					reloadindicadores();
+					buttonSelect.parents(".form-actions").find("button").button('reset');
+				} else {
+			        $('.notify').notify({message: { text: '  Registro agregado con éxito ' }}).show();
+			        show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/indicadores/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+				}
+			}
+		)
+	} else {
+		buttonSelect.parents(".form-actions").find("button").button('reset');
+		alert("Formulario invalido");
+	}
+}
+function reloadindicadores(){
+	$("#submitindicadores").click(clicksaveformindicadores);
+}
+</script>

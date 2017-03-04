@@ -1,0 +1,34 @@
+<?php $obj = $this->datos; ?>
+<div class="box-header navbar-inner">
+	<h3><button class="btn btn closeform" title="Atras"><i class="icon-step-backward"></i></button><span class="break"></span> Información de Qué indicadores se podrían usar para medir la eficiencia de esta solución cuando esta esté en funcionamiento</h3>
+    <div class="box-icon btn-group">
+    	<button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>
+    </div>
+</div>
+<div class="box-content">
+	<table class="table table-condensed table-striped">
+		<tr>
+			<td>
+				<b>Indicador: </b></td>
+			<td>
+			<?php echo $obj->getIndicador(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Descripción: </b></td>
+			<td>
+			<?php echo $obj->getDescripcion(); ?>	
+			</td>
+		</tr>
+	<?php if ($this->datos->getSolucionador() > 0 ): ?>
+		<tr>
+			<td>
+				<b>Solucionador: </b></td>
+			<td>
+				<?php echo $this->datos->getSolucionadorObject()->get_Label_model(); ?>
+			</td>
+		</tr>
+	<?php endif ?> 
+	</table>
+ </div>

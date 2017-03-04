@@ -1,0 +1,47 @@
+<div class="page-header">
+    <h2>Editando Qué otros desarrollos complementarios se deben realizar, para una optima implementación de la solución.</h2>
+</div>
+<div id="formotrosdesarrollos" > 
+<?php echo $this->form; ?> 
+</div>
+<script>
+$(document).ready(function(){
+	loadpage(); 
+
+	reloadotrosdesarrollos();	
+})
+function clicksaveformotrosdesarrollos()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+    if ($("#otrosdesarrollosform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/otrosdesarrollos/edit", $("#otrosdesarrollosform").serialize(),
+            function(data) {
+                if (data.id<0) {
+                    $("#otrosdesarrollosform").parent().html(data.form);                  
+                    reloadotrosdesarrollos();
+                    buttonSelect.parents(".form-actions").find("button").button('reset');
+                } else {
+                    $('.notify').notify({message: { text: '  Registro actualizado con éxito ' }}).show();
+                    show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/otrosdesarrollos/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+                }
+            }
+        )
+    } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+function reloadotrosdesarrollos(){
+	$("#submitotrosdesarrollos").click(clicksaveformotrosdesarrollos);
+}
+</script>

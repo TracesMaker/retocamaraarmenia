@@ -1,0 +1,47 @@
+<div class="page-header">
+    <h2>Editando Cuáles son las actividades fundamentales que se deben desarrolla en propuesta? </h2>
+</div>
+<div id="formactividadesfundamentales" > 
+<?php echo $this->form; ?> 
+</div>
+<script>
+$(document).ready(function(){
+	loadpage(); 
+
+	reloadactividadesfundamentales();	
+})
+function clicksaveformactividadesfundamentales()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+    if ($("#actividadesfundamentalesform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/actividadesfundamentales/edit", $("#actividadesfundamentalesform").serialize(),
+            function(data) {
+                if (data.id<0) {
+                    $("#actividadesfundamentalesform").parent().html(data.form);                  
+                    reloadactividadesfundamentales();
+                    buttonSelect.parents(".form-actions").find("button").button('reset');
+                } else {
+                    $('.notify').notify({message: { text: '  Registro actualizado con éxito ' }}).show();
+                    show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/actividadesfundamentales/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+                }
+            }
+        )
+    } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+function reloadactividadesfundamentales(){
+	$("#submitactividadesfundamentales").click(clicksaveformactividadesfundamentales);
+}
+</script>

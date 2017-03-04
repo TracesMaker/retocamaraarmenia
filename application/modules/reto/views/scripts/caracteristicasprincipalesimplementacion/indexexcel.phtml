@@ -1,0 +1,37 @@
+<?php
+	header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+	header("Content-type:   application/x-msexcel; charset=utf-8");
+	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("content-disposition: attachment;filename=caracteristicasprincipalesimplementacion_". date("Y_m_d_H_i_s",time()).".xls");
+?>
+<table border="1" align="center">
+	<thead >
+		<tr><th colspan="4" style="font-weight: bold;font-style: italic;">Listado de Características principales </th></tr>
+		<tr style="background-color: #C4C9DF; color:black;">
+			<th>Atributo Básico (característica sin la cual la solución no existe)</th>
+			<th>Tecnología que puede dar soporte a la existencia de este atributo</th>
+			<th>Grado de dificultad para involucrar la tecnología a la información</th>
+			<th>Explicación del grado de dificultad otorgado</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($this->pagination as $key => $obj) : ?>
+		<?php $class = fmod($key, 2) == 0 ? ' background-color: #F9F9F9;' : ''; ?>
+		<tr style="<?php echo $class; ?>">
+			<td style='mso-number-format:"@"'>
+			<?php echo $obj->getAtributobasicoObject()->get_Label_model(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getEstadodeldesarrollo(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getGradodeldesarrollo(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getAspectospendientes(); ?>
+			</td>
+		</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

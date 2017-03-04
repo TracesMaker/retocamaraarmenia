@@ -1,0 +1,46 @@
+<div class="page-header">
+    <h2>Agregando Agrupacion</h2>
+</div>
+<div id="formagrupacion" > <?php echo $this->form; ?> </div>
+<script> 
+$(document).ready(function(){
+	loadpage(); 
+
+
+	reloadagrupacion();
+})
+function clicksaveformagrupacion()
+{
+	var buttonSelect = $(this);	
+	buttonSelect.parents(".form-actions").find("button").button('loading');
+	if ($("#agrupacionform").valid()) {
+		$.post("<?php echo $this->baseUrl()?>/default/agrupacion/add", $("#agrupacionform").serialize(),
+			function(data) {
+				if (data.id<0) {
+					$("#agrupacionform").parent().html(data.form);					
+					reloadagrupacion();
+					buttonSelect.parents(".form-actions").find("button").button('reset');
+				} else {
+			        $('.notify').notify({message: { text: '  Registro agregado con éxito ' }}).show();
+			        show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents("#subcontainer");
+                        Request = "<?php echo $this->baseUrl()?>/default/agrupacion/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+				}
+			}
+		)
+	} else {
+		buttonSelect.parents(".form-actions").find("button").button('reset');
+		alert("Formulario invalido");
+	}
+}
+function reloadagrupacion(){
+	$("#submitagrupacion").click(clicksaveformagrupacion);
+}
+</script>

@@ -1,0 +1,47 @@
+<div class="page-header">
+    <h2>Editando Estados del reto</h2>
+</div>
+<div id="formestadosdelreto" > 
+<?php echo $this->form; ?> 
+</div>
+<script>
+$(document).ready(function(){
+	loadpage(); 
+
+	reloadestadosdelreto();	
+})
+function clicksaveformestadosdelreto()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+    if ($("#estadosdelretoform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/estadosdelreto/edit", $("#estadosdelretoform").serialize(),
+            function(data) {
+                if (data.id<0) {
+                    $("#estadosdelretoform").parent().html(data.form);                  
+                    reloadestadosdelreto();
+                    buttonSelect.parents(".form-actions").find("button").button('reset');
+                } else {
+                    $('.notify').notify({message: { text: '  Registro actualizado con éxito ' }}).show();
+                    show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/estadosdelreto/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+                }
+            }
+        )
+    } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+function reloadestadosdelreto(){
+	$("#submitestadosdelreto").click(clicksaveformestadosdelreto);
+}
+</script>

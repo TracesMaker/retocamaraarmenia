@@ -1,0 +1,47 @@
+<div class="page-header">
+    <h2>Editando Qué riesgos técnicos identifica que se pueden presentar para llegar a la implementación de esta solución?</h2>
+</div>
+<div id="formriesgos" > 
+<?php echo $this->form; ?> 
+</div>
+<script>
+$(document).ready(function(){
+	loadpage(); 
+
+	reloadriesgos();	
+})
+function clicksaveformriesgos()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+    if ($("#riesgosform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/riesgos/edit", $("#riesgosform").serialize(),
+            function(data) {
+                if (data.id<0) {
+                    $("#riesgosform").parent().html(data.form);                  
+                    reloadriesgos();
+                    buttonSelect.parents(".form-actions").find("button").button('reset');
+                } else {
+                    $('.notify').notify({message: { text: '  Registro actualizado con éxito ' }}).show();
+                    show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/riesgos/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+                }
+            }
+        )
+    } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+function reloadriesgos(){
+	$("#submitriesgos").click(clicksaveformriesgos);
+}
+</script>

@@ -1,0 +1,45 @@
+<table id="caracteristicasprincipalessolucionTable" class="table table-striped table-condensed " formBuscar="caracteristicasprincipalessolucionformbuscar" >
+<thead >
+	<tr>
+		<th  class="sort " sort="atributo" >Atributo</th>
+		<th  class="sort hidden-phone" sort="descripcionatributo" >¿Por qué este atributo es importante en la solución?</th>
+		<th  class="sort hidden-phone" sort="diferenciador" >¿Es un atributo diferenciador frente a otras posibles soluciones que se encuentran en el mercado?</th>
+		<th  class="sort hidden-phone" sort="ventajas" >Si en la casilla anterior, su respuesta fue afirmativa, por favor, explique por qué es diferenciador.</th>
+	</tr>
+</thead>
+<tbody>
+<?php foreach ($this->pagination as $obj) : ?>
+	<tr>
+		<td class="">
+			<?php echo $obj->getAtributo(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getDescripcionatributo(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php if($obj->getDiferenciador()==1)echo "Si"; else echo "No"; ?>
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getVentajas(); ?>	
+		</td>
+		
+
+		<?php if (false) { ?>
+		<td class="no-print" >
+		  <div class="btn-group" title="<?php echo $obj->get_Label_Model() ?>">
+			<?php if($this->permisos["edit"]  ): ?>
+				<button title="Editar" class="btn btn-success loadform" type="button" request="<?php echo $this->baseUrl() ?>/reto/caracteristicasprincipalessolucion/edit/id/<?php echo $obj->getId() ?>" ><i class="icon-pencil"></i></button>
+			<?php endif ?>
+			<?php if($this->permisos["detail"] ): ?>
+				<button title="Detalles" class="btn btn-info loadform" type="button" request="<?php echo $this->baseUrl() ?>/reto/caracteristicasprincipalessolucion/detail/id/<?php echo $obj->getId() ?>"><i class="icon-fullscreen"></i></button>
+			<?php endif ?>
+			<?php if($this->permisos["delete"]  ): ?>
+				<button title="Eliminar" class="btn btn-danger deleteaction" type="button" request="<?php echo $this->baseUrl() ?>/reto/caracteristicasprincipalessolucion/delete/id/<?php echo $obj->getId() ?>"><i class="icon-trash"></i></button>
+			<?php endif ?>
+            </div>
+		</td>
+		<?php } ?>
+	</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

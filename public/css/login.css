@@ -1,0 +1,50 @@
+body {
+	padding-top: 10%;
+	padding-bottom: 40px;
+	background-color: #F2F2F2;
+}
+
+.container {
+    width: 650px;
+}
+
+body div.container.body {
+	background-color: #fff;
+	box-shadow: 0 0 5px #BBBBBB;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 4px 4px 4px 4px;
+	display: block;
+	margin-top: 10px;
+}
+
+div.logo_container{
+	display: block;
+	margin-top: 25%;
+}
+div.login_form{
+	 border-left: 1px solid #DDDDDD;
+    float: left;
+    font-size: 13px;
+    margin: 28px 0;
+    padding: 30px 49px;
+}
+
+@media (max-width: 767px) {
+
+	div.login_form{
+	    margin: 0;
+	    padding: 0px 32px;
+	}
+	div.logo_container{
+		margin:0 25px;
+		padding:0 20px ;
+	}
+
+	.container {
+	    width: 290px;
+	}
+	body {
+		padding-top: 0;
+		padding-bottom: 60px;
+	}
+}

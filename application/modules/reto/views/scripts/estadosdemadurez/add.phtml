@@ -1,0 +1,46 @@
+<div class="page-header">
+    <h2>Agregando Estados de madurez</h2>
+</div>
+<div id="formestadosdemadurez" > <?php echo $this->form; ?> </div>
+<script> 
+$(document).ready(function(){
+	loadpage(); 
+
+
+	reloadestadosdemadurez();
+})
+function clicksaveformestadosdemadurez()
+{
+	var buttonSelect = $(this);	
+	buttonSelect.parents(".form-actions").find("button").button('loading');
+	if ($("#estadosdemadurezform").valid()) {
+		$.post("<?php echo $this->baseUrl()?>/reto/estadosdemadurez/add", $("#estadosdemadurezform").serialize(),
+			function(data) {
+				if (data.id<0) {
+					$("#estadosdemadurezform").parent().html(data.form);					
+					reloadestadosdemadurez();
+					buttonSelect.parents(".form-actions").find("button").button('reset');
+				} else {
+			        $('.notify').notify({message: { text: '  Registro agregado con éxito ' }}).show();
+			        show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/estadosdemadurez/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+				}
+			}
+		)
+	} else {
+		buttonSelect.parents(".form-actions").find("button").button('reset');
+		alert("Formulario invalido");
+	}
+}
+function reloadestadosdemadurez(){
+	$("#submitestadosdemadurez").click(clicksaveformestadosdemadurez);
+}
+</script>

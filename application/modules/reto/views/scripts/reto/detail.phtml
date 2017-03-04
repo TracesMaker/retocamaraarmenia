@@ -1,0 +1,71 @@
+<?php $obj = $this->datos; ?>
+<div class="box-header navbar-inner">
+	<h3><button class="btn btn closeform" title="Atras"><i class="icon-step-backward"></i></button><span class="break"></span> Información de Reto</h3>
+    <div class="box-icon btn-group">
+    	<button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>
+    </div>
+</div>
+<div class="box-content">
+	<table class="table table-condensed table-striped">
+		<tr>
+			<td>
+				<b>Tìtulo: </b></td>
+			<td>
+			<?php echo $obj->getTitulo(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Descripciòn corta: </b></td>
+			<td>
+			<?php echo $obj->getDescripcioncorta(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Descripciòn completa: </b></td>
+			<td>
+			<?php echo $obj->getDescripcioncompleta(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>URL del video: </b></td>
+			<td>
+			<?php echo $obj->getUrlvideo(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Imagen: </b></td>
+			<td>
+		<?php if(strlen($obj->getImagen())>0){ ?>
+		<a target="_blank" href="<?php echo $this->baseUrl()?>/Files/retoimagen/<?php echo $obj->getImagen(); ?>" ><?php echo $obj->getImagen(); ?></a>
+		<?php } ?>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Fecha de inicio: </b></td>
+			<td>
+			<?php echo $obj->getFechainicio(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Fecha de finalizaciòn: </b></td>
+			<td>
+			<?php echo $obj->getFechafin(); ?>	
+			</td>
+		</tr>
+	<?php if ($this->datos->getEstado() > 0 ): ?>
+		<tr>
+			<td>
+				<b>Estado del reto: </b></td>
+			<td>
+				<?php echo $this->datos->getEstadoObject()->get_Label_model(); ?>
+			</td>
+		</tr>
+	<?php endif ?> 
+	</table>
+ </div>

@@ -1,0 +1,73 @@
+.full-container{
+	background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 4px 4px 4px 4px;
+	padding: 30px 30px 20px!important;
+}
+.full-container-body{
+	float: left;
+	margin-top: 30px;
+	width: 100%;
+}
+
+/* Calendarios */
+.table-calendar tbody tr td {
+	height: 65px;
+	width: 95px;
+}
+.table-calendar .calendar-day-number{
+	color: #2E6E9E;
+    font-weight: bold;
+}
+.table-calendar tbody tr td.previous,
+.table-calendar tbody tr td.next {
+	opacity: 0.3;
+}
+.container-event{
+	position: relative;
+}
+
+.container-event a.interval-0{
+	position: relative;
+}
+.container-event a.interval-1{
+	width: 210px !important;
+	position: absolute;
+	bottom: -40px;
+}
+.calendar-day-number input{
+	margin: -2px 0 0 10px;
+}
+
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus,
+	.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle{
+	    background-color: #287125;
+	    color: #FFF;
+	    text-shadow: none;
+	    box-shadow: none;
+	    -webkit-border-radius: 0 0 6px 6px ;
+		-moz-border-radius: 0 0 6px 6px;
+		border-radius: 0 0 6px 6px;
+	}
+.navbar .nav li.dropdown.open>.dropdown-toggle .caret, .navbar .nav li.dropdown.active>.dropdown-toggle .caret, .navbar .nav li.dropdown.open.active>.dropdown-toggle .caret {
+		border-top-color: #fff;
+		border-bottom-color: #fff;
+}
+
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover, .dropdown-menu>.active>a:focus{
+	 background-color: #287125;
+	 background-image: inherit;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-submenu:hover > a, .dropdown-submenu:focus > a,
+.navbar .nav li.dropdown.open>.dropdown-toggle {
+	 background-color: #5BB75B;
+	 background-image: inherit;
+}
+.navbar .nav{
+	margin: 0 10px 5px 0;
+}
+.navbar .btn-navbar{
+	color:#000;
+}
+.navbar .btn-navbar:hover,.navbar .btn-navbar:focus{
+	color:#287125;
+}

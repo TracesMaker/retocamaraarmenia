@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 	<?php echo $this->headTitle(); ?>
+    <?php echo $this->headMeta(); ?>
+    <?php echo $this->headLink(); ?>
+
+	<!-- Le styles -->
+    <link type='text/css' href="<?php echo $this->baseUrl() ?>/css/bootstrap.css" rel="stylesheet">
+    <link type='text/css' href="<?php echo $this->baseUrl() ?>/css/bootstrap-combobox.css" rel="stylesheet">
+    <link type='text/css' href="<?php echo $this->baseUrl() ?>/css/font-awesome.css" rel="stylesheet">
+    <link type='text/css' href="<?php echo $this->baseUrl() ?>/css/style-back.css" rel="stylesheet">
+    <link type='text/css' href='<?php echo $this->baseUrl() ?>/css/jquery-ui.css' rel='stylesheet'/>
+    <link type='text/css' href='<?php echo $this->baseUrl() ?>/css/jquery.ui.theme.css' rel='stylesheet'/>
+    <link type='text/css' href='<?php echo $this->baseUrl() ?>/css/fullcalendar.css'  rel='stylesheet'/>
+    <script src="<?php echo $this->baseUrl() ?>/js/jquery.js"></script>
+    <script> baseUrl = "<?php echo $this->baseUrl() ?>" </script>
+</head>
+	<body>
+		<div class="navbar navbar-static-top">
+			<div>
+				<div class="container-fluid">
+					<div class="row-fluid">
+						 <a class="brand" href="<?php echo $this->baseUrl() ?>">VEOLIA</a>
+
+						<div>
+							<button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<div class="nav-collapse collapse pull-right">
+							<?php
+								$auth = new Zend_Session_Namespace('veoliaZend_Auth');
+								$view = Zend_Controller_Front::getInstance()
+										->getParam('bootstrap')
+										->getResource('layout')
+										->getView();
+
+								$navContainerConfig = new Zend_Config_Xml('../menus/menuprincipal.xml', 'nav');
+								$navContainer = new Zend_Navigation($navContainerConfig);
+								$view->navigation($navContainer)
+									->setAcl($auth->_acl)
+									->setRole($auth->rol);
+
+								echo $view->navigation()->bootstrapmenu()->renderMenu($view->navPrincipal, array('ulClass' => 'nav'));
+							?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid body">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="box  contenido" >
+						<?php echo $this->layout()->content; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	 <!-- Le javascript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+    <script src="<?php echo $this->baseUrl() ?>/js/scripts_generales.js"></script>
+    <script src="<?php echo $this->baseUrl() ?>/js/listado.js"></script>
+    <script src="<?php echo $this->baseUrl() ?>/js/formularios.js"></script>
+    <script src="<?php echo $this->baseUrl() ?>/js/bootstrap-notify.js"></script>
+    <script src="<?php echo $this->baseUrl() ?>/js/jquery.validate.min.js"></script>
+    <script src="<?php echo $this->baseUrl() ?>/js/bootstrap.min.js"></script>
+    <script src="<?php echo $this->baseUrl() ?>/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo $this->baseUrl() ?>/js/jquery-ui-1.9.1.custom.min.js"></script>
+    <script src="<?php echo $this->baseUrl() ?>/js/jquery-ui-timepicker-addon.js"></script>
+    <script src="<?php echo $this->baseUrl() ?>/js/jquery-ui-sliderAccess.js"></script>
+    <script src="<?php echo $this->baseUrl() ?>/js/bootstrap-combobox.js"></script>
+    <?php echo $this->headScript(); ?>
+	<div class="notify"></div>
+	<footer>
+		<p class="navbar-text pull-right">Powered By
+			<a href="http://www.easydev.co" target="_black">
+				<img title="EasyDev" src="<?php echo $this->baseUrl() ?>/img/powered.png" style="height: 30px;" />
+			</a>
+		</p>
+	</footer>
+  </body>
+</html>

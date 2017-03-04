@@ -1,0 +1,39 @@
+<table id="elementostangiblesTable" class="table table-striped table-condensed " formBuscar="elementostangiblesformbuscar" >
+<thead >
+	<tr>
+		<th class="">Elemento físico</th>
+		<th class="hidden-phone">Descripción</th>
+		<th class="hidden-phone">Utilidad o función dentro de la solución</th>
+	</tr>
+</thead>
+<tbody>
+<?php foreach ($this->pagination as $obj) : ?>
+	<tr>
+		<td class="">
+			<?php echo $obj->getElementofisico(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getDescripcion(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getFuncionenlasolucion(); ?>	
+		</td>
+		<?php if (false) { ?>
+		<td class="no-print" >
+		  <div class="btn-group" title="<?php echo $obj->get_Label_Model() ?>">
+			<?php if($this->permisos["edit"]  ): ?>
+				<button title="Editar" class="btn btn-success loadform" type="button" request="<?php echo $this->baseUrl() ?>/reto/elementostangibles/edit/id/<?php echo $obj->getId() ?>" ><i class="icon-pencil"></i></button>
+			<?php endif ?>
+			<?php if($this->permisos["detail"] ): ?>
+				<button title="Detalles" class="btn btn-info loadform" type="button" request="<?php echo $this->baseUrl() ?>/reto/elementostangibles/detail/id/<?php echo $obj->getId() ?>"><i class="icon-fullscreen"></i></button>
+			<?php endif ?>
+			<?php if($this->permisos["delete"]  ): ?>
+				<button title="Eliminar" class="btn btn-danger deleteaction" type="button" request="<?php echo $this->baseUrl() ?>/reto/elementostangibles/delete/id/<?php echo $obj->getId() ?>"><i class="icon-trash"></i></button>
+			<?php endif ?>
+            </div>
+		</td>
+		<?php } ?>
+	</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

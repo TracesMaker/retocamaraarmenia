@@ -1,0 +1,47 @@
+<?php
+	header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+	header("Content-type:   application/x-msexcel; charset=utf-8");
+	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("content-disposition: attachment;filename=reto_". date("Y_m_d_H_i_s",time()).".xls");
+?>
+<table border="1" align="center">
+	<thead >
+		<tr><th colspan="6" style="font-weight: bold;font-style: italic;">Listado de Reto</th></tr>
+		<tr style="background-color: #C4C9DF; color:black;">
+			<th>Descripciòn corta</th>
+			<th>Descripciòn completa</th>
+			<th>Imagen</th>
+			<th>Fecha de inicio</th>
+			<th>Fecha de finalizaciòn</th>
+			<th>Estado del reto</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($this->pagination as $key => $obj) : ?>
+		<?php $class = fmod($key, 2) == 0 ? ' background-color: #F9F9F9;' : ''; ?>
+		<tr style="<?php echo $class; ?>">
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getDescripcioncorta(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getDescripcioncompleta(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+		<?php if(strlen($obj->getImagen())>0){ ?>
+		<a target="_blank" href="<?php echo $this->baseUrl()?>/Files/retoimagen/<?php echo $obj->getImagen(); ?>" ><?php echo $obj->getImagen(); ?></a>
+		<?php } ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getFechainicio(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getFechafin(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+			<?php echo $obj->getEstadoObject()->get_Label_model(); ?>
+			</td>
+		</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

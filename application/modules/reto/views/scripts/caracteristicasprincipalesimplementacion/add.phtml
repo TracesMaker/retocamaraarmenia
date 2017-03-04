@@ -1,0 +1,46 @@
+<div class="page-header">
+    <h2>Agregando Características principales </h2>
+</div>
+<div id="formcaracteristicasprincipalesimplementacion" > <?php echo $this->form; ?> </div>
+<script> 
+$(document).ready(function(){
+	loadpage(); 
+
+
+	reloadcaracteristicasprincipalesimplementacion();
+})
+function clicksaveformcaracteristicasprincipalesimplementacion()
+{
+	var buttonSelect = $(this);	
+	buttonSelect.parents(".form-actions").find("button").button('loading');
+	if ($("#caracteristicasprincipalesimplementacionform").valid()) {
+		$.post("<?php echo $this->baseUrl()?>/reto/caracteristicasprincipalesimplementacion/add", $("#caracteristicasprincipalesimplementacionform").serialize(),
+			function(data) {
+				if (data.id<0) {
+					$("#caracteristicasprincipalesimplementacionform").parent().html(data.form);					
+					reloadcaracteristicasprincipalesimplementacion();
+					buttonSelect.parents(".form-actions").find("button").button('reset');
+				} else {
+			        $('.notify').notify({message: { text: '  Registro agregado con éxito ' }}).show();
+			        show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/caracteristicasprincipalesimplementacion/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+				}
+			}
+		)
+	} else {
+		buttonSelect.parents(".form-actions").find("button").button('reset');
+		alert("Formulario invalido");
+	}
+}
+function reloadcaracteristicasprincipalesimplementacion(){
+	$("#submitcaracteristicasprincipalesimplementacion").click(clicksaveformcaracteristicasprincipalesimplementacion);
+}
+</script>

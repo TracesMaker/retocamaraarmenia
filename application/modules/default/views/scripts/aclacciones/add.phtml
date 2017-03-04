@@ -1,0 +1,46 @@
+<div class="page-header">
+    <h2>Agregando Acciones</h2>
+</div>
+<div id="formaclacciones" > <?php echo $this->form; ?> </div>
+<script> 
+$(document).ready(function(){
+	loadpage(); 
+
+
+	reloadaclacciones();
+})
+function clicksaveformaclacciones()
+{
+	var buttonSelect = $(this);	
+	buttonSelect.parents(".form-actions").find("button").button('loading');
+	if ($("#aclaccionesform").valid()) {
+		$.post("<?php echo $this->baseUrl()?>/default/aclacciones/add", $("#aclaccionesform").serialize(),
+			function(data) {
+				if (data.id<0) {
+					$("#aclaccionesform").parent().html(data.form);					
+					reloadaclacciones();
+					buttonSelect.parents(".form-actions").find("button").button('reset');
+				} else {
+			        $('.notify').notify({message: { text: '  Registro agregado con éxito ' }}).show();
+			        show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/default/aclacciones/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+				}
+			}
+		)
+	} else {
+		buttonSelect.parents(".form-actions").find("button").button('reset');
+		alert("Formulario invalido");
+	}
+}
+function reloadaclacciones(){
+	$("#submitaclacciones").click(clicksaveformaclacciones);
+}
+</script>

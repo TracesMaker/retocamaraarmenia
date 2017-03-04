@@ -1,0 +1,48 @@
+<?php $obj = $this->datos; ?>
+<div class="box-header navbar-inner">
+	<h3><button class="btn btn closeform" title="Atras"><i class="icon-step-backward"></i></button><span class="break"></span> Información de Qué riesgos técnicos identifica que se pueden presentar para llegar a la implementación de esta solución?</h3>
+    <div class="box-icon btn-group">
+    	<button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>
+    </div>
+</div>
+<div class="box-content">
+	<table class="table table-condensed table-striped">
+	<?php if ($this->datos->getSolucionador() > 0 ): ?>
+		<tr>
+			<td>
+				<b>Solucionador: </b></td>
+			<td>
+				<?php echo $this->datos->getSolucionadorObject()->get_Label_model(); ?>
+			</td>
+		</tr>
+	<?php endif ?> 
+		<tr>
+			<td>
+				<b>Riesgo: </b></td>
+			<td>
+			<?php echo $obj->getRiesgo(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Descripción : </b></td>
+			<td>
+			<?php echo $obj->getDescripcion(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Impacto sobre el desarrollo de la solución propuesta : </b></td>
+			<td>
+			<?php echo $obj->getImpacto(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Probabilidad de ocurrencia : </b></td>
+			<td>
+			<?php echo $obj->getProbabilidad(); ?>	
+			</td>
+		</tr>
+	</table>
+ </div>

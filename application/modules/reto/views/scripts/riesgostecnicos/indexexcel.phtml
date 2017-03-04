@@ -1,0 +1,41 @@
+<?php
+	header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+	header("Content-type:   application/x-msexcel; charset=utf-8");
+	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("content-disposition: attachment;filename=riesgostecnicos_". date("Y_m_d_H_i_s",time()).".xls");
+?>
+<table border="1" align="center">
+	<thead >
+		<tr><th colspan="5" style="font-weight: bold;font-style: italic;">Listado de Qué riesgos técnicos o de funcionalidad se pueden presentar cuando la solución esté completamente implementada</th></tr>
+		<tr style="background-color: #C4C9DF; color:black;">
+			<th>Nombre del riesgo</th>
+			<th>Descripción </th>
+			<th>Probabilidad de ocurrencia </th>
+			<th>impacto esperado, si se presenta </th>
+			<th>Posibles medidas de prevención o mitigación</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($this->pagination as $key => $obj) : ?>
+		<?php $class = fmod($key, 2) == 0 ? ' background-color: #F9F9F9;' : ''; ?>
+		<tr style="<?php echo $class; ?>">
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getNombredelriesgo(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getDescripcion(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getProbabilidad(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getImpacto(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getPrevencion(); ?>
+			</td>
+		</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

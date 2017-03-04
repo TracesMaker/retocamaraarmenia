@@ -1,0 +1,51 @@
+<div class="page-header">
+    <h2>Editando Usuarios Online</h2>
+</div>
+<div id="formaclusuariosonline" > 
+<?php echo $this->form; ?> 
+</div>
+<script>
+$(document).ready(function(){
+	loadpage(); 
+	$('#ultimoacceso').datetimepicker({	
+		dateFormat: 'yy-mm-dd',
+		timeFormat: 'HH:00'
+	});
+
+	reloadaclusuariosonline();	
+})
+function clicksaveformaclusuariosonline()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+    if ($("#aclusuariosonlineform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/default/aclusuariosonline/edit", $("#aclusuariosonlineform").serialize(),
+            function(data) {
+                if (data.id<0) {
+                    $("#aclusuariosonlineform").parent().html(data.form);                  
+                    reloadaclusuariosonline();
+                    buttonSelect.parents(".form-actions").find("button").button('reset');
+                } else {
+                    $('.notify').notify({message: { text: '  Registro actualizado con éxito ' }}).show();
+                    show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/default/aclusuariosonline/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+                }
+            }
+        )
+    } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+function reloadaclusuariosonline(){
+	$("#submitaclusuariosonline").click(clicksaveformaclusuariosonline);
+}
+</script>

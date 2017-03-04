@@ -1,0 +1,103 @@
+<?php
+	$FieldLectura = $this->FormRelleno->getElement("peraccion");
+	$FieldMaestra = $this->FormRelleno->getElement("perrol");
+	$FieldAclpermisos_id = $this->FormRelleno->getElement("aclpermisos_id");
+	$FieldAclpermisos_id ->addDecorators(array('ViewHelper', array('HtmlTag', array('tag' => 'div', 'class' => 'hidden'))));
+	$FieldPerpermiso = $this->FormRelleno->getElement("perpermiso");
+?>
+<script>
+$(document).ready(function(){	    
+	reloadgrid();
+	$(".formasignarpermisos input, .formasignarpermisos select").change(
+    	function(){
+    		idForm = "#"+$(this).parents("form").attr("id");
+			if($(idForm+"  input[name=aclpermisos_id]").val() == 0){
+			 	$.post("<?php echo $this->baseUrl()?>/default/aclpermisos/add", $(idForm).serialize(),
+			 		function(data) {
+			 			$(idForm+"  input[name=aclpermisos_id]").val(data["id"]);
+						$(idForm+"  input[name=enviarbon]").val("Actualizar");
+					}
+				);		
+			}else{
+				$.post("<?php echo $this->baseUrl()?>/default/aclpermisos/edit", $(idForm).serialize(),
+			 		function(data) {}
+				);
+			}
+    	}
+    );
+    $('.formasignarpermisos').submit(function() {return false});
+	$('#listadoasignarpermisos').delegate('input[type="text"]', 'keypress', function(e)
+	{
+	  if (e.keyCode == 13) 
+	  {
+	    var l_index = $('input[type="text"]', '#listadoasignarpermisos').index($(this));
+	    $('input[type="text"]:eq('+(l_index+1)+')', '#listadoasignarpermisos').focus();
+	    return false;
+	  }
+	});    
+})
+</script>
+<div id="listado<?php echo $this->control ?>" class="box  contentindex" request="<?php echo $this->baseUrl()?>/default/asignarpermisos/index">
+    <div class="box-header navbar-inner">
+        <h3><i class="icon-align-justify"></i><span class="break"></span> Asignar Permisos</h3>
+        <div class="box-icon btn-group">
+        <a class="btn" type="button" title="Buscar"  href="#asignarpermisosmodalbuscar" data-toggle="modal" > <i class="icon-search"></i> </a>
+        </div>
+    </div>
+<div class="box-content">    
+<table class="table table-striped table-condensed " formBuscar="asignarpermisosformbuscar" >
+	<thead >
+		<tr>
+			<th  class="sort" sort="accrecurso" >Recurso</th>		
+			<th  class="sort" sort="accaccion" >Acción</th>		
+			<th>Permisos</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php 
+		$cont=0;
+		foreach ($this->ListLectura->_objects as $obj) :
+			$cont = $obj->getId();
+			$FieldLectura->setValue($obj->getId()); 
+			if($this->ArrayRelleno[$obj->getId()] != null){
+				$Relleno = $this->ArrayRelleno[$obj->getId()];
+				$FieldAclpermisos_id->setValue($Relleno->getId());
+				$FieldPerpermiso->setValue($Relleno->getPerpermiso());	
+				$mensajeboton = "Actualizar";		
+			}else{
+				$FieldAclpermisos_id->setValue(0);
+				$FieldPerpermiso->setValue("");	
+				$mensajeboton = "Guardar";
+			}
+		?>
+		<tr>
+				<td><?php echo $obj->getAccrecurso(); ?></td>		
+				<td><?php echo $obj->getAccaccion(); ?></td>		
+			<td>
+			    <form id="form<?php echo $cont ?>" class="formasignarpermisos" >
+			    	<?php echo $FieldAclpermisos_id; ?>
+							<?php echo $FieldPerpermiso; ?>
+					<div class="input-append">
+						<?php echo $FieldLectura; ?>
+						<?php echo $FieldMaestra; ?> 
+				    </div>
+	    		</form>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+<?php echo $this->paginationControl($this->ListLectura,'Sliding','pagination.phtml');?>
+</div>
+<div class="modal hide" id="asignarpermisosmodalbuscar">
+    <div class="modal-header">
+		<a class="close" data-dismiss="modal">×</a>
+    <h3>Buscar</h3>
+    </div>     
+    <div class="modal-body">
+		<?php echo $this->formBuscar; ?>
+	</div>
+	<div class="modal-footer">
+	</div>
+</div>
+</div>

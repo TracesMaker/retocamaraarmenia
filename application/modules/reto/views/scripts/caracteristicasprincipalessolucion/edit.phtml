@@ -1,0 +1,64 @@
+<div class="page-header">
+    <h2>Editando Características principales de la solucion </h2>
+</div>
+<div id="formcaracteristicasprincipalessolucion" > 
+<?php echo $this->form; ?> 
+</div>
+<script>
+$(document).ready(function(){
+	loadpage(); 
+
+
+    $('#diferenciador').on("change",function(){
+    	if($('#diferenciador').val()=="0") {
+            $("#ventajas").parents(".control-group").hide();
+            $("#ventajas").removeClass("required");            
+    	}		
+    });
+
+
+    $('#diferenciador').on("change",function(){
+    	if($('#diferenciador').val()=="1") {
+            $("#ventajas").parents(".control-group").show();
+            //$("#ventajas").change();
+    	}		
+    });
+
+	reloadcaracteristicasprincipalessolucion();	
+})
+function clicksaveformcaracteristicasprincipalessolucion()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+    if ($("#caracteristicasprincipalessolucionform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/caracteristicasprincipalessolucion/edit", $("#caracteristicasprincipalessolucionform").serialize(),
+            function(data) {
+                if (data.id<0) {
+                    $("#caracteristicasprincipalessolucionform").parent().html(data.form);                  
+                    reloadcaracteristicasprincipalessolucion();
+                    buttonSelect.parents(".form-actions").find("button").button('reset');
+                } else {
+                    $('.notify').notify({message: { text: '  Registro actualizado con éxito ' }}).show();
+                    show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/caracteristicasprincipalessolucion/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+                }
+            }
+        )
+    } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+function reloadcaracteristicasprincipalessolucion(){
+	$("#submitcaracteristicasprincipalessolucion").click(clicksaveformcaracteristicasprincipalessolucion);
+        $('#diferenciador').change();
+}
+</script>

@@ -1,0 +1,41 @@
+<?php $obj = $this->datos; ?>
+<div class="box-header navbar-inner">
+	<h3><button class="btn btn closeform" title="Atras"><i class="icon-step-backward"></i></button><span class="break"></span> Información de Elementos tangibles</h3>
+    <div class="box-icon btn-group">
+    	<button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>
+    </div>
+</div>
+<div class="box-content">
+	<table class="table table-condensed table-striped">
+	<?php if ($this->datos->getSolucionador() > 0 ): ?>
+		<tr>
+			<td>
+				<b>Solucionador: </b></td>
+			<td>
+				<?php echo $this->datos->getSolucionadorObject()->get_Label_model(); ?>
+			</td>
+		</tr>
+	<?php endif ?> 
+		<tr>
+			<td>
+				<b>Elemento físico: </b></td>
+			<td>
+			<?php echo $obj->getElementofisico(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Descripción: </b></td>
+			<td>
+			<?php echo $obj->getDescripcion(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Utilidad o función dentro de la solución: </b></td>
+			<td>
+			<?php echo $obj->getFuncionenlasolucion(); ?>	
+			</td>
+		</tr>
+	</table>
+ </div>

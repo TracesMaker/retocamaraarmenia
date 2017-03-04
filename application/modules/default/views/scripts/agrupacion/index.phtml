@@ -1,0 +1,79 @@
+<script>
+	$(document).ready(function(){	  
+		$("#agrupacionmodalbuscar").modal('hide');
+		reloadgrid();
+	});
+	function agrupacionindexexcel(){
+
+		var form = $('form#agrupacionformbuscar');
+		if($('input#download').length == 0){
+			form.append('<input type="hidden" id="download" name="download" value="1" />"');
+		}
+		var formData = form.serialize();
+		$('form#agrupacionformbuscar').submit();
+		form.find('input#download').remove();
+	}
+</script>
+<div id="agrupacionindex" class="box  contentindex"  filterreceived="<?php echo $this->filterreceived; ?>" request="<?php echo $this->baseUrl() ?>/default/agrupacion/index<?php echo $this->filterreceived; ?>">
+    <div class="box-header navbar-inner">
+        <h3><span class="hidden-phone"><i class="icon-align-justify"></i><span class="break"></span> Listado </span>Agrupacion</h3>
+        <div class="box-icon btn-group">
+                <a class="btn" type="button" title="Buscar"  href="#agrupacionmodalbuscar" data-toggle="modal" > <i class="icon-search"></i> </a>
+            <?php if($this->permisos["add"]): ?>
+                <a id="newagrupacion" href="#newagrupacion" class="btn btn-info loadform" title="Nuevo" type="button" request="<?php echo $this->baseUrl() ?>/default/agrupacion/add<?php echo $this->filterreceived; ?>" > <i class="icon-plus"></i></a>
+            <?php endif ?>
+                <button class="btn btn-warning" title="Descargar a Excel" onclick="agrupacionindexexcel()" type="button"><i class="icon-download-alt"></i></button>
+                <!-- <button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>-->
+        </div>
+    </div>
+    <div class="box-content">
+<table id="agrupacionTable" class="table table-striped table-condensed " formBuscar="agrupacionformbuscar" >
+<thead >
+	<tr>
+		<th  class="sort " sort="aabreviatura" >Abreviatura</th>
+		<th  class="sort hidden-phone" sort="alabel" >Label</th>
+		<th  class="sort hidden-phone" sort="atipoagrupacion" >Tipo de Agrupacion</th>
+		<th class="no-print" width="84px">Acciones</th>
+
+	</tr>
+</thead>
+<tbody>
+<?php foreach ($this->pagination->_objects as $obj) : ?>
+	<tr>
+		<td class="">
+			<?php echo $obj->getAabreviatura(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getAlabel(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getAtipoagrupacionObject()->get_Label_model(); ?>
+		</td>
+		<td class="no-print" >
+		  <div class="btn-group" title="<?php echo $obj->get_Label_Model() ?>">
+			<?php if($this->permisos["edit"]  ): ?>
+				<button title="Editar" class="btn btn-success loadform" type="button" request="<?php echo $this->baseUrl() ?>/default/agrupacion/edit/id/<?php echo $obj->getId() ?>" ><i class="icon-pencil"></i></button>
+			<?php endif ?>
+			<?php if($this->permisos["delete"]  ): ?>
+				<button title="Eliminar" class="btn btn-danger deleteaction" type="button" request="<?php echo $this->baseUrl() ?>/default/agrupacion/delete/id/<?php echo $obj->getId() ?>"><i class="icon-trash"></i></button>
+			<?php endif ?>
+            </div>
+		</td>
+	</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>
+    <?php echo $this->paginationControl($this->pagination,'Sliding','pagination.phtml');?>
+    </div>
+		<div class="modal hide" id="agrupacionmodalbuscar">
+		    <div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+		    <h3>Buscar</h3>
+		    </div>     
+		    <div class="modal-body">
+				<?php echo $this->formBuscar;?>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+</div>

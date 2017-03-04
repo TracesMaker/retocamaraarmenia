@@ -1,0 +1,86 @@
+<a data-toggle="modal" id="addnewriesgos" href="#newriesgos" class="btn btn-primary bg-color-4 pull-right addaction" title="Nuevo" type="button" request="<?php echo $this->baseUrl() ?>/reto/reto/add<?php echo $this->filterreceived; ?>" > <i class="fa fa-plus"></i> Agregar</a>
+
+<table id="riesgosTable" class="table table-striped table-condensed " formBuscar="riesgosformbuscar" >
+<thead >
+	<tr>
+		<th class="">Riesgo</th>
+		<th class="hidden-phone">Descripción </th>
+		<th class="hidden-phone">Impacto sobre el desarrollo de la solución propuesta </th>
+		<th class="hidden-phone">Probabilidad de ocurrencia </th>
+		<th style=" width: 74px;"></th>
+	</tr>
+</thead>
+<tbody>
+<?php foreach ($this->pagination as $obj) : ?>
+	<tr>
+		<td class="">
+			<?php echo $obj->getRiesgo(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getDescripcion(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getImpacto(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getProbabilidad(); ?>	
+		</td>
+		<td class="no-print pull-right" >
+
+				<a data-toggle="modal" href="#newriesgos" class="btn btn-success editaction" title="Editar" type="button" iditem="<?php echo $obj->getId() ?>" request="<?php echo $this->baseUrl() ?>/reto/riesgos/listbyid/id/<?php echo $obj->getId() ?>" >&nbsp;&nbsp;<i class="fa fa-pencil"></i>&nbsp;&nbsp;</a>
+
+				<button title="Eliminar" class="btn btn-danger deleteaction" type="button" request="<?php echo $this->baseUrl() ?>/reto/riesgos/delete/id/<?php echo $obj->getId() ?>">&nbsp;&nbsp;<i class="fa fa-trash"></i>&nbsp;&nbsp;</button>
+
+		</td>
+	</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>
+
+<!--  MODAL riesgos-->
+  <div class="modal fade customModal" id="newriesgos" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="panel panel-default formPanel">
+          <div class="panel-heading bg-color-4 border-color-1">
+            <h3 class="panel-title modtitle">Nuevo Riesgo</h3>
+          </div>
+
+          <div class="panel-body">
+            <form action="#" name="riesgosform" id="riesgosform" method="POST" role="form">
+            	<!-- id hidden para la edicion -->
+              <div class="form-group formField">
+              	<input type="hidden" class="form-control" name="riesgos_id" id="riesgos_id">
+              </div>
+              <div class="form-group formField">
+                <input type="text" class="form-control" name="riesgo" id="riesgo" placeholder="Riesgo">
+              </div>
+              <div class="form-group formField">
+              	<textarea name="descripcion" id="descripcion" placeholder="Descripcion" class="form-control"></textarea>
+              </div>
+              <div class="form-group formField">
+                <select name="impacto" id="impacto" class="form-control" >
+                  <option value="">Impacto</option>
+        				  <option value="alto">Alto</option>
+        				  <option value="medio">Medio</option>
+        				  <option value="bajo">Bajo</option>
+        				</select>
+              </div>
+              <div class="form-group formField">
+                <select name="probabilidad" id="probabilidad" class="form-control" >
+                  <option value="">Probabilidad</option>
+        				  <option value="improbable">Improbable</option>
+        				  <option value="posible">Posible</option>
+        				  <option value="probable">Probable</option>
+        				</select>
+              </div>
+              <div class="form-group formField">
+                <a id="saveriesgos" data-dismiss="modal" href="#newriesgos" class="btn btn-primary btn-block bg-color-3 border-color-3">Agregar</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript"></script>

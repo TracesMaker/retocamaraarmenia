@@ -1,0 +1,46 @@
+<div class="page-header">
+    <h2>Agregando Permisos</h2>
+</div>
+<div id="formaclpermisos" > <?php echo $this->form; ?> </div>
+<script> 
+$(document).ready(function(){
+	loadpage(); 
+
+
+	reloadaclpermisos();
+})
+function clicksaveformaclpermisos()
+{
+	var buttonSelect = $(this);	
+	buttonSelect.parents(".form-actions").find("button").button('loading');
+	if ($("#aclpermisosform").valid()) {
+		$.post("<?php echo $this->baseUrl()?>/default/aclpermisos/add", $("#aclpermisosform").serialize(),
+			function(data) {
+				if (data.id<0) {
+					$("#aclpermisosform").parent().html(data.form);					
+					reloadaclpermisos();
+					buttonSelect.parents(".form-actions").find("button").button('reset');
+				} else {
+			        $('.notify').notify({message: { text: '  Registro agregado con éxito ' }}).show();
+			        show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/default/aclpermisos/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+				}
+			}
+		)
+	} else {
+		buttonSelect.parents(".form-actions").find("button").button('reset');
+		alert("Formulario invalido");
+	}
+}
+function reloadaclpermisos(){
+	$("#submitaclpermisos").click(clicksaveformaclpermisos);
+}
+</script>

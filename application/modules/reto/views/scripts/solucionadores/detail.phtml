@@ -1,0 +1,296 @@
+<?php $obj = $this->datos; ?>
+<div class="box-header navbar-inner">
+	<h3><button class="btn btn closeform" title="Atras"><i class="icon-step-backward"></i></button><span class="break"></span> Información de Solucionadores</h3>
+    <div class="box-icon btn-group">
+    	<button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>
+    </div>
+</div>
+<div class="box-content">
+	<table class="table table-condensed table-striped">
+	<?php if ($this->datos->getUsuario() > 0 ): ?>
+		<tr>
+			<td>
+				<b>usuario: </b></td>
+			<td>
+				<?php echo $this->datos->getUsuarioObject()->get_Label_model(); ?>
+			</td>
+		</tr>
+	<?php endif ?> 
+		<tr>
+			<td>
+				<b>Tìtulo de la solución: </b></td>
+			<td>
+			<?php echo $obj->getTitulo(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Duración del proyecto en meses: </b></td>
+			<td>
+			<?php echo $obj->getDuracionenmeses(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Correo electrónico de contacto: </b></td>
+			<td>
+			<?php echo $obj->getCorreoelectronico(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Resumen ejecutivo de la idea de solución: </b></td>
+			<td>
+			<?php echo $obj->getResumenejecutivo(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Impacto de la solución innovadora: </b></td>
+			<td>
+			<?php echo $obj->getImpactodesolucion(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Nombre de la empresa / persona natural: </b></td>
+			<td>
+			<?php echo $obj->getNombredelaempresa(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Nit / C.C.: </b></td>
+			<td>
+			<?php echo $obj->getNit(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Teléfono: </b></td>
+			<td>
+			<?php echo $obj->getTelefono(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Página Web: </b></td>
+			<td>
+			<?php echo $obj->getPaginaweb(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Nombre de persona de contacto: </b></td>
+			<td>
+			<?php echo $obj->getNombredepersonadecontacto(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Número de Celular: </b></td>
+			<td>
+			<?php echo $obj->getCelulardelproponente(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Correo electrónico: </b></td>
+			<td>
+			<?php echo $obj->getCorreoelectronicoproponente(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Para iniciar, describa la solución innovadora desde la tecnología: </b></td>
+			<td>
+			<?php echo $obj->getDescripciondesolucion(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Anexe un dibujo que explique cómo funciona su solución. Dentro de este, por favor, señale sus principales componentes y la conexión entre estos. Puedes dibujar: equipos a desarrollar, procedimientos a realizar, personas involucradas o todo lo que exprese concretamente todo lo que exprese la solución.: </b></td>
+			<td>
+		<?php if(strlen($obj->getDiagramasolucion())>0){ ?>
+		<a target="_blank" href="<?php echo $this->baseUrl()?>/reto/solucionadores/descargar/file/diagramasolucion/id/<?php echo $obj->getId(); ?>" >Descargar</a>
+		<?php } ?>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>¿Por qué la solución que propone, quizás de muchas posibles, es mejor alternativa para atender la necesidad insatisfecha?: </b></td>
+			<td>
+			<?php echo $obj->getPorquelasolucion(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Por favor, señale la fuente de la inspiración de la solución que sugieres en esta propuesta: </b></td>
+			<td>
+			<?php echo $obj->getInspiracion(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Personal: </b></td>
+			<td>
+			<?php echo $obj->getPersonal(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Servicio técnico: </b></td>
+			<td>
+			<?php echo $obj->getServiciotecnico(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Equipos: </b></td>
+			<td>
+			<?php echo $obj->getEquipos(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Software: </b></td>
+			<td>
+			<?php echo $obj->getSoftware(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Materiales e insumos: </b></td>
+			<td>
+			<?php echo $obj->getMaterialeseinsumos(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Viajes: </b></td>
+			<td>
+			<?php echo $obj->getViajes(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Otros rubros necesarios para el desarrollo de la solución: </b></td>
+			<td>
+			<?php echo $obj->getOtrosrubros(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Por favor, señale su trayectoria para presentarse en esta propuesta: </b></td>
+			<td>
+			<?php echo $obj->getDescripciontrayectoria(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>La solución tecnologica presentada, como solución al reto, está protegida actualmente, por algún tipo de propiedad intelectual?: </b></td>
+			<td>
+			<?php if($obj->getPropiedadintelectual()==1)echo "Sí"; else echo "No"; ?>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Si la respuesta es afirmativa, por favor describa brevemente.: </b></td>
+			<td>
+			<?php echo $obj->getDescripcionpropiedadintelecual(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>¿Tiene una politica de propiedad intelectual?: </b></td>
+			<td>
+			<?php if($obj->getPoliticapropiedadintelectual()==1)echo "Sí"; else echo "No"; ?>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Si la respuesta es afirmativa, por favor describa brevemente.: </b></td>
+			<td>
+			<?php echo $obj->getDescripcionpoliticapropiedadintelecual(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>¿Esta propuesta y su contenido es de tu propiedad?: </b></td>
+			<td>
+			<?php if($obj->getAutenticidad()==1)echo "Sí"; else echo "No"; ?>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Si la respuesta es negativa, por favor define de quien es la propiedad: </b></td>
+			<td>
+			<?php echo $obj->getDescripcionautorpropiedad(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>¿Cuando?: </b></td>
+			<td>
+			<?php echo $obj->getCuando(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>¿Con quien?: </b></td>
+			<td>
+			<?php echo $obj->getConquien(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>¿se ha hecho presentación publica de esta solución?: </b></td>
+			<td>
+			<?php if($obj->getPresentacionpublica()==1)echo "Sí"; else echo "No"; ?>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>¿se hizo algún acuerdo de confidencialidad con esta persona?: </b></td>
+			<td>
+			<?php if($obj->getAcuerdoconfidencialidadconautor()==1)echo "Sí"; else echo "No"; ?>
+			</td>
+		</tr>
+	</table>
+	Tìtulo de la solución: <?php echo $obj->getTitulo(); ?>	
+	Duración del proyecto en meses: <?php echo $obj->getDuracionenmeses(); ?>	
+	Correo electrónico de contacto: <?php echo $obj->getCorreoelectronico(); ?>	
+	Resumen ejecutivo de la idea de solución: <?php echo $obj->getResumenejecutivo(); ?>	
+	Impacto de la solución innovadora: <?php echo $obj->getImpactodesolucion(); ?>	
+	Nombre de la empresa / persona natural: <?php echo $obj->getNombredelaempresa(); ?>	
+	Nit / C.C.: <?php echo $obj->getNit(); ?>	
+	Teléfono: <?php echo $obj->getTelefono(); ?>	
+	Página Web: <?php echo $obj->getPaginaweb(); ?>	
+	Nombre de persona de contacto: <?php echo $obj->getNombredepersonadecontacto(); ?>	
+	Número de Celular: <?php echo $obj->getCelulardelproponente(); ?>	
+	Correo electrónico: <?php echo $obj->getCorreoelectronicoproponente(); ?>	
+	Para iniciar, describa la solución innovadora desde la tecnología: <?php echo $obj->getDescripciondesolucion(); ?>	
+	¿Por qué la solución que propone, quizás de muchas posibles, es mejor alternativa para atender la necesidad insatisfecha?: <?php echo $obj->getPorquelasolucion(); ?>	
+	Por favor, señale la fuente de la inspiración de la solución que sugieres en esta propuesta: <?php echo $obj->getInspiracion(); ?>	
+	Personal: <?php echo $obj->getPersonal(); ?>	
+	Servicio técnico: <?php echo $obj->getServiciotecnico(); ?>	
+	Equipos: <?php echo $obj->getEquipos(); ?>	
+	Software: <?php echo $obj->getSoftware(); ?>	
+	Materiales e insumos: <?php echo $obj->getMaterialeseinsumos(); ?>	
+	Viajes: <?php echo $obj->getViajes(); ?>	
+	Otros rubros necesarios para el desarrollo de la solución: <?php echo $obj->getOtrosrubros(); ?>	
+	Por favor, señale su trayectoria para presentarse en esta propuesta: <?php echo $obj->getDescripciontrayectoria(); ?>	
+	Si la respuesta es afirmativa, por favor describa brevemente.: <?php echo $obj->getDescripcionpropiedadintelecual(); ?>	
+	Si la respuesta es afirmativa, por favor describa brevemente.: <?php echo $obj->getDescripcionpoliticapropiedadintelecual(); ?>	
+	Si la respuesta es negativa, por favor define de quien es la propiedad: <?php echo $obj->getDescripcionautorpropiedad(); ?>	
+	¿Cuando?: <?php echo $obj->getCuando(); ?>	
+	¿Con quien?: <?php echo $obj->getConquien(); ?>	
+	<!-- las de si y no -->
+	La solución tecnologica presentada, como solución al reto, está protegida actualmente, por algún tipo de propiedad intelectual?: <?php if($obj->getPropiedadintelectual()==1)echo "Sí"; else echo "No"; ?>
+	¿Tiene una politica de propiedad intelectual?: <?php if($obj->getPoliticapropiedadintelectual()==1)echo "Sí"; else echo "No"; ?>
+	¿Esta propuesta y su contenido es de tu propiedad?: <?php if($obj->getAutenticidad()==1)echo "Sí"; else echo "No"; ?>
+	¿se ha hecho presentación publica de esta solución?: <?php if($obj->getPresentacionpublica()==1)echo "Sí"; else echo "No"; ?>
+	¿se hizo algún acuerdo de confidencialidad con esta persona?: <?php if($obj->getAcuerdoconfidencialidadconautor()==1)echo "Sí"; else echo "No"; ?>
+	<!-- imagen de apoyo -->
+	Anexe un dibujo que explique cómo funciona su solución. Dentro de este, por favor, señale sus principales componentes y la conexión entre estos. Puedes dibujar: equipos a desarrollar, procedimientos a realizar, personas involucradas o todo lo que exprese concretamente todo lo que exprese la solución.: <?php if(strlen($obj->getDiagramasolucion())>0){ ?> <a target="_blank" href="<?php echo $this->baseUrl()?>/reto/solucionadores/descargar/file/diagramasolucion/id/<?php echo $obj->getId(); ?>" >Descargar</a> <?php } ?> 
+ </div>

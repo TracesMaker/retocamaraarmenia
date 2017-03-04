@@ -1,0 +1,15 @@
+<div class="page-header">
+    <h2>Agregando Solucionadores</h2>
+</div>
+<div id="formsolucionadores" > <?php echo $this->form; ?> </div>
+<script> 
+$(document).ready(function(){
+	loadpage(); 
+
+
+	reloadsolucionadores();
+})
+function reloadsolucionadores(){
+	$("#solucionadoresform").validate();
+}
+</script>

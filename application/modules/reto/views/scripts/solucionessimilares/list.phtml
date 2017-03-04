@@ -1,0 +1,83 @@
+<a data-toggle="modal" id="addnewsolucionessimilares" href="#newsolucionessimilares" class="btn btn-primary bg-color-4 pull-right addaction" title="Nuevo" type="button" request="<?php echo $this->baseUrl() ?>/reto/reto/add<?php echo $this->filterreceived; ?>" > <i class="fa fa-plus"></i> Agregar</a>
+
+<table id="solucionessimilaresTable" class="table table-striped table-condensed " formBuscar="solucionessimilaresformbuscar" >
+<thead >
+	<tr>
+		<th class="">Solucion Desarrollada</th>
+		<th class="hidden-phone">Año de Desarrollo</th>
+		<th class="hidden-phone">Quien la Desarrollo</th>
+		<th class="hidden-phone">Resultados Obtenidos</th>
+		<th class="hidden-phone">Dificultades Presentadas</th>
+		<th style=" width: 74px;"></th>
+	</tr>
+</thead>
+<tbody>
+<?php foreach ($this->pagination as $obj) : ?>
+	<tr>
+		<td class="">
+			<?php echo $obj->getSoluciondesarrollada(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getAnodesarrollo(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getQuienladesarrollo(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getResultadosobtenidos(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getDificultadespresentadas(); ?>	
+		</td>
+		<td class="no-print pull-right" >
+
+				<a data-toggle="modal" href="#newsolucionessimilares" class="btn btn-success editaction" title="Editar" type="button" iditem="<?php echo $obj->getId() ?>" request="<?php echo $this->baseUrl() ?>/reto/solucionessimilares/listbyid/id/<?php echo $obj->getId() ?>" >&nbsp;&nbsp;<i class="fa fa-pencil"></i>&nbsp;&nbsp;</a>
+
+				<button title="Eliminar" class="btn btn-danger deleteaction" type="button" request="<?php echo $this->baseUrl() ?>/reto/solucionessimilares/delete/id/<?php echo $obj->getId() ?>">&nbsp;&nbsp;<i class="fa fa-trash"></i>&nbsp;&nbsp;</button>
+
+		</td>
+	</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>
+
+<!--  MODAL solucionessimilares-->
+  <div class="modal fade customModal" id="newsolucionessimilares" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="panel panel-default formPanel">
+          <div class="panel-heading bg-color-4 border-color-1">
+            <h3 class="panel-title modtitle">Nueva Solucion Similar</h3>
+          </div>
+          <div class="panel-body">
+            <form action="#" name="solucionessimilaresform" id="solucionessimilaresform" method="POST" role="form">
+            	<!-- id hidden para la edicion -->
+              <div class="form-group formField">
+              	<input type="hidden" class="form-control" name="solucionessimilares_id" id="solucionessimilares_id">
+              </div>
+              <div class="form-group formField">
+              	<input type="text" class="form-control" name="soluciondesarrollada" id="soluciondesarrollada" placeholder="Solucion Desarrollada">
+              	<!-- <textarea name="descripcion" rows="2" id="descripcion" placeholder="Descripcion" class="form-control"></textarea> -->
+              </div>
+              <div class="form-group formField">
+              	<input type="text" class="form-control" name="anodesarrollo" id="anodesarrollo" placeholder="Años de Desarrollo">
+              </div>
+              <div class="form-group formField">
+              	<input type="text" class="form-control" name="quienladesarrollo" id="quienladesarrollo" placeholder="Quien la desarrollo">
+              </div>
+              <div class="form-group formField">
+              	<input type="text" class="form-control" name="resultadosobtenidos" id="resultadosobtenidos" placeholder="Resultados Obtenidos">
+              </div>
+              <div class="form-group formField">
+              	<input type="text" class="form-control" name="dificultadespresentadas" id="dificultadespresentadas" placeholder="Dificultades Presentadas">
+              </div>
+              <div class="form-group formField">
+                <a id="savesolucionessimilares" data-dismiss="modal" href="#newsolucionessimilares" class="btn btn-primary btn-block bg-color-3 border-color-3">Agregar</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript"></script>

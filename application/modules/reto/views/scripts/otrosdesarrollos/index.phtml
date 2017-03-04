@@ -1,0 +1,35 @@
+<table id="otrosdesarrollosTable" class="table table-striped table-condensed " formBuscar="otrosdesarrollosformbuscar" >
+<thead >
+	<tr>
+		<th class="">Desarrollo complementario requerido</th>
+		<th class="hidden-phone">¿Por qué se requiere este desarrollo?</th>
+	</tr>
+</thead>
+<tbody>
+<?php foreach ($this->pagination as $obj) : ?>
+	<tr>
+		<td class="">
+			<?php echo $obj->getDesarrollocomplementario(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getPorque(); ?>	
+		</td>
+		<?php if (false) { ?>
+		<td class="no-print" >
+		  <div class="btn-group" title="<?php echo $obj->get_Label_Model() ?>">
+			<?php if($this->permisos["edit"]  ): ?>
+				<button title="Editar" class="btn btn-success loadform" type="button" request="<?php echo $this->baseUrl() ?>/reto/otrosdesarrollos/edit/id/<?php echo $obj->getId() ?>" ><i class="icon-pencil"></i></button>
+			<?php endif ?>
+			<?php if($this->permisos["detail"] ): ?>
+				<button title="Detalles" class="btn btn-info loadform" type="button" request="<?php echo $this->baseUrl() ?>/reto/otrosdesarrollos/detail/id/<?php echo $obj->getId() ?>"><i class="icon-fullscreen"></i></button>
+			<?php endif ?>
+			<?php if($this->permisos["delete"]  ): ?>
+				<button title="Eliminar" class="btn btn-danger deleteaction" type="button" request="<?php echo $this->baseUrl() ?>/reto/otrosdesarrollos/delete/id/<?php echo $obj->getId() ?>"><i class="icon-trash"></i></button>
+			<?php endif ?>
+            </div>
+		</td>
+		<?php } ?>
+	</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

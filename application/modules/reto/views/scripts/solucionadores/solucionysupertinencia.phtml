@@ -1,0 +1,50 @@
+<div class="page-header">
+    <h2>Editando DESCRIPCIÓN DE LA SOLUCIÓN Y SU PERTINENCIA : <?php echo $this->object->get_Label_Model() ?> </h2>
+</div>
+<div id="formsolucionysupertinencia" > 
+<?php echo $this->form; ?> 
+</div>
+<script>
+$(document).ready(function(){
+	loadpage(); 
+	reloadsolucionadores();	
+})
+
+
+
+function clicksaveformsolucionadores()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+    if ($("#solucionadoresform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/solucionadores/solucionysupertinencia", $("#solucionadoresform").serialize(),
+            function(data) {
+                if (data.id<0) {
+                    $("#solucionadoresform").parent().html(data.form);                  
+                    reloadsolucionadores();
+                    buttonSelect.parents(".form-actions").find("button").button('reset');
+                } else {
+                    $('.notify').notify({message: { text: '  Registro actualizado con éxito ' }}).show();
+                    show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/solucionadores/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+                }
+            }
+        )
+    } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+function reloadsolucionadores(){
+	$("#submitsolucionadores").click(clicksaveformsolucionadores);
+}
+
+</script>

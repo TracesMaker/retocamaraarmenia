@@ -1,0 +1,50 @@
+<?php $obj = $this->datos; ?>
+<div class="box-header navbar-inner">
+	<h3><button class="btn btn closeform" title="Atras"><i class="icon-step-backward"></i></button><span class="break"></span> Información de Características principales </h3>
+    <div class="box-icon btn-group">
+    	<button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>
+    </div>
+</div>
+<div class="box-content">
+	<table class="table table-condensed table-striped">
+	<?php if ($this->datos->getAtributobasico() > 0 ): ?>
+		<tr>
+			<td>
+				<b>Atributo Básico (característica sin la cual la solución no existe): </b></td>
+			<td>
+				<?php echo $this->datos->getAtributobasicoObject()->get_Label_model(); ?>
+			</td>
+		</tr>
+	<?php endif ?> 
+		<tr>
+			<td>
+				<b>Tecnología que puede dar soporte a la existencia de este atributo: </b></td>
+			<td>
+			<?php echo $obj->getEstadodeldesarrollo(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Grado de dificultad para involucrar la tecnología a la información: </b></td>
+			<td>
+			<?php echo $obj->getGradodeldesarrollo(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Explicación del grado de dificultad otorgado: </b></td>
+			<td>
+			<?php echo $obj->getAspectospendientes(); ?>	
+			</td>
+		</tr>
+	<?php if ($this->datos->getSolucionador() > 0 ): ?>
+		<tr>
+			<td>
+				<b>Solucionador: </b></td>
+			<td>
+				<?php echo $this->datos->getSolucionadorObject()->get_Label_model(); ?>
+			</td>
+		</tr>
+	<?php endif ?> 
+	</table>
+ </div>

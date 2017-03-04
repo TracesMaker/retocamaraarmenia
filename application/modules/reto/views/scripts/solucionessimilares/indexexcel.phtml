@@ -1,0 +1,41 @@
+<?php
+	header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+	header("Content-type:   application/x-msexcel; charset=utf-8");
+	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("content-disposition: attachment;filename=solucionessimilares_". date("Y_m_d_H_i_s",time()).".xls");
+?>
+<table border="1" align="center">
+	<thead >
+		<tr><th colspan="5" style="font-weight: bold;font-style: italic;">Listado de Qué soluciones similares a la presentada a la propuesta ha desarrollado recientemente</th></tr>
+		<tr style="background-color: #C4C9DF; color:black;">
+			<th>Solución desarrollada </th>
+			<th>Año en el que se desarrolló la solución</th>
+			<th>Quien la desarrolló</th>
+			<th>Resultados obtenidos obtenidos </th>
+			<th>¿Qué dificultades se presentaron durante el desarrollo de la solución?</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($this->pagination as $key => $obj) : ?>
+		<?php $class = fmod($key, 2) == 0 ? ' background-color: #F9F9F9;' : ''; ?>
+		<tr style="<?php echo $class; ?>">
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getSoluciondesarrollada(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getAnodesarrollo(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getQuienladesarrollo(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getResultadosobtenidos(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getDificultadespresentadas(); ?>
+			</td>
+		</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

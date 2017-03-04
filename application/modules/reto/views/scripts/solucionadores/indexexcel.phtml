@@ -1,0 +1,127 @@
+<?php
+	header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+	header("Content-type:   application/x-msexcel; charset=utf-8");
+	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("content-disposition: attachment;filename=solucionadores_". date("Y_m_d_H_i_s",time()).".xls");
+?>
+<table border="1" align="center">
+	<thead >
+		<tr><th colspan="26" style="font-weight: bold;font-style: italic;">Listado de Solucionadores</th></tr>
+		<tr style="background-color: #C4C9DF; color:black;">
+			<th>Duración del proyecto en meses</th>
+			<th>Resumen ejecutivo de la idea de solución</th>
+			<th>Impacto de la solución innovadora</th>
+			<th>Nombre de la empresa / persona natural</th>
+			<th>Para iniciar, describa la solución innovadora desde la tecnología</th>
+			<th>Anexe un dibujo que explique cómo funciona su solución. Dentro de este, por favor, señale sus principales componentes y la conexión entre estos. Puedes dibujar: equipos a desarrollar, procedimientos a realizar, personas involucradas o todo lo que exprese concretamente todo lo que exprese la solución.</th>
+			<th>¿Por qué la solución que propone, quizás de muchas posibles, es mejor alternativa para atender la necesidad insatisfecha?</th>
+			<th>Por favor, señale la fuente de la inspiración de la solución que sugieres en esta propuesta</th>
+			<th>Personal</th>
+			<th>Servicio técnico</th>
+			<th>Equipos</th>
+			<th>Software</th>
+			<th>Materiales e insumos</th>
+			<th>Viajes</th>
+			<th>Otros rubros necesarios para el desarrollo de la solución</th>
+			<th>Por favor, señale su trayectoria para presentarse en esta propuesta</th>
+			<th>La solución tecnologica presentada, como solución al reto, está protegida actualmente, por algún tipo de propiedad intelectual?</th>
+			<th>Si la respuesta es afirmativa, por favor describa brevemente.</th>
+			<th>¿Tiene una politica de propiedad intelectual?</th>
+			<th>Si la respuesta es afirmativa, por favor describa brevemente.</th>
+			<th>¿Esta propuesta y su contenido es de tu propiedad?</th>
+			<th>Si la respuesta es negativa, por favor define de quien es la propiedad</th>
+			<th>¿Cuando?</th>
+			<th>¿Con quien?</th>
+			<th>¿se ha hecho presentación publica de esta solución?</th>
+			<th>¿se hizo algún acuerdo de confidencialidad con esta persona?</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($this->pagination as $key => $obj) : ?>
+		<?php $class = fmod($key, 2) == 0 ? ' background-color: #F9F9F9;' : ''; ?>
+		<tr style="<?php echo $class; ?>">
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getDuracionenmeses(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getResumenejecutivo(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getImpactodesolucion(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getNombredelaempresa(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getDescripciondesolución(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+		<?php if(strlen($obj->getDiagramasolucion())>0){ ?>
+		<a target="_blank" href="<?php echo $this->baseUrl()?>/reto/solucionadores/descargar/file/diagramasolucion/id/<?php echo $obj->getId(); ?>" >Descargar</a>
+		<?php } ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getPorquelasolucion(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getInspiracion(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getPersonal(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getServiciotécnico(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getEquipos(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getSoftware(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getMaterialeseinsumos(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getViajes(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getOtrosrubros(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getDescripciontrayectoria(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php if($obj->getPropiedadintelectual()==1)echo "Sí"; else echo "No"; ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getDescripcionpropiedadintelecual(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php if($obj->getPoliticapropiedadintelectual()==1)echo "Sí"; else echo "No"; ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getDescripcionpoliticapropiedadintelecual(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php if($obj->getAutenticidad()==1)echo "Sí"; else echo "No"; ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getDescripcionautorpropiedad(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getCuando(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getConquien(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php if($obj->getPresentacionpublica()==1)echo "Sí"; else echo "No"; ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php if($obj->getAcuerdoconfidencialidadconautor()==1)echo "Sí"; else echo "No"; ?>
+			</td>
+		</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

@@ -1,0 +1,115 @@
+
+<div class="sidebar-nav">
+	<ul class="nav nav-stacked left-menu">
+		<li title="Atras">
+			<a href="<?php echo$this->baseUrl()?>/reto/solucionadores/index" >
+				<span class="box">
+					<i class="icon-arrow-left"></i>
+				</span>
+				<span class="hidden-tablet hidden-phone btn">Atras</span>
+			</a>
+		</li>
+	<?php if($this->permisos["solucionadores"]): ?>
+			<li class="navigation-index" title="INFORMACIÓN GENERAL DE LA PROPUESTA">
+				<a rel="<?php echo$this->baseUrl()?>/reto/solucionadores/informaciongeneral/"  href="#solucionadores_informaciongeneral" class="loadsubcontainer">
+					<span class="box">
+						<i class="icon-ok"></i>
+					</span>
+					<span class="hidden-tablet hidden-phone">INFORMACIÓN GENERAL DE LA PROPUESTA</span>
+				</a>
+			</li>			
+	<?php endif ?>	
+	<?php if($this->permisos["solucionadores"]): ?>
+			<li class="navigation-index" title="INFORMACIÓN GENERAL DEL PROPONENTE">
+				<a rel="<?php echo$this->baseUrl()?>/reto/solucionadores/informaciongeneral/"  href="#solucionadores_informaciongeneral" class="loadsubcontainer">
+					<span class="box">
+						<i class="icon-ok"></i>
+					</span>
+					<span class="hidden-tablet hidden-phone">INFORMACIÓN GENERAL DEL PROPONENTE</span>
+				</a>
+			</li>			
+	<?php endif ?>	
+	<?php if($this->permisos["solucionadores"]): ?>
+			<li class="navigation-index" title="DESCRIPCIÓN DE LA SOLUCIÓN Y SU PERTINENCIA">
+				<a rel="<?php echo$this->baseUrl()?>/reto/solucionadores/solucion/"  href="#solucionadores_solucion" class="loadsubcontainer">
+					<span class="box">
+						<i class="icon-ok"></i>
+					</span>
+					<span class="hidden-tablet hidden-phone">DESCRIPCIÓN DE LA SOLUCIÓN Y SU PERTINENCIA</span>
+				</a>
+			</li>			
+	<?php endif ?>	
+	<?php if($this->permisos["solucionadores"]): ?>
+			<li class="navigation-index" title="PLANTEAMIENTO PRESUPUESTAL DE LA PROPUESTA">
+				<a rel="<?php echo$this->baseUrl()?>/reto/solucionadores/solucion/"  href="#solucionadores_solucion" class="loadsubcontainer">
+					<span class="box">
+						<i class="icon-ok"></i>
+					</span>
+					<span class="hidden-tablet hidden-phone">PLANTEAMIENTO PRESUPUESTAL DE LA PROPUESTA</span>
+				</a>
+			</li>			
+	<?php endif ?>	
+	<?php if($this->permisos["solucionadores"]): ?>
+			<li class="navigation-index" title="TRAYECTORIA">
+				<a rel="<?php echo$this->baseUrl()?>/reto/solucionadores/solucion/"  href="#solucionadores_solucion" class="loadsubcontainer">
+					<span class="box">
+						<i class="icon-ok"></i>
+					</span>
+					<span class="hidden-tablet hidden-phone">TRAYECTORIA</span>
+				</a>
+			</li>			
+	<?php endif ?>	
+	<?php if($this->permisos["solucionadores"]): ?>
+			<li class="navigation-index" title="PROPIEDAD INTELECTUAL DE LA SOLUCIÓN">
+				<a rel="<?php echo$this->baseUrl()?>/reto/solucionadores/solucion/"  href="#solucionadores_solucion" class="loadsubcontainer">
+					<span class="box">
+						<i class="icon-ok"></i>
+					</span>
+					<span class="hidden-tablet hidden-phone">PROPIEDAD INTELECTUAL DE LA SOLUCIÓN</span>
+				</a>
+			</li>			
+	<?php endif ?>	
+	</ul>
+</div>
+<div  class="content-wrapper">
+	<ul class="nav nav-tabs pull-right title-menulateral "><li class="active"><a><strong>Solucionadores</strong></a></li></ul>
+	<div id="subcontainer">
+
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){		
+		$(".loadsubcontainer").click(function(event){
+			event.preventDefault();
+			show_loader();
+			var currLocation = window.location.href;
+			href = currLocation.split("?")[0]+'?sublink='+ $(this).attr("rel");
+			history.pushState(null, "", href);
+			$("#subcontainer").load($(this).attr("rel"), hide_loader);
+			$(".navigation-index.active").removeClass("active");	
+			$(this).parents(".navigation-index").addClass("active");
+		});
+		var currLocation = window.location.href;
+		if(currLocation.split("?")[1] == undefined){
+			var rel = $('.left-menu > li:first-child').next().children('a').attr("rel");
+			var se = $('.left-menu > li:first-child').next();
+			href = location.href+'?sublink='+ rel;
+			history.replaceState(null, "", href);
+			$("#subcontainer").load(rel, hide_loader);
+			$(".navigation-index.active").removeClass("active");
+			$(se).addClass("active");
+		}else{
+			if(currLocation.split("?")[1]){
+				$(".navigation-index.active").removeClass("active");
+				var tab = getUrlParameters("sublink", "", true)
+				var currLocation = location.href;
+				parArr = currLocation.split("?")[2];
+				$("#subcontainer").load(tab+'?'+parArr);
+				$('a[rel="'+tab+'"]').parent().addClass("active"); 
+			}
+		}
+	});
+</script>
+
+

@@ -1,0 +1,51 @@
+<div class="page-header">
+    <h2>Editando Historial de Usuarios</h2>
+</div>
+<div id="formaclhistorialusuarios" > 
+<?php echo $this->form; ?> 
+</div>
+<script>
+$(document).ready(function(){
+	loadpage(); 
+	$('#aclhfecha').datetimepicker({	
+		dateFormat: 'yy-mm-dd',
+		timeFormat: 'HH:00'
+	});
+
+	reloadaclhistorialusuarios();	
+})
+function clicksaveformaclhistorialusuarios()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+    if ($("#aclhistorialusuariosform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/default/aclhistorialusuarios/edit", $("#aclhistorialusuariosform").serialize(),
+            function(data) {
+                if (data.id<0) {
+                    $("#aclhistorialusuariosform").parent().html(data.form);                  
+                    reloadaclhistorialusuarios();
+                    buttonSelect.parents(".form-actions").find("button").button('reset');
+                } else {
+                    $('.notify').notify({message: { text: '  Registro actualizado con éxito ' }}).show();
+                    show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/default/aclhistorialusuarios/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+                }
+            }
+        )
+    } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+function reloadaclhistorialusuarios(){
+	$("#submitaclhistorialusuarios").click(clicksaveformaclhistorialusuarios);
+}
+</script>

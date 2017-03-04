@@ -1,0 +1,55 @@
+<?php $obj = $this->datos; ?>
+<div class="box-header navbar-inner">
+	<h3><button class="btn btn closeform" title="Atras"><i class="icon-step-backward"></i></button><span class="break"></span> Información de Qué soluciones similares a la presentada a la propuesta ha desarrollado recientemente</h3>
+    <div class="box-icon btn-group">
+    	<button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>
+    </div>
+</div>
+<div class="box-content">
+	<table class="table table-condensed table-striped">
+	<?php if ($this->datos->getSolucionador() > 0 ): ?>
+		<tr>
+			<td>
+				<b>Solucionador: </b></td>
+			<td>
+				<?php echo $this->datos->getSolucionadorObject()->get_Label_model(); ?>
+			</td>
+		</tr>
+	<?php endif ?> 
+		<tr>
+			<td>
+				<b>Solución desarrollada : </b></td>
+			<td>
+			<?php echo $obj->getSoluciondesarrollada(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Año en el que se desarrolló la solución: </b></td>
+			<td>
+			<?php echo $obj->getAnodesarrollo(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Quien la desarrolló: </b></td>
+			<td>
+			<?php echo $obj->getQuienladesarrollo(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Resultados obtenidos obtenidos : </b></td>
+			<td>
+			<?php echo $obj->getResultadosobtenidos(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>¿Qué dificultades se presentaron durante el desarrollo de la solución?: </b></td>
+			<td>
+			<?php echo $obj->getDificultadespresentadas(); ?>	
+			</td>
+		</tr>
+	</table>
+ </div>

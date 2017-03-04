@@ -1,0 +1,65 @@
+<script>
+	$(document).ready(function(){	  
+		$("#aclhistorialusuariosmodalbuscar").modal('hide');
+		reloadgrid();
+	});
+	function aclhistorialusuariosindexexcel(){
+
+		var form = $('form#aclhistorialusuariosformbuscar');
+		if($('input#download').length == 0){
+			form.append('<input type="hidden" id="download" name="download" value="1" />"');
+		}
+		var formData = form.serialize();
+		$('form#aclhistorialusuariosformbuscar').submit();
+		form.find('input#download').remove();
+	}
+</script>
+<div id="aclhistorialusuariosindex" class="box  contentindex"  filterreceived="<?php echo $this->filterreceived; ?>" request="<?php echo $this->baseUrl() ?>/default/aclhistorialusuarios/index<?php echo $this->filterreceived; ?>">
+    <div class="box-header navbar-inner">
+        <h3><span class="hidden-phone"><i class="icon-align-justify"></i><span class="break"></span> Listado </span>Historial de Usuarios</h3>
+        <div class="box-icon btn-group">
+                <a class="btn" type="button" title="Buscar"  href="#aclhistorialusuariosmodalbuscar" data-toggle="modal" > <i class="icon-search"></i> </a>
+                <button class="btn btn-warning" title="Descargar a Excel" onclick="aclhistorialusuariosindexexcel()" type="button"><i class="icon-download-alt"></i></button>
+                <!-- <button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>-->
+        </div>
+    </div>
+    <div class="box-content">
+<table id="aclhistorialusuariosTable" class="table table-striped table-condensed " formBuscar="aclhistorialusuariosformbuscar" >
+<thead >
+	<tr>
+		<th  class="sort " sort="aclhusuario" >Usuario</th>
+		<th class="no-print" width="42px">Acciones</th>
+
+	</tr>
+</thead>
+<tbody>
+<?php foreach ($this->pagination->_objects as $obj) : ?>
+	<tr>
+		<td class="">
+			<?php echo $obj->getAclhusuarioObject()->get_Label_model(); ?>
+		</td>
+		<td class="no-print" >
+		  <div class="btn-group" title="<?php echo $obj->get_Label_Model() ?>">
+			<?php if($this->permisos["edit"]  ): ?>
+				<button title="Editar" class="btn btn-success loadform" type="button" request="<?php echo $this->baseUrl() ?>/default/aclhistorialusuarios/edit/id/<?php echo $obj->getId() ?>" ><i class="icon-pencil"></i></button>
+			<?php endif ?>
+            </div>
+		</td>
+	</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>
+    <?php echo $this->paginationControl($this->pagination,'Sliding','pagination.phtml');?>
+    </div>
+		<div class="modal hide" id="aclhistorialusuariosmodalbuscar">
+		    <div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+		    <h3>Buscar</h3>
+		    </div>     
+		    <div class="modal-body">
+				<?php echo $this->formBuscar;?>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+</div>

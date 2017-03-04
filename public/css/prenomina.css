@@ -1,0 +1,91 @@
+	.Dia1{
+		background-color: #CCCCCC;
+	}
+	.Dia2{
+		background-color: #9C9C9C;
+	}
+	.chiquito{
+		padding: 1px!important;
+		color: #ffffff!important;
+		font-size: 10px;
+		text-align: center;
+	}
+	.HoraCopada{
+		background-color: #006DCC;
+		text-align: center;
+	}
+	#sevicio-cargo-name{
+		display: none;
+	}
+	.textcenter{
+		text-align: center;
+	}
+	.noche{
+		color: #B94A48;
+		font-weight: bold;
+	}
+	.dia{
+		text-decoration: underline
+	}
+
+	table {
+    text-transform: capitalize!important;
+}
+	@media print
+	{
+		
+		fieldset,
+		#ui-datepicker-div {
+			display: none;
+		}
+		table, body{
+			text-transform: capitalize!important;
+			background-color: #ffffff!important;
+			color: #000000!important;
+			font-size: 10px;
+		}
+		table thead{
+			background-color: #F5F5F5;
+		}
+		table tr{
+			border: 1px solid #000!important;
+		}
+
+		table td {
+			padding: 0px, 0px;
+		}
+
+		td.HoraCopada{
+			border: 1px solid #000 !important;
+			background-color: #fff!important;
+			color: #000!important;
+			overflow: hidden!important;
+			text-align: center!important;;
+
+		}
+		#sevicio-cargo-name{
+			display: block;
+		}
+
+		.container-fluid.body, .row-fluid, .span12, .span9, .conten {
+			padding: 0px!important;
+			border: 0px!important;
+			background-color: #ffffff!important;
+			margin: 0px!important;
+			width: 100%;
+		}
+
+		a{
+			color: #000000!important;
+		}
+
+
+
+		.table th, .table td {
+ 
+ 
+		    padding: 0px;
+
+		}
+		
+	}

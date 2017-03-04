@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+ 	<?php echo $this->headTitle(); ?>
+    <?php echo $this->headMeta(); ?>
+    <?php echo $this->headLink(); ?>
+    <?php echo $this->headStyle(); ?>
+
+	<?php echo $this->headScript ();?>
+
+		<!-- Le styles -->
+	<link href="<?php echo $this->baseUrl() ?>/css/bootstrap.css" rel="stylesheet">
+	<link href="<?php echo $this->baseUrl() ?>/css/font-awesome.css" rel="stylesheet">
+	<link href="<?php echo $this->baseUrl() ?>/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="<?php echo $this->baseUrl() ?>/css/general.css" rel="stylesheet">
+	<link href="<?php echo $this->baseUrl() ?>/css/listado.css" rel="stylesheet">
+	<script src="<?php echo $this->baseUrl() ?>/js/jquery.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/scripts_comuneslistado.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/scripts_listadosidebar.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/jquery.nicescroll.min.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/jquery.validate.min.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/scripts_add.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-datepicker.js"></script>
+	<link href="<?php echo $this->baseUrl() ?>/css/datepicker.css" rel="stylesheet">
+	
+	<script>
+		var baseUrl="<?php echo$this->baseUrl()?>";
+	</script>
+	    <style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+    </style>
+	</head>	
+	<body>
+		<div class="navbar navbar-fixed-top navbar-inverse">
+		  <div class="navbar-inner">
+			<div class="container-fluid">
+			  <a class="brand" href="<?php echo $this->baseUrl() ?>">SIS FET</a>
+			  <div class="nav-collapse">
+		  	<?php 
+				$options = array(
+					'ulClass' => 'nav'
+				);
+				
+				echo $this->navigation()
+						   ->menu()
+						   ->renderMenu($this->navPrincipal, $options);
+				
+            if(Zend_Auth::getInstance()->hasIdentity()){
+				echo '<a href="'.$this->baseUrl().'/authentication/logout" class = "pull-right exit" title="Salir"><i class = " icon-off icon-white " ></i></a>';
+				echo '<p class="navbar-text pull-right">Bienvenido <a href="#">'.Zend_Auth::getInstance()->getIdentity()->username.'</a></p>';
+			}		
+		?>
+			 
+			  </div><!--/.nav-collapse -->
+			</div>
+		  </div>
+		</div>
+		<?php echo $this->layout()->content; ?>	
+
+								
+
+
+		 
+	 <!-- Le javascript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-transition.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-alert.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-modal.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-dropdown.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-scrollspy.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-tab.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-tooltip.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-popover.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-button.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-collapse.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-carousel.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/bootstrap-typeahead.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/waypoints.min.js"></script>
+	<script src="<?php echo $this->baseUrl() ?>/js/scripts_generales.js"></script>
+	<footer>
+		<div class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-inner">
+					<p class="navbar-text pull-right">@copy rigth <a href="">Generador</a></p>
+				</div>
+			</div>
+		</div>
+	  </footer>
+	  <div id="modalload" class="modal hide" >
+		<div id="floatingCirclesG">
+			<div class="f_circleG" id="frotateG_01">
+			</div>
+			<div class="f_circleG" id="frotateG_02">
+			</div>
+			<div class="f_circleG" id="frotateG_03">
+			</div>
+			<div class="f_circleG" id="frotateG_04">
+			</div>
+			<div class="f_circleG" id="frotateG_05">
+			</div>
+			<div class="f_circleG" id="frotateG_06">
+			</div>
+			<div class="f_circleG" id="frotateG_07">
+			</div>
+			<div class="f_circleG" id="frotateG_08">
+			</div>
+		</div>
+		<div class="loadtext" ><h1>Cargando</h1></div> 
+	</div>	  
+  </body>  
+</html>

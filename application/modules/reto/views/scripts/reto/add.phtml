@@ -1,0 +1,17 @@
+<div class="page-header">
+    <h2>Agregando Reto</h2>
+</div>
+<div id="formreto" > <?php echo $this->form; ?> </div>
+<script> 
+$(document).ready(function(){
+	loadpage(); 
+	$('#fechainicio').datepicker({	dateFormat: 'yy-mm-dd'});
+	$('#fechafin').datepicker({	dateFormat: 'yy-mm-dd'});
+
+
+	reloadreto();
+})
+function reloadreto(){
+	$("#retoform").validate();
+}
+</script>

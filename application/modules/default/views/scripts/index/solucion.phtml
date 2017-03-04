@@ -1,0 +1,470 @@
+
+    <!-- WHITE SECTION -->
+    <section class="whiteSection full-width clearfix p-t-n">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 ">
+            <div class="sectionTitle text-center">
+              <h2>
+                <span class="shape shape-left bg-color-4"></span>
+                <span>Reto 1</span>
+                <span class="shape shape-right bg-color-4"></span>
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="tabCommon tabLeft">
+              <ul class="nav nav-tabs col-sm-3">
+                <li class="active"><a data-toggle="tab" href="#DatosGenerales">Datos generales</a></li>
+                <li><a data-toggle="tab" href="#proponente">Datos del proponente</a></li>
+                <li><a data-toggle="tab" href="#solucion">Solución</a></li>
+                <li><a data-toggle="tab" href="#metodologia">Metodología</a></li>
+                <li><a data-toggle="tab" href="#presupuesto">Presupuesto</a></li>
+                <li><a data-toggle="tab" href="#capacidad">Capacidad</a></li>
+                <li><a data-toggle="tab" href="#intelectual">Propiedad intelectual</a></li>
+              </ul>
+              <div class="tab-content col-sm-9">
+                <div id="DatosGenerales" class="tab-pane fade in active">
+                  <div class="media">
+                    <div class="media-body">
+                        <div class="panel panel-default checkoutInfo">
+                            <div class="panel-heading bg-color-3 border-color-3">
+                              <h3 class="panel-title">1.  INFORMACIÓN GENERAL DE LA PROPUESTA</h3>
+                            </div>
+                            <div class="panel-body">
+                              <?php echo $this->form_informaciongeneral; ?> 
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="proponente" class="tab-pane fade">
+                  <div class="media">
+                    <div class="media-body">
+                        <div class="panel panel-default checkoutInfo">
+                            <div class="panel-heading bg-color-3 border-color-3">
+                              <h3 class="panel-title">2.  INFORMACIÓN GENERAL DEL PROPONENTE </h3>
+                            </div>
+                            <div class="panel-body">
+                              <?php echo $this->form_proponente; ?> 
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="solucion" class="tab-pane fade">
+                  <div class="media">
+                    <div class="media-body">
+                        <div class="panel panel-default checkoutInfo">
+                            <div class="panel-heading bg-color-3 border-color-3">
+                              <h3 class="panel-title">3.  DESCRIPCIÓN DE LA SOLUCIÓN Y SU PERTINENCIA</h3>
+                            </div>
+                            <div class="panel-body">
+                              
+                              <br>
+                              <p><b>Anexa un dibujo que explique cómo funciona tu solución</b>. Dentro de éste, por favor, señala sus principales componente y la conexión entre estos. Puedes dibujar equipos a desarrollar, procedimientos a realizar, personas involucradas o todo aquello que exprese concretamente como sería la solución <span style="color: #225c8a;">(Asegúrate de que las palabras o expresiones que uses sean legibles. Envíalo en formato PDF)</span></p>
+                              <form id="solucionfile" action="" method="post" enctype="multipart/form-data">
+                                <?php echo $this->form_solucion->solucionadores_id; ?>
+                                <input type="file" name="file" id="file" onchange="clicksaveformsolucionfile()" class="form-control" />
+                              </form>
+
+                              <form id="solucionysupertinenciaform" name="solucionysupertinenciaform" class="form-horizontal">
+                                  <?php echo $this->form_solucion->solucionadores_id; ?>
+                                  <br>
+                                  <?php echo $this->form_solucion->descripciondesolucion; ?>
+                              
+                                  <br>
+                                  <?php echo $this->form_solucion->porquelasolucion; ?>
+                                  <br><br><hr>
+                                  <h4>Caracteristicas Principales Solucion</h4>
+                                  <p><b>¿Cuáles son las características principales (atributos) de la solución?</b><span style="color: #225c8a;"> (Describe cada una de las características relevantes para dar solución al reto usando la tabla que se muestra a continuación. Algunos ejemplos de atributos son: alta velocidad, seguridad en el manejo, facilidad de escalamiento…).</span> Máximo 10 atributos</p>
+                                  <div id='div-caracteristicasprincipalessolucion'></div>
+                                  <hr>
+                                  <h4>Elementos Tangibles</h4>
+                                  <p>Le vamos a ayudar a soñar un poco con la forma que tomaría la solución innovadora. Por favor señale  <b>¿Cuáles podrían ser elementos tangibles que conformarían la solución final cuando ésta estuviera totalmente implementada?</b> <span style="color: #225c8a;">(Puede nombrar equipos, obras civiles, dispositivos, software u otros elementos físicos que puedan observarse una vez se construya la solución innovadora. Si quiere, mencione elementos genéricos sin referenciar marcas de equipos, capacidades instaladas o todo aquello que provenga de un diseño más detallado.)</span> Máximo 10 elementos tangibles</p>
+                                  <div id='div-elementostangibles'></div>
+                                  <hr>
+                                  <h4>Indicadores</h4>
+                                  <p>En caso de implementarse posteriormente la solución sobre la cual presenta este propuesta <b>¿Qué indicadores se podrían usar para medir su eficiencia cuando ésta esté funcionando? </b> <span style="color: #225c8a;">(Un indicador es una variable que mide cualitativa o cuantitativamente el comportamiento de un objeto. Por ejemplo, para indicar si un vehículo va rápido se usa la velocidad que se describe como la relación que existe entre una distancia recorrida en un tiempo dado)  </span> Máximo 6 indicadores</p>
+                                  <div id='div-indicadores'></div>
+                                  <br><hr>
+                                  <p><b>Por favor, señala la fuente de inspiración de la solución que sugieres en esta propuesta.</b><span style="color: #225c8a;"> (En máximo 400 palabras ,indique si vio algo parecido, si ha estudiado el tema, si hizo algo parecido y cree que aquí lo puede replicar, si sabe de una patente o cualquier otra fuente)</span> </p>
+                                  
+                                  <?php echo $this->form_solucion->inspiracion; ?>
+                                  <br>
+                                  <button id="submitsolucionadores" onclick="clicksaveformsolucion();" title="Guardar" class="btn btn-primary saveform pull-right" type="button" >Guardar</button>
+                              </form>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="metodologia" class="tab-pane fade">
+                  <div class="media">
+                    <div class="media-body">
+                        <div class="panel panel-default checkoutInfo">
+                            <div class="panel-heading bg-color-3 border-color-3">
+                              <h3 class="panel-title">4.  DESCRIPCIÓN DE LA METODOLOGÍA</h3>
+                            </div>
+                            <div class="panel-body">
+                              <hr>
+                              <h4>Actividades Fundamentales</h4>
+                              <p><b>¿Qué actividades serían claves ejecutar para ir desde el diseño conceptual que se presenta en esta propuesta hasta una implementación final?</b>  Por favor, menciónelo intentando plantear un orden cronológico de estas actividades.  <span style="color: #225c8a;"> (No plantees actividades genéricas como “diseño básico”, “diseño en detalle”, “compra de equipos” o similares. Por el contrario, indica actividades concretas que permitan ver detalles de lo que se hará)</span></p>
+                              <div id='div-actividadesfundamentales'></div>
+                              <hr>
+                              <h4>Riesgos</h4>
+                              <p><b>¿Qué riesgos técnicos identifica que se pueden presentar para llegar a la implementación de la solución?  </b> <span style="color: #225c8a;"> (Diligencie el cuadro a continuación, agregue cuantas filas sean necesarias. Es clave que se concentre en riesgos “técnicos” . Tampoco debe plantear riesgos genéricos como falta de recursos. Entre más concreto seas con el planteamiento de riesgos se entiende que tiene más bajo control la propuesta)</span></p>
+                              <div id='div-riesgos'></div>
+                              <p><b>Bajo:</b> Si el hecho llegara a presentarse, tendría bajo impacto o efecto sobre el desarrollo de la solución.<br><b>Medio:</b> Si el hecho llegara a presentarse, tendría medianas consecuencias o efectos sobre el desarrollo de la solución.<br><b>Alto:</b> Si el hecho llegara a presentarse, tendría desastrosas consecuencias o efectos sobre el desarrollo de la solución<br><b>Improbable:</b> El evento puede ocurrir sólo en circunstancias excepcionales<br><b>Posible:</b> El evento podría ocurrir en algún momento<br><b>Probable:</b> El evento probablemente ocurrirá en la mayoría de las circunstancias</p>
+                              <hr>
+                              <h4>Caracteristicas Principales Implementacion</h4>
+                              <p>De los atributos mencionados en el numeral 3.4, por favor define <b>¿Cuál es el grado de dificultad existente hoy día para alcanzar dicho atributo?</b> <span style="color: #225c8a;">(Para responder esta pregunta, por favor, ten en cuenta la experiencia nacional o internacional y el nivel de acceso que se pueda tener a las tecnologías previstas)</span></p>
+                              <div id='div-caracteristicasprincipalesimplementacion'></div>
+                              <hr>
+                              <p>A partir de lo expuesto durante todo el formato, por favor define en la lista expuesta a continuación,  <b>¿Cuál es el estado de madurez de la solución?</b> <span style="color: #225c8a;">(Indica con una X,  la solución que se plantea en qué nivel de desarrollo está. Puede que esté a nivel de desarrollo conceptual, prototipo básico o alguna de las escalas que se muestra en la tabla a continuación).</span>  </p>
+                              <?php echo $this->form_madurez; ?> 
+                              <hr>
+                              <h4>Otros Desarrollos</h4>
+                              <p><b>¿Qué otros desarrollos complementarios se deberían realizar en VEOLIA para una óptima implementación de la solución?</b> <span style="color: #225c8a;">( Algunos ejemplos son: infraestructura, adecuaciones físicas de terrenos, obtención de permisos)</span></p>
+                              <div id='div-otrosdesarrollos'></div>
+                              <hr>
+                              <h4>Riesgos Tecnicos</h4>
+                              <p><b>¿Qué riesgos técnicos o de funcionamiento se podrían presentar cuando la solución esté totalmente implementada?</b> <span style="color: #225c8a;">(Es importante considerar que estos riesgos corresponden al momento en que la solución ya esté desarrollada y en funcionamiento. Previamente se había preguntado por riesgos, pero durante la implementación)</span>  Máximo  10 riesgos</p>
+                              <div id='div-riesgostecnicos'></div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="presupuesto" class="tab-pane fade">
+                  <div class="media">
+                    <div class="media-body">
+                        <div class="panel panel-default checkoutInfo">
+                            <div class="panel-heading bg-color-3 border-color-3">
+                              <h3 class="panel-title">5.  PLANTEAMIENTO PRESUPUESTAL DE LA PROPUESTA</h3>
+                            </div>
+                            <div class="panel-body">
+                              <p>Teniendo en cuenta las actividades propuestas previamente tanto para el desarrollo técnico de la solución, por favor, introducir el <b>monto de dinero requerido</b> para cubrir cada uno de los rubros del proyecto. <span style="color: #225c8a;">(Para diligenciar esta tabla puede realizar cálculos en un archivo Excel de manera cuidadosa. En caso de que su propuesta sea seleccionada se hará una revisión de lo aquí planteado.)</span></p>
+                              <?php echo $this->form_presupuesto; ?> 
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="capacidad" class="tab-pane fade">
+                  <div class="media">
+                    <div class="media-body">
+                        <div class="panel panel-default checkoutInfo">
+                            <div class="panel-heading bg-color-3 border-color-3">
+                              <h3 class="panel-title">6.  CAPACIDAD DEL SOLUCIONADOR</h3>
+                            </div>
+                            <div class="panel-body">
+                              <p><b>Por favor, señale su trayectoria para presentarse esta propuesta</b> <span style="color: #225c8a;">(En máximo 400 palabras indica años de experiencia, los logros más relevantes y toda información que crea contribuya para revisar la capacidad. Puede incluir aspectos como infraestructura especial, patentes…)</span></p>
+                              <?php echo $this->form_trayectoria; ?>
+                              <hr>
+                              <h4>Soluciones Similares</h4>
+                              <p><b>¿Qué soluciones similares a la presentada en la propuesta ha desarrollado previamente?</b> <span style="color: #225c8a;">(Diligencie el cuadro a continuación, agregue cuantas filas sean necesarias)</span></p>
+                              <div id='div-solucionessimilares'></div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="intelectual" class="tab-pane fade">
+                  <div class="media">
+                    <div class="media-body">
+                        <div class="panel panel-default checkoutInfo">
+                            <div class="panel-heading bg-color-3 border-color-3">
+                              <h3 class="panel-title">7.  PROPIEDAD INTELECTUAL DE LA SOLUCIÓN</h3>
+                            </div>
+                            <div class="panel-body">
+                              <p>Este numeral es informativo, y no será objeto de evaluación de la propuesta, sin embargo es obligatorio su diligenciamiento.</p>
+                              
+                              <?php echo $this->form_intelectual; ?> 
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<script>
+
+function clicksaveformsolucionadores()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+
+    if ($("#solucionadoresform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/solucionadores/informaciongeneralpropuesta", $("#solucionadoresform").serialize(),
+            function(data) {
+              html = '<div class="col-xs-12 message"><div class=" alert alert-success alert-dismissible alt" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="false">x</span></button><span class="successAlert"><i class="fa fa-check" aria-hidden="true"></i></span>Registro actualizado con éxito</div></div>';
+                if(data.success){
+                  $(".tab-content").append(html);
+                  $('.message').slideUp( 2000 );
+                   setTimeout(function() {
+                      $('.message').remove();
+                    }, 2000);
+                }
+                
+            });
+      } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+
+function clicksaveformtrayectoria()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+
+    if ($("#solucionadorestrayectoriaform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/solucionadores/trayectoria", $("#solucionadorestrayectoriaform").serialize(),
+            function(data) {
+              html = '<div class="col-xs-12 message"><div class=" alert alert-success alert-dismissible alt" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="false">x</span></button><span class="successAlert"><i class="fa fa-check" aria-hidden="true"></i></span>Registro actualizado con éxito</div></div>';
+                if(data.success){
+                  $(".tab-content").append(html);
+                  $('.message').slideUp( 2000 );
+                   setTimeout(function() {
+                      $('.message').remove();
+                    }, 2000);
+                }
+                
+            });
+      } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+
+function clicksaveformmadurez()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+
+    if ($("#solucionadoresmadurezform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/solucionadores/madurez", $("#solucionadoresmadurezform").serialize(),
+            function(data) {
+              html = '<div class="col-xs-12 message"><div class=" alert alert-success alert-dismissible alt" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="false">x</span></button><span class="successAlert"><i class="fa fa-check" aria-hidden="true"></i></span>Registro actualizado con éxito</div></div>';
+                if(data.success){
+                  $(".tab-content").append(html);
+                  $('.message').slideUp( 2000 );
+                   setTimeout(function() {
+                      $('.message').remove();
+                    }, 2000);
+                }
+                
+            });
+      } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+
+
+
+
+
+function clicksaveformproponente()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+
+    if ($("#proponenteform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/solucionadores/informaciongeneralproponente", $("#proponenteform").serialize(),
+            function(data) {
+              html = '<div class="col-xs-12 message"><div class=" alert alert-success alert-dismissible alt" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="false">x</span></button><span class="successAlert"><i class="fa fa-check" aria-hidden="true"></i></span>Registro actualizado con éxito</div></div>';
+                if(data.success){
+                  $(".tab-content").append(html);
+                  $('.message').slideUp( 2000 );
+                   setTimeout(function() {
+                      $('.message').remove();
+                    }, 2000);
+                }
+                
+            });
+      } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+
+function clicksaveformsolucion()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+
+    if ($("#solucionysupertinenciaform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/solucionadores/solucionysupertinencia", $("#solucionysupertinenciaform").serialize(),
+            function(data) {
+              html = '<div class="col-xs-12 message"><div class=" alert alert-success alert-dismissible alt" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="false">x</span></button><span class="successAlert"><i class="fa fa-check" aria-hidden="true"></i></span>Registro actualizado con éxito</div></div>';
+                if(data.success){
+                  $(".tab-content").append(html);
+                  $('.message').slideUp( 2000 );
+                   setTimeout(function() {
+                      $('.message').remove();
+                    }, 2000);
+                }
+                
+            });
+      } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+
+function clicksaveformsolucionfile()
+{
+    $("#solucionfile").submit();
+}
+
+function clicksaveformpresupuesto()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+
+    if ($("#presupuestalform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/solucionadores/planteamientopresupuestal", $("#presupuestalform").serialize(),
+            function(data) {
+              html = '<div class="col-xs-12 message"><div class=" alert alert-success alert-dismissible alt" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="false">x</span></button><span class="successAlert"><i class="fa fa-check" aria-hidden="true"></i></span>Registro actualizado con éxito</div></div>';
+                if(data.success){
+                  $(".tab-content").append(html);
+                  $('.message').slideUp( 2000 );
+                   setTimeout(function() {
+                      $('.message').remove();
+                    }, 2000);
+                }
+                
+            });
+      } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+
+function clicksaveformpropiedad()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+
+    if ($("#propiedadform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/solucionadores/propiedadintelectual", $("#propiedadform").serialize(),
+            function(data) {
+              html = '<div class="col-xs-12 message"><div class=" alert alert-success alert-dismissible alt" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="false">x</span></button><span class="successAlert"><i class="fa fa-check" aria-hidden="true"></i></span>Registro actualizado con éxito</div></div>';
+                if(data.success){
+                  $(".tab-content").append(html);
+                  $('.message').slideUp( 2000 );
+                   setTimeout(function() {
+                      $('.message').remove();
+                    }, 2000);
+                }
+                
+            });
+      } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+
+$(document).ready(function () {
+  
+  basetxt = '<?php echo $this->baseUrl()?>';
+  var filerequest = basetxt+"/reto/solucionadores/solucionysupertinenciafile";
+
+  $("#solucionfile").on('submit',(function(e) {
+    e.preventDefault();
+      $.ajax({
+        url: filerequest,
+        type: "POST",
+        data: new FormData(this),
+        contentType: false,
+        cache: false,
+        processData:false,
+        success: function(data)
+        {
+          //$("#message").html(data);
+        }
+      });
+  }));
+
+
+  //PRE carga el listado de actividades
+  var Content1 = $("#div-actividadesfundamentales");
+  Request1 = "<?php echo $this->baseUrl()?>/reto/actividadesfundamentales/list";
+  Content1.load(Request1,function(response, status, xhr) { 
+    actividadesfundamentales(basetxt); //
+  });
+
+
+  //pre carga el listado de riesgos
+  var Content2 = $("#div-riesgos");
+  Request2 = "<?php echo $this->baseUrl()?>/reto/riesgos/list";
+  Content2.load(Request2,function(response, status, xhr) {
+    riesgos(basetxt); //
+  });
+
+  //pre carga el listado de caracteristicas principales solucion
+  var Content3 = $("#div-caracteristicasprincipalessolucion");
+  Request3 = "<?php echo $this->baseUrl()?>/reto/caracteristicasprincipalessolucion/list";
+  Content3.load(Request3,function(response, status, xhr) {
+    caracteristicasprincipalessolucion(basetxt); //
+  });
+
+  //pre carga el elementos tangibles
+  var Content4 = $("#div-elementostangibles");
+  Request4 = "<?php echo $this->baseUrl()?>/reto/elementostangibles/list";
+  Content4.load(Request4,function(response, status, xhr) {
+    elementostangibles(basetxt); //
+  });
+
+  //pre carga indicadores
+  var Content5 = $("#div-indicadores");
+  Request5 = "<?php echo $this->baseUrl()?>/reto/indicadores/list";
+  Content5.load(Request5,function(response, status, xhr) {
+    indicadores(basetxt); //
+  });
+
+  //pre carga caracteristicas principales implementacion
+  var Content6 = $("#div-caracteristicasprincipalesimplementacion");
+  Request6 = "<?php echo $this->baseUrl()?>/reto/caracteristicasprincipalesimplementacion/list";
+  Content6.load(Request6,function(response, status, xhr) {
+    caracteristicasprincipalesimplementacion(basetxt); //
+  });
+
+  //pre carga caracteristicas principales implementacion
+  var Content7 = $("#div-otrosdesarrollos");
+  Request7 = "<?php echo $this->baseUrl()?>/reto/otrosdesarrollos/list";
+  Content7.load(Request7,function(response, status, xhr) {
+    otrosdesarrollos(basetxt); //
+  });
+
+  //pre carga riesgos tecnicos
+  var Content8 = $("#div-riesgostecnicos");
+  Request8 = "<?php echo $this->baseUrl()?>/reto/riesgostecnicos/list";
+  Content8.load(Request8,function(response, status, xhr) {
+    riesgostecnicos(basetxt); //
+  });
+
+  //pre carga soluciones similares
+  var Content9 = $("#div-solucionessimilares");
+  Request9 = "<?php echo $this->baseUrl()?>/reto/solucionessimilares/list";
+  Content9.load(Request9,function(response, status, xhr) {
+    solucionessimilares(basetxt); //
+  });
+
+  
+
+
+});
+
+
+
+</script>

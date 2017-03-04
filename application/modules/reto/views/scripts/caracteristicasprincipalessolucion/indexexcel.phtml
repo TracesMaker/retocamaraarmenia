@@ -1,0 +1,37 @@
+<?php
+	header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+	header("Content-type:   application/x-msexcel; charset=utf-8");
+	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("content-disposition: attachment;filename=caracteristicasprincipalessolucion_". date("Y_m_d_H_i_s",time()).".xls");
+?>
+<table border="1" align="center">
+	<thead >
+		<tr><th colspan="4" style="font-weight: bold;font-style: italic;">Listado de Características principales de la solucion </th></tr>
+		<tr style="background-color: #C4C9DF; color:black;">
+			<th>Atributo</th>
+			<th>¿Por qué este atributo es importante en la solución?</th>
+			<th>¿Es un atributo diferenciador frente a otras posibles soluciones que se encuentran en el mercado?</th>
+			<th>Si en la casilla anterior, su respuesta fue afirmativa, por favor, explique por qué es diferenciador.</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($this->pagination as $key => $obj) : ?>
+		<?php $class = fmod($key, 2) == 0 ? ' background-color: #F9F9F9;' : ''; ?>
+		<tr style="<?php echo $class; ?>">
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getAtributo(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getDescripcionatributo(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php if($obj->getDiferenciador()==1)echo "Si"; else echo "No"; ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getVentajas(); ?>
+			</td>
+		</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

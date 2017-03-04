@@ -1,0 +1,80 @@
+<a data-toggle="modal" id="addnewcaracteristicasprincipalesimplementacion" href="#newcaracteristicasprincipalesimplementacion" class="btn btn-primary bg-color-4 pull-right addaction" title="Nuevo" type="button" request="<?php echo $this->baseUrl() ?>/reto/reto/add<?php echo $this->filterreceived; ?>" > <i class="fa fa-plus"></i> Agregar</a>
+
+<table id="caracteristicasprincipalesimplementacionTable" class="table table-striped table-condensed " formBuscar="caracteristicasprincipalesimplementacionformbuscar" >
+<thead >
+	<tr>
+		<th class="">Atributo</th>
+		<th class="hidden-phone">Estado Desarrollo</th>
+		<th class="hidden-phone">Grado Desarrollo</th>
+		<th class="hidden-phone">Aspectos Pendientes</th>
+		<th style=" width: 74px;"></th>
+	</tr>
+</thead>
+<tbody>
+<?php foreach ($this->pagination as $obj) : ?>
+	<tr>
+		<td class="">
+			<?php echo $obj->getAtributobasicoObject()->get_Label_model(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getEstadodeldesarrollo(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getGradodeldesarrollo(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getAspectospendientes(); ?>	
+		</td>
+		<td class="no-print pull-right" >
+
+				<a data-toggle="modal" href="#newcaracteristicasprincipalesimplementacion" class="btn btn-success editaction" title="Editar" type="button" iditem="<?php echo $obj->getId() ?>" request="<?php echo $this->baseUrl() ?>/reto/caracteristicasprincipalesimplementacion/listbyid/id/<?php echo $obj->getId() ?>" >&nbsp;&nbsp;<i class="fa fa-pencil"></i>&nbsp;&nbsp;</a>
+
+				<button title="Eliminar" class="btn btn-danger deleteaction" type="button" request="<?php echo $this->baseUrl() ?>/reto/caracteristicasprincipalesimplementacion/delete/id/<?php echo $obj->getId() ?>">&nbsp;&nbsp;<i class="fa fa-trash"></i>&nbsp;&nbsp;</button>
+
+		</td>
+	</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>
+
+<!--  MODAL caracteristicasprincipalesimplementacion-->
+  <div class="modal fade customModal" id="newcaracteristicasprincipalesimplementacion" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="panel panel-default formPanel">
+          <div class="panel-heading bg-color-4 border-color-1">
+            <h3 class="panel-title modtitle">Nueva Caracteristica Principal Implementacion</h3>
+          </div>
+          <div class="panel-body">
+            <form action="#" name="caracteristicasprincipalesimplementacionform" id="caracteristicasprincipalesimplementacionform" method="POST" role="form">
+            	<!-- id hidden para la edicion -->
+              <div class="form-group formField">
+              	<input type="hidden" class="form-control" name="caracteristicasprincipalesimplementacion_id" id="caracteristicasprincipalesimplementacion_id">
+              </div>
+              <div class="form-group formField">
+                <select class="form-control" name="atributobasico" id="atributobasico">
+                  
+                  <?php foreach ($this->arrayatributos as $key => $value) { ?>
+                  		<option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                  <?php } ?>
+				      </select>
+              </div>
+              <div class="form-group formField">
+                <textarea name="estadodeldesarrollo" id="estadodeldesarrollo" placeholder="Estado del Desarrollo" class="form-control" style="height: 65px;"></textarea>
+              </div>
+              <div class="form-group formField">
+                <textarea name="gradodeldesarrollo" id="gradodeldesarrollo" placeholder="Grado del Desarrollo" class="form-control" style="height: 65px;"></textarea>
+              </div>
+              <div class="form-group formField">
+                <textarea name="aspectospendientes" id="aspectospendientes" placeholder="Aspectos Pendientes" class="form-control" style="height: 65px;"></textarea>
+              </div>
+              <div class="form-group formField">
+                <a id="savecaracteristicasprincipalesimplementacion" data-dismiss="modal" href="#newcaracteristicasprincipalesimplementacion" class="btn btn-primary btn-block bg-color-3 border-color-3">Agregar</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript"></script>

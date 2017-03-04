@@ -1,0 +1,108 @@
+<script>
+	$(document).ready(function(){	  
+		$("#aclusuariosmodalbuscar").modal('hide');
+		reloadgrid();
+	});
+	function aclusuariosindexexcel(){
+
+		var form = $('form#aclusuariosformbuscar');
+		if($('input#download').length == 0){
+			form.append('<input type="hidden" id="download" name="download" value="1" />"');
+		}
+		var formData = form.serialize();
+		$('form#aclusuariosformbuscar').submit();
+		form.find('input#download').remove();
+	}
+</script>
+<div id="aclusuariosindex" class="box  contentindex"  filterreceived="<?php echo $this->filterreceived; ?>" request="<?php echo $this->baseUrl() ?>/default/aclusuarios/index<?php echo $this->filterreceived; ?>">
+    <div class="box-header navbar-inner">
+        <h3><span class="hidden-phone"><i class="icon-align-justify"></i><span class="break"></span> Listado </span>Usuarios</h3>
+        <div class="box-icon btn-group">
+                <a class="btn" type="button" title="Buscar"  href="#aclusuariosmodalbuscar" data-toggle="modal" > <i class="icon-search"></i> </a>
+            <?php if($this->permisos["add"]): ?>
+                <a id="newaclusuarios" href="#newaclusuarios" class="btn btn-info loadform" title="Nuevo" type="button" request="<?php echo $this->baseUrl() ?>/default/aclusuarios/add<?php echo $this->filterreceived; ?>" > <i class="icon-plus"></i></a>
+            <?php endif ?>
+                <button class="btn btn-warning" title="Descargar a Excel" onclick="aclusuariosindexexcel()" type="button"><i class="icon-download-alt"></i></button>
+                <!-- <button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>-->
+        </div>
+    </div>
+    <div class="box-content">
+<table id="aclusuariosTable" class="table table-striped table-condensed " formBuscar="aclusuariosformbuscar" >
+<thead >
+	<tr>
+		<th width="5%"></th>
+		<th  class="sort " sort="nombre" >Nombre</th>
+		<th  class="sort hidden-phone" sort="cargo" >Cargo</th>
+		<th  class="sort hidden-phone" sort="role" >Rol</th>
+		<th  class="sort hidden-phone" sort="username" >Username</th>
+		<th  class="sort hidden-phone" sort="activo" >Activo</th>
+		<th  class="sort hidden-phone" sort="email" >Email</th>
+		<th  class="sort hidden-phone" sort="manejodedatos" >Acepta Manejo de datos</th>
+		<th  class="sort hidden-phone" sort="divulgacionpostulacion" >Acepta Divulgaciòn de la postulaciòn</th>
+		<th class="no-print" width="84px">Acciones</th>
+
+	</tr>
+</thead>
+<tbody>
+<?php foreach ($this->pagination->_objects as $obj) : ?>
+	<tr>
+		<td><span class="accionesindex btn-group" >
+
+<span accion="<?php echo $this->baseUrl() ?>/default/aclusuarios/estado/id/<?php echo $obj->getId() ?>" <?php if($obj->getactivo()==1)	
+			echo "class='btn  accionajax  btn-success   icon-ok' title='Activo'"; 
+		else 
+			echo "class='btn accionajax  btn-danger icon-ban-circle' title='Inactivo'"; ?>
+	></span>
+		</span></td>
+		<td class="">
+			<?php echo $obj->getNombre(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getCargo(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getRoleObject()->get_Label_model(); ?>
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getUsername(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php if($obj->getActivo()==1)echo "Activo"; else echo "Inactivo"; ?>
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getEmail(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php if($obj->getManejodedatos()==1)echo "Sí"; else echo "No"; ?>
+		</td>
+		<td class="hidden-phone">
+			<?php if($obj->getDivulgacionpostulacion()==1)echo "Sí"; else echo "No"; ?>
+		</td>
+		<td class="no-print" >
+		  <div class="btn-group" title="<?php echo $obj->get_Label_Model() ?>">
+			<?php if($this->permisos["edit"]  ): ?>
+				<button title="Editar" class="btn btn-success loadform" type="button" request="<?php echo $this->baseUrl() ?>/default/aclusuarios/edit/id/<?php echo $obj->getId() ?>" ><i class="icon-pencil"></i></button>
+			<?php endif ?>
+			<?php if($this->permisos["delete"]  ): ?>
+				<button title="Eliminar" class="btn btn-danger deleteaction" type="button" request="<?php echo $this->baseUrl() ?>/default/aclusuarios/delete/id/<?php echo $obj->getId() ?>"><i class="icon-trash"></i></button>
+			<?php endif ?>
+            </div>
+		</td>
+	</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>
+    <?php echo $this->paginationControl($this->pagination,'Sliding','pagination.phtml');?>
+    </div>
+		<div class="modal hide" id="aclusuariosmodalbuscar">
+		    <div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+		    <h3>Buscar</h3>
+		    </div>     
+		    <div class="modal-body">
+				<?php echo $this->formBuscar;?>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+</div>

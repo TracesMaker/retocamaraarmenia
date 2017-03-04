@@ -1,0 +1,33 @@
+<?php
+	header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+	header("Content-type:   application/x-msexcel; charset=utf-8");
+	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("content-disposition: attachment;filename=agrupacion_". date("Y_m_d_H_i_s",time()).".xls");
+?>
+<table border="1" align="center">
+	<thead >
+		<tr><th colspan="3" style="font-weight: bold;font-style: italic;">Listado de Agrupacion</th></tr>
+		<tr style="background-color: #C4C9DF; color:black;">
+			<th>Abreviatura</th>
+			<th>Label</th>
+			<th>Tipo de Agrupacion</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($this->pagination as $key => $obj) : ?>
+		<?php $class = fmod($key, 2) == 0 ? ' background-color: #F9F9F9;' : ''; ?>
+		<tr style="<?php echo $class; ?>">
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getAabreviatura(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getAlabel(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+			<?php echo $obj->getAtipoagrupacionObject()->get_Label_model(); ?>
+			</td>
+		</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

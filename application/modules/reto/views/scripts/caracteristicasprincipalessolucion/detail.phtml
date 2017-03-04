@@ -1,0 +1,48 @@
+<?php $obj = $this->datos; ?>
+<div class="box-header navbar-inner">
+	<h3><button class="btn btn closeform" title="Atras"><i class="icon-step-backward"></i></button><span class="break"></span> Información de Características principales de la solucion </h3>
+    <div class="box-icon btn-group">
+    	<button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>
+    </div>
+</div>
+<div class="box-content">
+	<table class="table table-condensed table-striped">
+		<tr>
+			<td>
+				<b>Atributo: </b></td>
+			<td>
+			<?php echo $obj->getAtributo(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>¿Por qué este atributo es importante en la solución?: </b></td>
+			<td>
+			<?php echo $obj->getDescripcionatributo(); ?>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>¿Es un atributo diferenciador frente a otras posibles soluciones que se encuentran en el mercado?: </b></td>
+			<td>
+			<?php if($obj->getDiferenciador()==1)echo "Si"; else echo "No"; ?>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Si en la casilla anterior, su respuesta fue afirmativa, por favor, explique por qué es diferenciador.: </b></td>
+			<td>
+			<?php echo $obj->getVentajas(); ?>	
+			</td>
+		</tr>
+	<?php if ($this->datos->getSolucionador() > 0 ): ?>
+		<tr>
+			<td>
+				<b>Solucionador: </b></td>
+			<td>
+				<?php echo $this->datos->getSolucionadorObject()->get_Label_model(); ?>
+			</td>
+		</tr>
+	<?php endif ?> 
+	</table>
+ </div>

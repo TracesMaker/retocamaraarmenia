@@ -1,0 +1,81 @@
+<script>
+	$(document).ready(function(){	  
+		$("#aclrolesmodalbuscar").modal('hide');
+		reloadgrid();
+	});
+	function aclrolesindexexcel(){
+
+		var form = $('form#aclrolesformbuscar');
+		if($('input#download').length == 0){
+			form.append('<input type="hidden" id="download" name="download" value="1" />"');
+		}
+		var formData = form.serialize();
+		$('form#aclrolesformbuscar').submit();
+		form.find('input#download').remove();
+	}
+</script>
+<div id="aclrolesindex" class="box  contentindex"  filterreceived="<?php echo $this->filterreceived; ?>" request="<?php echo $this->baseUrl() ?>/default/aclroles/index<?php echo $this->filterreceived; ?>">
+    <div class="box-header navbar-inner">
+        <h3><span class="hidden-phone"><i class="icon-align-justify"></i><span class="break"></span> Listado </span>Roles</h3>
+        <div class="box-icon btn-group">
+                <a class="btn" type="button" title="Buscar"  href="#aclrolesmodalbuscar" data-toggle="modal" > <i class="icon-search"></i> </a>
+            <?php if($this->permisos["add"]): ?>
+                <a id="newaclroles" href="#newaclroles" class="btn btn-info loadform" title="Nuevo" type="button" request="<?php echo $this->baseUrl() ?>/default/aclroles/add<?php echo $this->filterreceived; ?>" > <i class="icon-plus"></i></a>
+            <?php endif ?>
+                <button class="btn btn-warning" title="Descargar a Excel" onclick="aclrolesindexexcel()" type="button"><i class="icon-download-alt"></i></button>
+                <!-- <button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>-->
+        </div>
+    </div>
+    <div class="box-content">
+<table id="aclrolesTable" class="table table-striped table-condensed " formBuscar="aclrolesformbuscar" >
+<thead >
+	<tr>
+		<th  class="sort " sort="rolnombre" >Nombre</th>
+		<th  class="sort hidden-phone" sort="rolpadre" >Padre</th>
+		<th class="no-print" width="246px">Acciones</th>
+
+	</tr>
+</thead>
+<tbody>
+<?php foreach ($this->pagination->_objects as $obj) : ?>
+	<tr>
+		<td class="">
+			<?php echo $obj->getRolnombre(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getRolpadreObject()->get_Label_model(); ?>
+		</td>
+		<td class="no-print" >
+		  <div class="btn-group" title="<?php echo $obj->get_Label_Model() ?>">
+			<?php if($this->permisos["edit"]  ): ?>
+				<button title="Editar" class="btn btn-success loadform" type="button" request="<?php echo $this->baseUrl() ?>/default/aclroles/edit/id/<?php echo $obj->getId() ?>" ><i class="icon-pencil"></i></button>
+			<?php endif ?>
+			<?php if($this->permisos["detail"] ): ?>
+				<button title="Detalles" class="btn btn-info loadform" type="button" request="<?php echo $this->baseUrl() ?>/default/aclroles/detail/id/<?php echo $obj->getId() ?>"><i class="icon-fullscreen"></i></button>
+			<?php endif ?>
+			<?php if($this->permisos["delete"]  ): ?>
+				<button title="Eliminar" class="btn btn-danger deleteaction" type="button" request="<?php echo $this->baseUrl() ?>/default/aclroles/delete/id/<?php echo $obj->getId() ?>"><i class="icon-trash"></i></button>
+			<?php endif ?>
+			<?php if($this->permisos["default_asignarpermisos_index"]  ): ?>
+				<button title="Permisos" class="btn btn-inverse" type="button" onClick="location='<?php echo $this->baseUrl().'/default/asignarpermisos/index/aclroles_id/'.$obj->getId().'/'?>'">Permisos</button>
+			<?php endif ?>
+            </div>
+		</td>
+	</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>
+    <?php echo $this->paginationControl($this->pagination,'Sliding','pagination.phtml');?>
+    </div>
+		<div class="modal hide" id="aclrolesmodalbuscar">
+		    <div class="modal-header">
+				<a class="close" data-dismiss="modal">×</a>
+		    <h3>Buscar</h3>
+		    </div>     
+		    <div class="modal-body">
+				<?php echo $this->formBuscar;?>
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+</div>

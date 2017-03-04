@@ -1,0 +1,53 @@
+<?php
+	header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+	header("Content-type:   application/x-msexcel; charset=utf-8");
+	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("content-disposition: attachment;filename=aclusuarios_". date("Y_m_d_H_i_s",time()).".xls");
+?>
+<table border="1" align="center">
+	<thead >
+		<tr><th colspan="8" style="font-weight: bold;font-style: italic;">Listado de Usuarios</th></tr>
+		<tr style="background-color: #C4C9DF; color:black;">
+			<th>Nombre</th>
+			<th>Cargo</th>
+			<th>Rol</th>
+			<th>Username</th>
+			<th>Activo</th>
+			<th>Email</th>
+			<th>Acepta Manejo de datos</th>
+			<th>Acepta Divulgaciòn de la postulaciòn</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($this->pagination as $key => $obj) : ?>
+		<?php $class = fmod($key, 2) == 0 ? ' background-color: #F9F9F9;' : ''; ?>
+		<tr style="<?php echo $class; ?>">
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getNombre(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getCargo(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+			<?php echo $obj->getRoleObject()->get_Label_model(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getUsername(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php if($obj->getActivo()==1)echo "Activo"; else echo "Inactivo"; ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getEmail(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php if($obj->getManejodedatos()==1)echo "Sí"; else echo "No"; ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php if($obj->getDivulgacionpostulacion()==1)echo "Sí"; else echo "No"; ?>
+			</td>
+		</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

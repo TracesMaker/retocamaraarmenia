@@ -1,0 +1,46 @@
+<div class="page-header">
+    <h2>Agregando Tipo de Agrupacion</h2>
+</div>
+<div id="formtipoagrupacion" > <?php echo $this->form; ?> </div>
+<script> 
+$(document).ready(function(){
+	loadpage(); 
+
+
+	reloadtipoagrupacion();
+})
+function clicksaveformtipoagrupacion()
+{
+	var buttonSelect = $(this);	
+	buttonSelect.parents(".form-actions").find("button").button('loading');
+	if ($("#tipoagrupacionform").valid()) {
+		$.post("<?php echo $this->baseUrl()?>/default/tipoagrupacion/add", $("#tipoagrupacionform").serialize(),
+			function(data) {
+				if (data.id<0) {
+					$("#tipoagrupacionform").parent().html(data.form);					
+					reloadtipoagrupacion();
+					buttonSelect.parents(".form-actions").find("button").button('reset');
+				} else {
+			        $('.notify').notify({message: { text: '  Registro agregado con éxito ' }}).show();
+			        show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/default/tipoagrupacion/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+				}
+			}
+		)
+	} else {
+		buttonSelect.parents(".form-actions").find("button").button('reset');
+		alert("Formulario invalido");
+	}
+}
+function reloadtipoagrupacion(){
+	$("#submittipoagrupacion").click(clicksaveformtipoagrupacion);
+}
+</script>

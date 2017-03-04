@@ -1,0 +1,71 @@
+.iddato {
+	height:  10px; 
+	width: 20px;
+	text-align:center;
+}
+.error  {
+  color: #b94a48;
+  border-color: #b94a48;
+}
+
+.error:focus {
+  border-color: #953b39;
+  -webkit-box-shadow: 0 0 6px #d59392;
+  -moz-box-shadow: 0 0 6px #d59392;
+  box-shadow: 0 0 6px #d59392;
+}
+
+
+div.campo {
+	float: left;
+	margin-right:10px;
+}
+
+.input-largo {
+	width: 820px;
+}
+.input-trescuartos {
+	width: 610px;
+}
+.input-dostercios {
+	width: 540px;
+}
+.input-medio {
+	width: 400px;
+}
+.input-tercio {
+	width: 260px;
+}
+.input-cuarto {
+	width: 190px;
+}
+
+input[type="checkbox"], input[type="radio"] {
+	display: inline;
+	margin-right:5px;
+}
+
+[class*="span"] {
+    float: left;
+    margin-left: 0px;
+}
+
+.span3_1 {
+    width: 260px;
+}
+
+.widget {
+    width: 280px;
+    float: right;
+}
+
+.iconadd{
+	float:left;
+}
+.exit{
+	margin:8px;
+}
+
+.error label{
+	font-weight: bold;
+}

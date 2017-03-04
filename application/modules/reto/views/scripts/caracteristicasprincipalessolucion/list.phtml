@@ -1,0 +1,79 @@
+<a data-toggle="modal" id="addnewcaracteristicasprincipalessolucion" href="#newcaracteristicasprincipalessolucion" class="btn btn-primary bg-color-4 pull-right addaction" title="Nuevo" type="button" request="<?php echo $this->baseUrl() ?>/reto/reto/add<?php echo $this->filterreceived; ?>" > <i class="fa fa-plus"></i> Agregar</a>
+
+<table id="caracteristicasprincipalessolucionTable" class="table table-striped table-condensed " formBuscar="caracteristicasprincipalessolucionformbuscar" >
+<thead >
+	<tr>
+		<th class="">Atributo</th>
+		<th class="hidden-phone">Descripción </th>
+		<th class="hidden-phone">Diferenciador </th>
+		<th class="hidden-phone">Ventajas</th>
+		<th style=" width: 74px;"></th>
+	</tr>
+</thead>
+<tbody>
+<?php foreach ($this->pagination as $obj) : ?>
+	<tr>
+		<td class="">
+			<?php echo $obj->getAtributo(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getDescripcionatributo(); ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php 	if($obj->getDiferenciador() ==1){ echo "Si"; }else {  echo "No"; }  ?>	
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getVentajas(); ?>	
+		</td>
+		<td class="no-print pull-right" >
+
+				<a data-toggle="modal" href="#newcaracteristicasprincipalessolucion" class="btn btn-success editaction" title="Editar" type="button" iditem="<?php echo $obj->getId() ?>" request="<?php echo $this->baseUrl() ?>/reto/caracteristicasprincipalessolucion/listbyid/id/<?php echo $obj->getId() ?>" >&nbsp;&nbsp;<i class="fa fa-pencil"></i>&nbsp;&nbsp;</a>
+
+				<button title="Eliminar" class="btn btn-danger deleteaction" type="button" request="<?php echo $this->baseUrl() ?>/reto/caracteristicasprincipalessolucion/delete/id/<?php echo $obj->getId() ?>">&nbsp;&nbsp;<i class="fa fa-trash"></i>&nbsp;&nbsp;</button>
+
+		</td>
+	</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>
+
+<!--  MODAL caracteristicasprincipalessolucion-->
+  <div class="modal fade customModal" id="newcaracteristicasprincipalessolucion" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="panel panel-default formPanel">
+          <div class="panel-heading bg-color-4 border-color-1">
+            <h3 class="panel-title modtitle">Nuevo Riesgo Tecnico</h3>
+          </div>
+          <div class="panel-body">
+            <form action="#" name="caracteristicasprincipalessolucionform" id="caracteristicasprincipalessolucionform" method="POST" role="form">
+            	<!-- id hidden para la edicion -->
+              <div class="form-group formField">
+              	<input type="hidden" class="form-control" name="caracteristicasprincipalessolucion_id" id="caracteristicasprincipalessolucion_id">
+              </div>
+              <div class="form-group formField">
+                <input type="text" class="form-control" name="atributo" id="atributo" placeholder="Atributo">
+              </div>
+              <div class="form-group formField">
+              	<textarea name="descripcionatributo" id="descripcionatributo" placeholder="Descripcion Atributo" class="form-control" style="height: 65px;"></textarea>
+              </div>
+              <div class="form-group formField">
+                <select name="diferenciador" id="diferenciador" class="form-control" >
+                  <option value="">Diferenciador</option>
+				  <option value="1">Si</option>
+				  <option value="0">No</option>
+				</select>
+              </div>
+              <div class="form-group formField">
+                <textarea name="ventajas" id="ventajas" placeholder="Ventajas" class="form-control" style="height: 65px;"></textarea>
+              </div>
+              <div class="form-group formField">
+                <a id="savecaracteristicasprincipalessolucion" data-dismiss="modal" href="#newcaracteristicasprincipalessolucion" class="btn btn-primary btn-block bg-color-3 border-color-3">Agregar</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript"></script>

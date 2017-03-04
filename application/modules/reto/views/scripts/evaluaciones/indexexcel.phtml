@@ -1,0 +1,45 @@
+<?php
+	header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+	header("Content-type:   application/x-msexcel; charset=utf-8");
+	header("Expires: 0");
+	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+	header("content-disposition: attachment;filename=evaluaciones_". date("Y_m_d_H_i_s",time()).".xls");
+?>
+<table border="1" align="center">
+	<thead >
+		<tr><th colspan="6" style="font-weight: bold;font-style: italic;">Listado de Evaluaciones</th></tr>
+		<tr style="background-color: #C4C9DF; color:black;">
+			<th>Reto</th>
+			<th>Evaluador</th>
+			<th>Item a evaluar</th>
+			<th>Solucionador</th>
+			<th>Concepto</th>
+			<th>Evaluación cuantitativa</th>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach ($this->pagination as $key => $obj) : ?>
+		<?php $class = fmod($key, 2) == 0 ? ' background-color: #F9F9F9;' : ''; ?>
+		<tr style="<?php echo $class; ?>">
+			<td style='mso-number-format:"@"'>
+			<?php echo $obj->getRetoObject()->get_Label_model(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+			<?php echo $obj->getEvaluadorObject()->get_Label_model(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+			<?php echo $obj->getItemaevaluarObject()->get_Label_model(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+			<?php echo $obj->getSolucionadorObject()->get_Label_model(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getConcepto(); ?>
+			</td>
+			<td style='mso-number-format:"@"'>
+				<?php echo $obj->getValor(); ?>
+			</td>
+		</tr>
+<?php endforeach; ?>
+</tbody>	
+</table>

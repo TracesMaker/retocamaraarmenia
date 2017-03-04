@@ -1,0 +1,64 @@
+<?php if (isset($this->pagination) && count($this->pagination) > 0) {?>
+<div id="solucionadoresindex" class="box  contentindex"  filterreceived="<?php echo $this->filterreceived; ?>" request="<?php echo $this->baseUrl() ?>/reto/solucionadores/index<?php echo $this->filterreceived; ?>">
+    <div class="box-header navbar-inner">
+        <h3><span class="hidden-phone"><i class="icon-align-justify"></i><span class="break"></span> Listado </span>Solucionadores</h3>
+        
+    </div>
+    <div class="box-content">
+<table id="solucionadoresTable" class="table table-striped table-condensed " formBuscar="solucionadoresformbuscar" >
+<thead >
+	<tr>
+		<th  class="sort hidden-phone" sort="nombredelaempresa" >Nombre de la empresa / persona natural</th>
+		<th  class="sort hidden-phone" sort="nombredepersonadecontacto" >Persona contacto</th>
+		<th  class="sort hidden-phone" sort="celulardelproponente" >Celular</th>
+		<th  class="sort hidden-phone"  >Progreso</th>
+		<th class="no-print" width="126px">Evaluar</th>
+
+	</tr>
+</thead>
+<tbody>
+<?php
+ foreach ($this->pagination as $obj) : ?>
+	<tr>
+		<td class="hidden-phone">
+			<?php echo $obj->getNombredelaempresa(); ?>
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getNombredepersonadecontacto(); ?>
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getCelulardelproponente(); ?>
+		</td>
+		</td>
+		<td class="hidden-phone">
+			[AsignarPorcentaje]
+		</td>
+		<td class="no-print" >
+		  <div class="btn-group" title="<?php echo $obj->get_Label_Model() ?>">
+			<?php if($this->permisos["evaluar"]  ): ?>
+				<a title="Evaluar" class="btn btn-success" type="button" href="<?php echo $this->baseUrl() ?>/reto/solucionadores/evaluar/id/<?php echo $obj->getId() ?>" ><i class="icon-tasks"></i></a>
+			<?php endif ?>
+            </div>
+		</td>
+	</tr>
+<?php endforeach; ?>
+</tbody>
+</table>
+    
+    </div>
+	
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#solucionadoresTable").dataTable({"bPaginate": true,"sPaginationType": "bootstrap", "bLengthChange": false});
+	});
+	
+</script>
+
+<?php }	else { ?>
+<div class="alert">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <h4>No hay solucionadores para este reto</h4>
+</div>
+<?php } ?>
+

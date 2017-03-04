@@ -1,0 +1,47 @@
+<div class="page-header">
+    <h2>Editando Evaluaciones</h2>
+</div>
+<div id="formevaluaciones" > 
+<?php echo $this->form; ?> 
+</div>
+<script>
+$(document).ready(function(){
+	loadpage(); 
+
+	reloadevaluaciones();	
+})
+function clicksaveformevaluaciones()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+    if ($("#evaluacionesform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/evaluaciones/edit", $("#evaluacionesform").serialize(),
+            function(data) {
+                if (data.id<0) {
+                    $("#evaluacionesform").parent().html(data.form);                  
+                    reloadevaluaciones();
+                    buttonSelect.parents(".form-actions").find("button").button('reset');
+                } else {
+                    $('.notify').notify({message: { text: '  Registro actualizado con éxito ' }}).show();
+                    show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/evaluaciones/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+                }
+            }
+        )
+    } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+function reloadevaluaciones(){
+	$("#submitevaluaciones").click(clicksaveformevaluaciones);
+}
+</script>

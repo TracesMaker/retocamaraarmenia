@@ -1,0 +1,53 @@
+<?php 
+echo '<div class="pagination pagination-centered pagination-small" ><ul>';
+if(isset($this->previous)){
+    echo '<li class="paginacion"><a page="'.$this->first.'"><i class="icon-fast-backward"></i></a></li>';
+    echo '<li class="paginacion"><a page="'.$this->previous.'"><i class="icon-step-backward"></i></a></li>';
+}
+else {
+    echo '<li class="active"><a page="'.$this->first.'"><i class="icon-fast-backward icon-white"></i></a></li>';
+    echo '<li class="active"><a page="'.$this->previous.'"><i class="icon-step-backward icon-white"></i></a></li>';
+    }   
+
+/*echo '<li><a>Pagina <input style="width:30px;margin:0" type="text" id="pagina" name="pagina" value="'.$this->current.'" maxlength="7" size="1" onChange="paginacion('.$this->pageCount.')"> de '.$this->pageCount.'</a></li>';*/  
+
+foreach ($this->pagesInRange as $page):
+    if ($page != $this->current):
+        echo '<li class="paginacion"><a page="'.$page.'">'.$page.'</a></li>';
+    else: 
+        echo '<li class="active"><a page="'.$page.'">'.$page.'</a></li>';
+    endif; 
+endforeach;
+if(isset($this->next)){
+    echo '<li class="paginacion"><a page="'.$this->next.'"><i class="icon-step-forward"></i></a></li>';
+    echo '<li class="paginacion"><a page="'.$this->last.'"><i class="icon-fast-forward"></i></a></li>';
+}
+else{
+    echo '<li class="active"><a page="'.$this->next.'"><i class="icon-step-forward icon-white"></i></a></li>';
+    echo '<li class="active"><a page="'.$this->last.'"><i class="icon-fast-forward icon-white"></i></a></li>';
+}
+$count= '<li><select class="hidden-phone" style="width:70px;margin:0" name="number" id="number" onChange="Guardar()">
+    <option value="10"';
+    if ($this->itemCountPerPage==10)
+        $count.= 'selected="selected"';
+$count.='>10</option>
+    <option value="20"';
+    if ($this->itemCountPerPage==20)
+        $count.= 'selected="selected"';
+$count.='>20</option>
+    <option value="50"';
+        if ($this->itemCountPerPage==50)
+            $count.= 'selected="selected"';
+    $count.='>50</option>
+        <option value="100"';
+        if ($this->itemCountPerPage==100)
+            $count.= 'selected="selected"';
+    $count.='>100</option>
+    <option value="'.$this->totalItemCount.'"';
+    if ($this->itemCountPerPage==$this->totalItemCount)
+        $count.= 'selected="selected"';
+$count.='>Todos</option></select></li>';
+echo $count;    
+echo '<li><span class="hidden-phone">Mostrando Registros '.$this->firstItemNumber.' - '.$this->lastItemNumber.'  de '.$this->totalItemCount.'</span></li>';
+echo '</ul></div>';
+?>

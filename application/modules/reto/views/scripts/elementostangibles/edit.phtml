@@ -1,0 +1,47 @@
+<div class="page-header">
+    <h2>Editando Elementos tangibles</h2>
+</div>
+<div id="formelementostangibles" > 
+<?php echo $this->form; ?> 
+</div>
+<script>
+$(document).ready(function(){
+	loadpage(); 
+
+	reloadelementostangibles();	
+})
+function clicksaveformelementostangibles()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+    if ($("#elementostangiblesform").valid()) {
+        $.post("<?php echo $this->baseUrl()?>/reto/elementostangibles/edit", $("#elementostangiblesform").serialize(),
+            function(data) {
+                if (data.id<0) {
+                    $("#elementostangiblesform").parent().html(data.form);                  
+                    reloadelementostangibles();
+                    buttonSelect.parents(".form-actions").find("button").button('reset');
+                } else {
+                    $('.notify').notify({message: { text: '  Registro actualizado con éxito ' }}).show();
+                    show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/elementostangibles/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+                }
+            }
+        )
+    } else {
+        buttonSelect.parents(".form-actions").find("button").button('reset');
+        alert("Formulario invalido");
+    }
+}
+function reloadelementostangibles(){
+	$("#submitelementostangibles").click(clicksaveformelementostangibles);
+}
+</script>

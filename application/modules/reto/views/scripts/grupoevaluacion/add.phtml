@@ -1,0 +1,46 @@
+<div class="page-header">
+    <h2>Agregando Grupo evaluacion</h2>
+</div>
+<div id="formgrupoevaluacion" > <?php echo $this->form; ?> </div>
+<script> 
+$(document).ready(function(){
+	loadpage(); 
+
+
+	reloadgrupoevaluacion();
+})
+function clicksaveformgrupoevaluacion()
+{
+	var buttonSelect = $(this);	
+	buttonSelect.parents(".form-actions").find("button").button('loading');
+	if ($("#grupoevaluacionform").valid()) {
+		$.post("<?php echo $this->baseUrl()?>/reto/grupoevaluacion/add", $("#grupoevaluacionform").serialize(),
+			function(data) {
+				if (data.id<0) {
+					$("#grupoevaluacionform").parent().html(data.form);					
+					reloadgrupoevaluacion();
+					buttonSelect.parents(".form-actions").find("button").button('reset');
+				} else {
+			        $('.notify').notify({message: { text: '  Registro agregado con éxito ' }}).show();
+			        show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/reto/grupoevaluacion/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+				}
+			}
+		)
+	} else {
+		buttonSelect.parents(".form-actions").find("button").button('reset');
+		alert("Formulario invalido");
+	}
+}
+function reloadgrupoevaluacion(){
+	$("#submitgrupoevaluacion").click(clicksaveformgrupoevaluacion);
+}
+</script>

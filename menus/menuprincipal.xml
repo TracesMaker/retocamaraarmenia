@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <nav>
+    	<home>
+	        <label>Inicio</label>
+	        <order>-100</order>
+	        <module>default</module>
+	        <controller>index</controller>
+	        <action>index</action>
+	        <icon>icon-home</icon>	
+	    </home>
+	    <solucionadores>
+            <label>Solucionadores</label>
+            <order>1</order>
+            <module>reto</module>
+            <controller>solucionadores</controller>
+            <action>index</action>
+            <resource>reto:solucionadores</resource>
+	  		<privilege>index</privilege>
+	  		<visible>1</visible>
+			<icon>icon-lightbulb</icon>
+		</solucionadores>
+	    <retos>
+            <label>Retos</label>
+            <order>2</order>
+            <module>reto</module>
+            <controller>reto</controller>
+            <action>index</action>
+            <resource>reto:reto</resource>
+	  		<privilege>index</privilege>
+	  		<visible>1</visible>
+			<icon>icon-fire</icon>
+		</retos>
+		<usuarios>
+            <label>usuarios</label>
+            <order>3</order>
+            <module>default</module>
+            <controller>aclusuarios</controller>
+            <action>index</action>
+            <resource>default:aclusuarios</resource>
+	  		<privilege>index</privilege>
+	  		<visible>1</visible>
+			<icon>icon-user</icon>
+
+
+	  		<pages>
+		  		<usuarios>
+		  			<label>usuarios</label>
+		  			<order>1</order>
+		  			<module>default</module>
+		  			<controller>aclusuarios</controller>
+		  			<action>index</action>
+		  			<resource>default:aclusuarios</resource>
+		  			<privilege>index</privilege>	
+		  			<visible>1</visible>
+
+		  		</usuarios>
+		  		<roles>
+		  			<label>roles</label>
+		  			<order>2</order>
+		  			<module>default</module>
+		  			<controller>aclroles</controller>
+		  			<action>index</action>
+		  			<resource>default:aclroles</resource>
+		  			<privilege>index</privilege>	
+		  			<visible>1</visible>
+
+		  		</roles>
+		  		<aclacciones>
+		  			<label>Acciones</label>
+		  			<order>3</order>
+		  			<module>default</module>
+		  			<controller>aclacciones</controller>
+		  			<action>index</action>
+		  			<resource>default:aclacciones</resource>
+		  			<privilege>index</privilege>	
+		  			<visible>1</visible>
+
+		  		</aclacciones>
+
+			</pages>
+
+		</usuarios>
+		
+		<logout>
+            <label>Salir</label>
+            <order>100</order>
+            <module>default</module>
+            <controller>authentication</controller>
+            <action>logout</action>
+            <icon>icon-off</icon>
+            <title>Salida segura</title>
+        </logout>
+    </nav>
+</config>

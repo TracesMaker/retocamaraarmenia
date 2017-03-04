@@ -1,0 +1,64 @@
+<div class="page-header">
+    <h2>Agregando Usuarios</h2>
+</div>
+<div id="formaclusuarios" > <?php echo $this->form; ?> </div>
+<script> 
+$(document).ready(function(){
+	loadpage(); 
+
+    $('#username').on("change",function(){
+		verificarunicousername();
+    });
+
+	reloadaclusuarios();
+})
+function clicksaveformaclusuarios()
+{
+	if(!verificarunicousername())return;
+	var buttonSelect = $(this);	
+	buttonSelect.parents(".form-actions").find("button").button('loading');
+	if ($("#aclusuariosform").valid()) {
+		$.post("<?php echo $this->baseUrl()?>/default/aclusuarios/add", $("#aclusuariosform").serialize(),
+			function(data) {
+				if (data.id<0) {
+					$("#aclusuariosform").parent().html(data.form);					
+					reloadaclusuarios();
+					buttonSelect.parents(".form-actions").find("button").button('reset');
+				} else {
+			        $('.notify').notify({message: { text: '  Registro agregado con éxito ' }}).show();
+			        show_loader();                        
+                    var Request = "";
+                    if (buttonSelect.attr("new") == "true") {
+						var Content = buttonSelect.parents(".contenido");
+                        Request = "<?php echo $this->baseUrl()?>/default/aclusuarios/add<?php echo $this->filterreceived?>";
+                        Content.load(Request,function(response, status, xhr) {successload(response, status, xhr)});
+                    } else {
+                         history.back();
+                         hide_loader();
+                    }
+				}
+			}
+		)
+	} else {
+		buttonSelect.parents(".form-actions").find("button").button('reset');
+		alert("Formulario invalido");
+	}
+}
+function reloadaclusuarios(){
+	$("#submitaclusuarios").click(clicksaveformaclusuarios);
+}
+    function verificarunicousername()
+    {
+        $("#submitaclusuarios").button('loading');
+    	$("#saveandnewaclusuarios").button('loading');
+		valor=$('#username').val();
+		url='<?php echo$this->baseUrl()?>/default/aclusuarios/validateonly/propiedad/username/valor/'+valor;
+		var data = ajaxasincronico(url);
+		if(parseInt($('#aclusuarios_id').val()) == parseInt(data))
+          return true;
+		verificarunico(data,$('#username'));
+		$("#submitaclusuarios").button('reset');
+		$("#saveandnewaclusuarios").button('reset');
+		if(data > 0)return false;else return true;
+    }
+</script>

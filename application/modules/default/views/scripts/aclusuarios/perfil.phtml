@@ -1,0 +1,52 @@
+<div id="formaclusuarios" > <?php echo $this->form; ?> </div>
+
+<script>     
+	$(document).ready(function(){
+		if($("#formaclusuarios").parent().hasClass("modal-body")){
+			$("#formaclusuarios").parent().parent().css("width","700px")
+		}
+	
+	    $('form').on("change",'#username',function(){
+	    	$("#submitaclusuarios").button('loading');
+			valor=$('#username').val();
+			url='<?php echo$this->baseUrl()?>/default/aclusuarios/validateonly/propiedad/username/valor/'+valor;
+			$.getJSON(url, function(data) { verificarunico(data,$('#username'));})
+				.success(function() { $("#submitaclusuarios").button('reset'); });
+	    });
+	    $('form').on("change",'#useremail',function(){
+	    	$("#submitaclusuarios").button('loading');
+			valor=$('#useremail').val();
+			url='<?php echo$this->baseUrl()?>/default/aclusuarios/validateonly/propiedad/useremail/valor/'+valor;
+			$.getJSON(url, function(data) { verificarunico(data,$('#useremail'));})
+				.success(function() { $("#submitaclusuarios").button('reset'); });
+	    });
+		reloadaclusuarios();	
+	})
+	function clicksaveformaclusuarios(){
+		var buttonSelect = $(this);
+		buttonSelect.parents(".form-actions").find("button").button('loading');
+		var _idform=$(this).attr("idform");
+		var _control=$(this).attr("control");
+		var _modulo=$(this).attr("modulo");
+		if($("#"+_idform).valid()){
+			$.post("<?php echo $this->baseUrl()?>/"+_modulo+"/"+_control+"/perfil", $("#"+_idform).serialize(),
+				function(data) {
+					if(data.id){
+						$('.notify').notify({message: { text: '  Registro actualizado con exito ' }}).show();
+						$('#ajax').modal('hide');
+						$('#ajax').remove();
+					}else{
+						$('.notify').notify({message: { text: 'No se realizaron cambios!' }}).show();
+					}
+					buttonSelect.parents(".form-actions").find("button").button('reset');
+				}
+			)
+		}else{
+			buttonSelect.parents(".form-actions").find("button").button('reset');
+			alert("Formulario invalido");
+		}
+	}
+	function reloadaclusuarios(){
+		$("#submitaclusuarios").click(clicksaveformaclusuarios);
+	}
+</script>
