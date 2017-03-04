@@ -38,7 +38,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 						->appendName('autor', 'FaunoCo');
 		
 		$view->headTitle()->setSeparator(' - ')
-			 ->headTitle('VEOLIA');
+			 ->headTitle('retocamaraarmenia');
 			 
 		require_once('EasyBib/View/Helper/BootstrapMenu.php');
 		$view->addHelperPath(
