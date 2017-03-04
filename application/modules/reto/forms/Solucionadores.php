@@ -233,6 +233,30 @@ class Reto_Form_Solucionadores extends EasyBib_Form
 			$acuerdoconfidencialidadconautor->addMultiOption("1", "Sí");
 		$acuerdoconfidencialidadconautor->setAttrib('class', ' ');
  		$this->addElement($acuerdoconfidencialidadconautor);
+
+		$reto = new Zend_Form_Element_Select('reto');
+        $reto->setLabel('Reto:');
+		$RetoDB = Reto_Model_RetoMapper::getInstance();
+		$ArrayOption=$RetoDB->getArrayOption($reto);
+		$reto->setMultiOptions($ArrayOption);
+ 		$reto->setAttrib('class', '   ');
+ 		$reto->addFilter('null');
+ 		$this->addElement($reto);
+
+		$estadodemadurez = new Zend_Form_Element_Select('estadodemadurez');
+        $estadodemadurez->setLabel('Estado de madurez:');
+		$EstadosdemadurezDB = Reto_Model_EstadosdemadurezMapper::getInstance();
+		$ArrayOption=$EstadosdemadurezDB->getArrayOption($estadodemadurez);
+		$estadodemadurez->setMultiOptions($ArrayOption);
+ 		$estadodemadurez->setAttrib('class', '   ');
+ 		$estadodemadurez->addFilter('null');
+ 		$this->addElement($estadodemadurez);
+
+		$requisitosusuario = new Zend_Form_Element_Text('requisitosusuario');
+        $requisitosusuario->setLabel('Qué tipo de requerimientos, por parte de los empresarios (usuarios del servicio), necesita la solución:');
+		$requisitosusuario->addValidator(new Zend_Validate_StringLength(array('max' => 256)));
+		$requisitosusuario->setAttrib('class', ' ');
+ 		$this->addElement($requisitosusuario);
 		$cancel = new Zend_Form_Element_Button('cancelsolucionadores');
 		$cancel->setLabel('Cancelar');
 		$cancel->setAttrib('class', 'btn closeform');

@@ -83,7 +83,7 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 		$where = array(0 => "solucionadores_id = ".$data["solucionadores_id"]);
 		$ret = $db->update($this->_nametable, $data, $where);
 		return $ret;
-	}	
+	}
 
 	/**
 	 * Elimina un registro de la BD por el ID
@@ -115,7 +115,7 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
             $select->where("a.acuerdoconfidencialidadconautor = ?",$this->_objectFilter->getAcuerdoconfidencialidadconautor());
 
 		if(strlen($this->_objectFilter->get_Fbuscar())>1){
-			$select->where(' a.titulo like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.correoelectronico like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.resumenejecutivo like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.impactodesolucion like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.nombredelaempresa like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.nit like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.telefono like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.paginaweb like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.nombredepersonadecontacto like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.celulardelproponente like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.correoelectronicoproponente like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.descripciondesolucion like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.porquelasolucion like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.inspiracion like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.descripciontrayectoria like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.descripcionpropiedadintelecual like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.descripcionpoliticapropiedadintelecual like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.descripcionautorpropiedad like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.cuando like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.conquien like "%'.$this->_objectFilter->get_Fbuscar().'%" ');
+			$select->where(' a.titulo like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.correoelectronico like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.resumenejecutivo like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.impactodesolucion like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.nombredelaempresa like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.nit like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.telefono like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.paginaweb like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.nombredepersonadecontacto like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.celulardelproponente like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.correoelectronicoproponente like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.descripciondesolución like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.porquelasolucion like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.inspiracion like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.descripciontrayectoria like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.descripcionpropiedadintelecual like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.descripcionpoliticapropiedadintelecual like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.descripcionautorpropiedad like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.cuando like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.conquien like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.requisitosusuario like "%'.$this->_objectFilter->get_Fbuscar().'%" ');
 		}
 		if(count($this->_objectFilter->getOrderBy())>0){
 			$select->order($this->_objectFilter->getOrderBy());
@@ -173,6 +173,7 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 		if(array_key_exists("conquien", $data))$object->setConquien($data["conquien"]);
 		if(array_key_exists("presentacionpublica", $data))$object->setPresentacionpublica($data["presentacionpublica"]);
 		if(array_key_exists("acuerdoconfidencialidadconautor", $data))$object->setAcuerdoconfidencialidadconautor($data["acuerdoconfidencialidadconautor"]);
+		if(array_key_exists("requisitosusuario", $data))$object->setRequisitosusuario($data["requisitosusuario"]);
 	if(array_key_exists("usuario", $data)){
 		$object->setUsuario($data["usuario"]);
 		if($this->getPerezoso()){
@@ -253,6 +254,7 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 		$_array["conquien"] = $object->getConquien();
 		$_array["presentacionpublica"] = $object->getPresentacionpublica();
 		$_array["acuerdoconfidencialidadconautor"] = $object->getAcuerdoconfidencialidadconautor();
+		$_array["requisitosusuario"] = $object->getRequisitosusuario();
 		$_array["usuario"] = $object->getUsuario();
 		$_array["reto"] = $object->getReto();
 		$_array["estadodemadurez"] = $object->getEstadodemadurez();

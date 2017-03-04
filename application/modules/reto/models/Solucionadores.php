@@ -40,6 +40,7 @@ class Reto_Model_Solucionadores extends Model_DomainObjectAbstract
 	private $_conquien = null;
 	private $_presentacionpublica = null;
 	private $_acuerdoconfidencialidadconautor = null;
+	private $_requisitosusuario = null;
 	private $_usuario = null;
 	private $_usuarioObject = null;
 	private $_reto = null;
@@ -250,6 +251,12 @@ class Reto_Model_Solucionadores extends Model_DomainObjectAbstract
     }
     public function setAcuerdoconfidencialidadconautor($acuerdoconfidencialidadconautor) {
         $this->_acuerdoconfidencialidadconautor = $acuerdoconfidencialidadconautor;
+    }	
+    public function getRequisitosusuario() {
+        return $this->_requisitosusuario;
+    }
+    public function setRequisitosusuario($requisitosusuario) {
+        $this->_requisitosusuario = $requisitosusuario;
     }	
     public function getUsuario() {
         return $this->_usuario;
