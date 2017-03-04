@@ -11,7 +11,8 @@ class Reto_Form_Solucionadoresmadurez extends EasyBib_Form
 		$solucionadores_id->addFilter('Int');
 		$this->addElement($solucionadores_id);
 
-		$estadodemadurez = new Zend_Form_Element_Select('estadodemadurez');
+
+		$estadodemadurez = new Zend_Form_Element_Radio('estadodemadurez');
 	    $estadodemadurez->setLabel('A partir de lo expuesto durante todo el formato, por favor define en la lista expuesta a continuación,  ¿cuál es el estado de madurez de la solución? ');
 		$EstadosdemadurezDB = Reto_Model_EstadosdemadurezMapper::getInstance();
 		$ArrayOption=$EstadosdemadurezDB->getArrayOption($estadodemadurez);
@@ -27,7 +28,8 @@ class Reto_Form_Solucionadoresmadurez extends EasyBib_Form
 		$submit->setAttrib('onclick', 'clicksaveformmadurez();');
 		$this->addElement($submit);
 
-
+		// set decorators
+        EasyBib_Form_Decorator::setFormDecorator($this, EasyBib_Form_Decorator::BOOTSTRAP, 'submitsolucionadores');
 
 	}
 	

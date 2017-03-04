@@ -407,4 +407,8 @@ a,
   }
 }
 
+.error {
+        color: rgba(156, 21, 21, 0.71)!important;
+      }
+
 /*# sourceMappingURL=default.css.map */

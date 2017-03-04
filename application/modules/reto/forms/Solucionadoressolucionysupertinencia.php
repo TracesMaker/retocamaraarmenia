@@ -14,7 +14,8 @@ class Reto_Form_Solucionadoressolucionysupertinencia extends EasyBib_Form
 		$descripciondesolucion = new Zend_Form_Element_Textarea('descripciondesolucion');
 		$descripciondesolucion->setAttrib('rows', 5);
 		$descripciondesolucion->setAttrib('cols', 2);
-        $descripciondesolucion->setLabel('* Para iniciar, describa la solución innovadora desde la tecnología:');    
+        $descripciondesolucion->setLabel('* Para iniciar, describa la solución innovadora que propones');    
+        $descripciondesolucion->setDescription('(En máximo 400 palabras, cuenta de manera sencilla cómo funciona la solución que propones y cómo es que es tu solución cumple con el  resultado esperado) ');    
 		$descripciondesolucion->setRequired(true);
 		$descripciondesolucion->setAttrib('class', ' form-control required ');
  		$this->addElement($descripciondesolucion);
@@ -28,6 +29,7 @@ class Reto_Form_Solucionadoressolucionysupertinencia extends EasyBib_Form
 		$porquelasolucion = new Zend_Form_Element_Textarea('porquelasolucion');
 		$porquelasolucion->setAttrib('rows', 5);
 		$porquelasolucion->setAttrib('cols', 2);
+		$porquelasolucion->setDescription('(Explica en máximo 400 palabras');
         $porquelasolucion->setLabel('¿Por qué la solución que propone, quizás de muchas posibles, es mejor alternativa para atender la necesidad insatisfecha?:');
 		$porquelasolucion->setAttrib('class', ' form-control');
  		$this->addElement($porquelasolucion);
@@ -38,6 +40,14 @@ class Reto_Form_Solucionadoressolucionysupertinencia extends EasyBib_Form
         $inspiracion->setLabel('Por favor, señala la fuente de inspiración de la solución que sugieres en esta propuesta');
 		$inspiracion->setAttrib('class', ' form-control');
  		$this->addElement($inspiracion);
+
+ 		$requisitosusuario = new Zend_Form_Element_Textarea('requisitosusuario');
+		$requisitosusuario->setAttrib('rows', 5);
+		$requisitosusuario->setAttrib('cols', 2);
+        $requisitosusuario->setLabel('Qué tipo de requerimientos, por parte de los empresarios (usuarios del servicio), necesitaría tu solución');
+        $requisitosusuario->setDescription('(En máximo 400 palabra  ,indique si los requerimientos de, tiempo, personal, recursos y demás que se necesitarán por parte del empresario para la prestación del servicio. )');
+		$requisitosusuario->setAttrib('class', ' form-control');
+ 		$this->addElement($requisitosusuario);
 
 		// $cancel = new Zend_Form_Element_Button('cancelsolucionadores');
 		// $cancel->setLabel('Cancelar');

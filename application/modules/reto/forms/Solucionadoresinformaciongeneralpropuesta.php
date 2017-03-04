@@ -34,8 +34,9 @@ class Reto_Form_Solucionadoresinformaciongeneralpropuesta extends EasyBib_Form
 		$resumenejecutivo = new Zend_Form_Element_Textarea('resumenejecutivo');
 		$resumenejecutivo->setAttrib('rows', 5);
 		$resumenejecutivo->setAttrib('cols', 2);
-        $resumenejecutivo->setLabel('* Resumen ejecutivo de la idea de solución:');    
+        $resumenejecutivo->setLabel('* Resumen ejecutivo de la idea de solución :');    
 		$resumenejecutivo->setRequired(true);
+		$resumenejecutivo->setDescription('(En máximo 200 palabras describe la solución innovadora a ofrecer. Esta información será publicada en la página web para conocimiento público. Por favor, sea conciso )');
 		$resumenejecutivo->setAttrib('class', 'form-control  required ');
  		$this->addElement($resumenejecutivo);
 
@@ -43,6 +44,7 @@ class Reto_Form_Solucionadoresinformaciongeneralpropuesta extends EasyBib_Form
 		$impactodesolucion->setAttrib('rows', 5);
 		$impactodesolucion->setAttrib('cols', 2);
         $impactodesolucion->setLabel('* Impacto de la solución innovadora:');    
+        $impactodesolucion->setDescription('(En máximo 400 palabras señala los beneficios que ofrece la solución mejorara el clima laboral, aumentara eficiencia en el desempeño de proyectos, aumentara velocidad de respuesta, etc -  . Incorpore en su respuesta, en la medida de lo posible, elementos cuantitativos que ilustren la magnitud de los beneficios a obtener)');    
 		$impactodesolucion->setRequired(true);
 		$impactodesolucion->setAttrib('class', 'form-control  required ');
  		$this->addElement($impactodesolucion);
@@ -53,6 +55,9 @@ class Reto_Form_Solucionadoresinformaciongeneralpropuesta extends EasyBib_Form
 		$submit->setAttrib('class', 'btn btn-primary saveform pull-right');
 		$submit->setAttrib('onclick', 'clicksaveformsolucionadores();');
 		$this->addElement($submit);
+
+		// set decorators
+        EasyBib_Form_Decorator::setFormDecorator($this, EasyBib_Form_Decorator::BOOTSTRAP, 'submitsolucionadores');
 
          
 	}

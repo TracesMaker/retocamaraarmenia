@@ -22,6 +22,7 @@ class Reto_Form_Solucionadorespropiedadintelectual extends EasyBib_Form
 		$descripcionpropiedadintelecual->setAttrib('rows', 5);
 		$descripcionpropiedadintelecual->setAttrib('cols', 2);
         $descripcionpropiedadintelecual->setLabel('Si la respuesta es afirmativa, por favor describa brevemente.:');
+        $descripcionpropiedadintelecual->setDescription('Máximo 400 palabras.');
 		$descripcionpropiedadintelecual->setAttrib('class', ' form-control');
  		$this->addElement($descripcionpropiedadintelecual);
 
@@ -36,6 +37,7 @@ class Reto_Form_Solucionadorespropiedadintelectual extends EasyBib_Form
 		$descripcionpoliticapropiedadintelecual->setAttrib('rows', 5);
 		$descripcionpoliticapropiedadintelecual->setAttrib('cols', 2);
         $descripcionpoliticapropiedadintelecual->setLabel('Si la respuesta es afirmativa, por favor describa brevemente.:');
+        $descripcionpoliticapropiedadintelecual->setDescription('Máximo 400 palabras.');
 		$descripcionpoliticapropiedadintelecual->setAttrib('class', ' form-control');
  		$this->addElement($descripcionpoliticapropiedadintelecual);
 

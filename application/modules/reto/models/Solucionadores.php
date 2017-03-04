@@ -21,7 +21,8 @@ class Reto_Model_Solucionadores extends Model_DomainObjectAbstract
 	private $_descripciondesolucion = null;
 	private $_diagramasolucion = null;
 	private $_porquelasolucion = null;
-	private $_inspiracion = null;
+    private $_inspiracion = null;
+	private $_requisitosusuario = null;
 	private $_personal = null;
 	private $_serviciotecnico = null;
 	private $_equipos = null;
@@ -137,12 +138,19 @@ class Reto_Model_Solucionadores extends Model_DomainObjectAbstract
     }
     public function setPorquelasolucion($porquelasolucion) {
         $this->_porquelasolucion = $porquelasolucion;
-    }	
+    }   
     public function getInspiracion() {
         return $this->_inspiracion;
     }
     public function setInspiracion($inspiracion) {
         $this->_inspiracion = $inspiracion;
+        
+    }   	
+    public function getRequisitosusuario() {
+        return $this->_requisitosusuario;
+    }
+    public function setRequisitosusuario($requisitosusuario) {
+        $this->_requisitosusuario = $requisitosusuario;
     }	
     public function getPersonal() {
         return $this->_personal;

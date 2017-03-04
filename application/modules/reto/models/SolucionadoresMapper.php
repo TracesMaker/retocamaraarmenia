@@ -155,6 +155,7 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 		if(array_key_exists("diagramasolucion", $data))$object->setDiagramasolucion($data["diagramasolucion"]);
 		if(array_key_exists("porquelasolucion", $data))$object->setPorquelasolucion($data["porquelasolucion"]);
 		if(array_key_exists("inspiracion", $data))$object->setInspiracion($data["inspiracion"]);
+		if(array_key_exists("requisitosusuario", $data))$object->setRequisitosusuario($data["requisitosusuario"]);
 		if(array_key_exists("personal", $data))$object->setPersonal($data["personal"]);
 		if(array_key_exists("serviciotecnico", $data))$object->setServiciotecnico($data["serviciotecnico"]);
 		if(array_key_exists("equipos", $data))$object->setEquipos($data["equipos"]);
@@ -236,6 +237,7 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 		$_array["diagramasolucion"] = $object->getDiagramasolucion();
 		$_array["porquelasolucion"] = $object->getPorquelasolucion();
 		$_array["inspiracion"] = $object->getInspiracion();
+		$_array["requisitosusuario"] = $object->getRequisitosusuario();
 		$_array["personal"] = $object->getPersonal();
 		$_array["serviciotecnico"] = $object->getServiciotecnico();
 		$_array["equipos"] = $object->getEquipos();

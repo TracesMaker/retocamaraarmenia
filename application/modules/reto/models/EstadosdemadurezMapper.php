@@ -80,7 +80,7 @@ class Reto_Model_EstadosdemadurezMapper extends Model_DataMapperAbstract
 			$select->order($this->_objectFilter->getOrderBy());
 		}else{
 
-            $select->order("estadosdemadurez_id desc");
+            $select->order("estadosdemadurez_id ASC");
 		}
 		
 		return $select;
@@ -188,6 +188,13 @@ class Reto_Model_EstadosdemadurezMapper extends Model_DataMapperAbstract
         return self::$_instance;
     }
 
+    public function getArrayOption(){
+		$arrayOption = array();
+		
+		foreach ($this->getList(false) as $Obj)
+			$arrayOption[$Obj->getId()] = $Obj->get_Label_model();
+		return $arrayOption;
+	}
 
 
 }

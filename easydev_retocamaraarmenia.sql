@@ -748,7 +748,7 @@ CREATE TABLE IF NOT EXISTS `ve_solucionadores` (
   `diagramasolucion` longtext,
   `porquelasolucion` text,
   `inspiracion` text,
-  `requisitosusuario` varchar(256) DEFAULT NULL,
+  `requisitosusuario` text,,
   `personal` double DEFAULT NULL,
   `serviciotecnico` double DEFAULT NULL,
   `equipos` double DEFAULT NULL,
