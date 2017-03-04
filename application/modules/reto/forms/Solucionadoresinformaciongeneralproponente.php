@@ -65,6 +65,9 @@ class Reto_Form_Solucionadoresinformaciongeneralproponente extends EasyBib_Form
 		$submit->setAttrib('onclick', 'clicksaveformproponente();');
 		$this->addElement($submit);
 
+		 // set decorators
+        EasyBib_Form_Decorator::setFormDecorator($this, EasyBib_Form_Decorator::BOOTSTRAP, 'submitsolucionadores', 'cancelsolucionadores');
+
 	}
 	
 	public function _populateHidden($data)

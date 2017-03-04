@@ -1,6 +1,7 @@
-INSERT INTO `ve_aclacciones` (`aclacciones_id`, `accrecurso`, `accaccion`) VALUES (186, 'default:index', 'terminosycondiciones');
+INSERT INTO `ve_aclacciones` (`aclacciones_id`, `accrecurso`, `accaccion`) VALUES (202, 'default:index', 'terminosycondiciones');
 
-INSERT INTO `ve_aclpermisos` (`aclpermisos_id`, `perpermiso`, `perrol`, `peraccion`) VALUES (NULL, '1', '1', '186');
+INSERT INTO `ve_aclpermisos` (`aclpermisos_id`, `perpermiso`, `perrol`, `peraccion`) VALUES (NULL, '1', '1', '202');
+
 
 ALTER TABLE `ve_solucionadores` ADD `requisitosusuario` TEXT NOT NULL AFTER `inspiracion`;
 
