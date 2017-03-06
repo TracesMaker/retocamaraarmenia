@@ -39,9 +39,15 @@
 			<td>
 				<b>Imagen: </b></td>
 			<td>
-		<?php if(strlen($obj->getImagen())>0){ ?>
-		<a target="_blank" href="<?php echo $this->baseUrl()?>/Files/retoimagen/<?php echo $obj->getImagen(); ?>" ><?php echo $obj->getImagen(); ?></a>
-		<?php } ?>
+			<?php 
+				if(strlen($obj->getImagen())>0){ 
+				$filename = $obj->getImagen();
+				$archivo = $filename;
+				$extension = end(explode('.',$archivo));
+			?>
+		
+				<a target="_blank" href="<?php echo $this->baseUrl()?>/Files/retoimagen/<?php echo $obj->getId().'.'.$extension; ?>" ><?php echo $obj->getImagen(); ?></a>
+			<?php } ?>
 			</td>
 		</tr>
 		<tr>

@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Clase que procesas las consultas de personalizadas para las vistas
@@ -51,12 +52,16 @@ class Reto_Model_RetoMapper extends Model_DataMapperAbstract
 		$db = $this->getDb();
 		$db->insert($this->_nametable, $data);
 		$id =  $db->lastInsertId($this->_nametable);
+		$this->filePublico($data, $id);
 		return $id;	
 	}
 
 	public function UpdateData($data){
 		if(array_key_exists('imagen', $data) && $data['imagen']=="")
 			unset($data['imagen']);
+		else
+			$this->filePublico($data, $data["reto_id"]);
+		
 		$db = $this->getDb();
 		$where = array(0 => "reto_id = ".$data["reto_id"]);
 		return $db->update($this->_nametable, $data, $where);
@@ -229,6 +234,17 @@ class Reto_Model_RetoMapper extends Model_DataMapperAbstract
 		$rst = $db->query($query);
 		$res = $rst->fetch();
 		return $res["count"];
+	}
+
+	private function filePublico($data, $id)
+	{
+		if(array_key_exists('archivo', $data) && strlen($data['archivo'])>0 )
+		{
+			$archivo = $data['archivo'];
+			$extension = end(explode('.',$archivo));
+			copy("Files/temp/retoimagen/".$data['archivo'], "Files/retoimagen/".$id.".".$extension);
+			unlink("Files/temp/retoimagen/".$data['archivo']);
+		}
 	}
 
 }

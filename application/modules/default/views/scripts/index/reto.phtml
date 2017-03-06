@@ -1,90 +1,103 @@
 <?php $obj = $this->datos; ?>
  <!-- MAIN SECTION -->
-    <section class="mainContent full-width clearfix courseSingleSection">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-9 col-sm-8 col-xs-12 block">
-             
-            <div class="thumbnail thumbnailContent alt">
-            <?php
-                if($obj->getUrlvideo() != ""){
-                ?>
-                	<object width="100%" height="385"
-    					data="<?php echo $obj->getUrlvideo(); ?>">
-				    </object>
-                <?php 
-                }else{
-                    ?>
-                      <img class="media-object" src="<?php echo $obj->getImagen(); ?>" alt="Image">
-                    <?php
-                }
-                ?>
-              <div class="caption border-color-1">
-                <h3 class="color-1"><?php echo $obj->getTitulo(); ?></h3>
-                <p><?php echo $obj->getDescripcioncompleta(); ?></p>
-              </div>
-            </div>
-            <?php
-	            if(Zend_Auth::getInstance()->hasIdentity()){
-	              ?>
-	                <div class="btnArea">
-		              <a href="<?php echo $this->baseUrl()?>/index/solucion/id/<?php echo $obj->getId(); ?>" class="btn btn-primary">Aplicar</a>
-		            </div>
-	              <?php 
-	              
-	            }else{
-	              ?>
-	              	<div class="btnArea">
-		              <a href="<?php echo $this->baseUrl()?>/authentication/login?mensaje=login" class="btn btn-primary">Aplicar </a>
-		            </div>
-	            <?php 
-	            }
-            ?>
-            
-          </div>
-          <div class="col-md-3 col-sm-4 col-xs-12">
-            <aside>
-              <div class="rightSidebar">
-                <div class="panel panel-default">
-                  <div class="panel-heading bg-color-1 border-color-1">
-                    <h3 class="panel-title">Información general</h3>
-                  </div>
-                  <div class="panel-body">
-                    <ul class="media-list">
-                      <li class="media">
-                        <div class="media-left iconContent bg-color-2">
-                          <i class="fa fa-calendar" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body iconContent">
-                          <h4 class="media-heading color-2">Fecha de inicio</h4>
-                          <p><?php echo $obj->getFechainicio(); ?></p>
-                        </div>
-                      </li>
-                      <li class="media">
-                        <div class="media-left iconContent bg-color-4">
-                          <i class="fa fa-calendar" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body iconContent">
-                          <h4 class="media-heading color-4">Fecha de fin</h4>
-                          <p><?php echo $obj->getFechafin(); ?></p>
-                        </div>
-                      </li>
-                      <li class="media">
-                        <div class="media-left iconContent bg-color-3">
-                          <i class="fa fa-anchor" aria-hidden="true"></i>
-                        </div>
-                        <div class="media-body iconContent">
-                          <h4 class="media-heading color-3">Estado</h4>
-                          <p><?php echo $this->datos->getEstadoObject()->get_Label_model(); ?></p>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                
-              </div>
-            </aside>
-          </div>
-        </div>
-      </div>
-    </section>
+	<section class="mainContent full-width clearfix courseSingleSection">
+	  <div class="container">
+		<div class="row">
+		  <div class="col-md-9 col-sm-8 col-xs-12 block">
+			 
+			<div class="thumbnail thumbnailContent alt">
+			<?php
+				if(strlen($obj->getUrlvideo()) > 0){
+				?>
+					<object width="100%" height="385"
+						data="<?php echo $obj->getUrlvideo(); ?>">
+					</object>
+				<?php 
+				}else{
+				if( strlen($obj->getImagen()) >0){ 
+					$filename = $obj->getImagen();
+					$archivo = $filename;
+					$extension = end(explode('.',$archivo));
+					$nuevo_nombre = $obj->getId().'.'.$extension;
+				  }else{
+					$nuevo_nombre = '';
+				  }
+					?>
+					  <img class="media-object" src="<?php echo $this->baseUrl()?>/Files/retoimagen/<?php echo $nuevo_nombre; ?>" alt="Image">
+					<?php
+				}
+				?>
+			  <div class="caption border-color-1">
+				<h3 class="color-1"><?php echo $obj->getTitulo(); ?></h3>
+				<p><?php echo $obj->getDescripcioncompleta(); ?></p>
+			  </div>
+			</div>
+			<?php 
+				if($obj->getId() == 1){ 
+				echo '<a download="' .$obj->getTitulo(). '" href="'.$this->baseUrl().'/Files/retopdf/'.$obj->getId().'.pdf" class="btn btn-primary" > <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar Anexo</a>';
+				}
+			?>
+			<?php
+				if(Zend_Auth::getInstance()->hasIdentity()){
+				  ?>
+					<div class="btnArea">
+					  <a href="<?php echo $this->baseUrl()?>/index/solucion/id/<?php echo $obj->getId(); ?>" class="btn btn-primary">Aplicar</a>
+					</div>
+				  <?php 
+				  
+				}else{
+				  ?>
+					<div class="btnArea">
+					  <a href="<?php echo $this->baseUrl()?>/authentication/login?mensaje=login" class="btn btn-primary">Aplicar </a>
+					</div>
+				<?php 
+				}
+			?>
+			
+		  </div>
+		  <div class="col-md-3 col-sm-4 col-xs-12">
+			<aside>
+			  <div class="rightSidebar">
+				<div class="panel panel-default">
+				  <div class="panel-heading bg-color-1 border-color-1">
+					<h3 class="panel-title">Información general</h3>
+				  </div>
+				  <div class="panel-body">
+					<ul class="media-list">
+					  <li class="media">
+						<div class="media-left iconContent bg-color-2">
+						  <i class="fa fa-calendar" aria-hidden="true"></i>
+						</div>
+						<div class="media-body iconContent">
+						  <h4 class="media-heading color-2">Fecha de inicio</h4>
+						  <p><?php echo $obj->getFechainicio(); ?></p>
+						</div>
+					  </li>
+					  <li class="media">
+						<div class="media-left iconContent bg-color-4">
+						  <i class="fa fa-calendar" aria-hidden="true"></i>
+						</div>
+						<div class="media-body iconContent">
+						  <h4 class="media-heading color-4">Fecha de fin</h4>
+						  <p><?php echo $obj->getFechafin(); ?></p>
+						</div>
+					  </li>
+					  <li class="media">
+						<div class="media-left iconContent bg-color-3">
+						  <i class="fa fa-anchor" aria-hidden="true"></i>
+						</div>
+						<div class="media-body iconContent">
+						  <h4 class="media-heading color-3">Estado</h4>
+						  <p><?php echo $this->datos->getEstadoObject()->get_Label_model(); ?></p>
+						</div>
+					  </li>
+					</ul>
+				  </div>
+				</div>
+				
+			  </div>
+			</aside>
+		  </div>
+		</div>
+	  </div>
+	</section>

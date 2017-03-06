@@ -31,7 +31,7 @@ class Reto_Form_Reto extends EasyBib_Form
 		$descripcioncompleta->setAttrib('cols', 2);
         $descripcioncompleta->setLabel('* Descripciòn completa:');    
 		$descripcioncompleta->setRequired(true);
-		$descripcioncompleta->setAttrib('class', '  required ');
+		$descripcioncompleta->setAttrib('class', '  editor required ');
  		$this->addElement($descripcioncompleta);
 
 		$urlvideo = new Zend_Form_Element_Text('urlvideo');
@@ -42,10 +42,9 @@ class Reto_Form_Reto extends EasyBib_Form
 
 		$imagen = new Zend_Form_Element_File('imagen');
         $imagen->setLabel('Imagen:');
-		$imagen->setDestination('Files/retoimagen');
+		$imagen->setDestination('Files/temp/retoimagen');
 		$imagen->setAttrib('class', ' ');
  		$this->addElement($imagen);
-
 		$fechainicio = new Zend_Form_Element_Text('fechainicio');
         $fechainicio->setLabel('* Fecha de inicio:');    
 		$valiDate = new Zend_Validate_Date();
@@ -90,7 +89,7 @@ class Reto_Form_Reto extends EasyBib_Form
 
 		$this->addDisplayGroup(array("submitreto", "cancelreto"), 'submitretogroup');
         // set decorators
-        EasyBib_Form_Decorator::setFormDecorator($this, EasyBib_Form_Decorator::BOOTSTRAP, 'submitreto', 'cancelreto');
+        //EasyBib_Form_Decorator::setFormDecorator($this, EasyBib_Form_Decorator::BOOTSTRAP, 'submitreto', 'cancelreto');
 	}
 	
 	public function _populateHidden($data)

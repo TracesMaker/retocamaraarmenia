@@ -58,6 +58,8 @@ class Reto_Form_Solucionadoresplanteamientopresupuestal extends EasyBib_Form
 		$submit->setAttrib('class', 'btn btn-primary saveform pull-right');
 		$submit->setAttrib('onclick', 'clicksaveformpresupuesto();');
 		$this->addElement($submit);
+
+		  EasyBib_Form_Decorator::setFormDecorator($this, EasyBib_Form_Decorator::BOOTSTRAP, 'submitsolucionadores');
    
 	}
 	

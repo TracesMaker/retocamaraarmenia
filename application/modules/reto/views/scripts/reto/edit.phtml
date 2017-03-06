@@ -7,12 +7,17 @@
 <script>
 $(document).ready(function(){
 	loadpage(); 
+
 	$('#fechainicio').datepicker({	dateFormat: 'yy-mm-dd'});
 	$('#fechafin').datepicker({	dateFormat: 'yy-mm-dd'});
 
 	reloadreto();	
 	$("#retoform").validate();
+	CKEDITOR.replace("descripcioncompleta");
+	
+
 })
+
 function reloadreto(){
 	$("#retoform").validate();
 }
