@@ -61,13 +61,10 @@ class Model_AclusuariosMapper extends Model_DataMapperAbstract
 
 	public function UpdateData($data){
 		if(array_key_exists("password", $data)){
-        	$verificar = md5($data["password0"]);
-        
-        	$original = $this->getById($data["aclusuarios_id"]);
-        	if($verificar != $original->getPassword())
-            	return false;
-        	unset($data["password0"]);
-       		$data["password"] = md5($data["password"]);
+			$original = $this->getById($data["aclusuarios_id"]);
+    	if($data["password0"] != $original->getPassword())
+        	return false;
+    	unset($data["password0"]);
 		}
 		$db = $this->getDb();
 		$where = array(0 => "aclusuarios_id = ".$data["aclusuarios_id"]);
@@ -126,6 +123,7 @@ class Model_AclusuariosMapper extends Model_DataMapperAbstract
 		if(array_key_exists("password", $data))$object->setPassword($data["password"]);
 		if(array_key_exists("activo", $data))$object->setActivo($data["activo"]);
 		if(array_key_exists("email", $data))$object->setEmail($data["email"]);
+		if(array_key_exists("resetdate", $data))$object->setResetdate($data["resetdate"]);
 		if(array_key_exists("manejodedatos", $data))$object->setManejodedatos($data["manejodedatos"]);
 		if(array_key_exists("divulgacionpostulacion", $data))$object->setDivulgacionpostulacion($data["divulgacionpostulacion"]);
 	if(array_key_exists("role", $data)){
@@ -161,6 +159,7 @@ class Model_AclusuariosMapper extends Model_DataMapperAbstract
 		$_array["manejodedatos"] = $object->getManejodedatos();
 		$_array["divulgacionpostulacion"] = $object->getDivulgacionpostulacion();
 		$_array["role"] = $object->getRole();
+		$_array["resetdate"] = $object->getResetdate();
  		return $_array;
 	}
 

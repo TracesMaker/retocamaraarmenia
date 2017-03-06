@@ -114,77 +114,140 @@ class AuthenticationController extends Zend_Controller_Action{
     	return $authAdapter;
     }
     
-public function recoveryAction()
-    {
-    	$this->_helper->layout()->setLayout("layoutlogin");
+	public function recoveryAction()
+  {  
+  	$this->_helper->layout()->setLayout("layout_new_login");
+    if(Zend_Auth::getInstance()->hasIdentity())	$this->_redirect('index/index');
 		
-		$request = $this->getRequest();
-		$form = new Form_Recovery();
+		$request = $this->getRequest();		
 		$this->view->errorMessage = "";
 		$this->view->successMessage = "";
 		if($request->isPost())
-		{
-			if($form->isValid($this->_request->getPost()))
-			{
-				$username = $form->getValue('username');
-				$useremail = $form->getValue('useremail');
+		{	
+				$form = $request->getParams();
+				$useremail = $form['email'];
 				$tableUsuarios = Model_AclusuariosMapper::getInstance();
-
-				$user = $tableUsuarios->getByPropiedad("username", $username);
+				$user = $tableUsuarios->getByPropiedad("email", $useremail);
 
 				//Validamos que el usuario exista para enviar confirmación o mensaje de usuario no econtrado
-    			if($user->getId() > 0 && $user->getUseremail() == $useremail)
+    			if($user->getId() > 0)
     			{
 
-					$token = uniqid();
-					$pass = md5($token);
-					$imagenurl = 'http://app.easydev.co/img/logo.png';
-					$url = 'http://' . $_SERVER['SERVER_NAME'];
-					$asunto = 'Recuperación de contraseña [http://' . $_SERVER['SERVER_NAME'].'].';
-					$mensajeText = 'Usted a solicitado un cambio de contraseña en la plataforma veolia
-									por lo tanto se le ha generado la seguiente contraseña temporalmente.
+    				$rstDate = $user->getResetdate();
+    				if (is_null($rstDate)) {
+    					//Se genera nuevo token
+    					$ahora = new DateTime();
+    					$tableUsuarios->UpdateData(array("aclusuarios_id"=> $user->getId(), "resetdate"=>$ahora->format("Y-m-d H:i:s")));
+    					$rstoken = md5($ahora->format("Y-m-d H:i:s").$user->getId());    					
+    				} else {
+    					//se verifica si ha pasado más de 24 horas o se reenvía el mismo.						
+							$ultimoReset = new DateTime($rstDate);
+							$ahora = new DateTime();
+							$interval = $ahora->diff($ultimoReset);
+							if ($interval->format('%d') >= "1") {
+								//si pasa un día sin reestablecer su contraseña
+								//Se genera un nuevo rstoken
+								$rstoken = md5($ahora->format("Y-m-d H:i:s").$user->getId());
+								//se procede a actualizar el registro del usuario con la nueva fecha generada
+								$tableUsuarios->UpdateData(array("aclusuarios_id"=> $user->getId(), "resetdate"=>$ahora->format("Y-m-d H:i:s")));
+							} else {
+								$rstoken = md5($rstDate.$user->getId());
+							}
+    				}
+					
+					$username = $user->getUsername();
+					$imagenurl = $_SERVER['HTTP_HOST'].'/public/img/logo.png';
+					$url = $_SERVER['HTTP_HOST']."/public".'/authentication/resetpass/token/'.$rstoken.'/usuario/'.$user->getId();
+					$asunto = 'Recuperar contraseña en Cámara de comercio de armenia';
+					$mensajeText = 'Has solicitado un cambio de contraseña en la plataforma de Cámara de comercio de armenia
+									por lo tanto se le ha generado la siguiente contraseña temporalmente.
 
-									Nombre de usuario: 
-									Contraseña: 
-									
-									Recuerde que debe cambiar la contraseña al momento que ingrese a la plataforma entrando en el menu superior en el ítem de "Mi perfil" -> "Contraseña"
-									Si necesita ayuda, por favor comuníquese con el administrador.';
+									Nombre de usuario: ' . $username .'
+									Copia y pega la siguiente URL para que puedas reasignar tu contraseña: ' . $url . '
+																		
+									Si necesitas ayuda, por favor comunícate al correo contacto@retocamaraarmenia.com.co
+
+									Atentamente,
+									El equipo de soporte Cámara de comercio de armenia';
 
 					$mensajeHtml = '<center><img src="' . $imagenurl .'"></center>
-									Usted a solicitado un cambio de contraseña en la plataforma virtual de <b>FET</b><br>
-									por lo tanto se le ha generado la seguiente contraseña temporalmente.<br>
+									<h3>' . $username .'</h3> <br>
 									<br>
-									Nombre de usuario: ' . $username .'<br>
-									Contraseña: ' . $token . '<br>
+									<b>Has solicitado un cambio de contraseña en la plataforma de <b>Cámara de comercio de armenia</b>
+									<br>									
+									<a href="'.$url.'">Reasignar contraseña: '.$url.'</a>
 									<br>
-									Recuerde que debe cambiar la contraseña al momento que ingrese a la plataforma entrando en el menú superior en el ítem de "Mi perfil" -> "Contraseña".<br><br>
-									Si necesita ayuda, por favor comuníquese con el administrador. 	';		          
+									
+									Si necesitas ayuda, por favor comunícate al correo <br> <b>contacto@retocamaraarmenia.com.co</b>.<br>
+									<br>
+									Atentamente,
+									El equipo de soporte Cámara de comercio de armenia';		          
 
 					$mail = new Zend_Mail('UTF-8');
-					$mail->setFrom('noreply@easydev.co', 'Recuperar contraseña FET.');
-					$mail->addTo($useremail, $user->getUsernombres());
+					$mail->setFrom('contacto@retocamaraarmenia.com.co', 'Cámara de comercio de armenia');
+					$mail->addTo($useremail, $username);
 					$mail->setSubject($asunto);
 					$mail->setBodyText($mensajeText);
 					$mail->setBodyHtml($mensajeHtml);
 
 					try {
 					    $mail->send();
-					    $this->view->successMessage = "Se ha enviado un mensaje a su correo, por favor revise en su bandeja principal y en su bandeja de spam y encontrará la informacion necesaria para poder continuar con el proceso de cambio de contraseña";
-					    $tableUsuarios->UpdatePass(array("password" => $pass), $user->getId());
+					    $this->view->successMessage = "Se ha enviado un mensaje a su correo, por favor revise en su bandeja principal o bandeja de spam. <b>Encontrará un correo</b> con las instrucciones de acceso.";					    
 					} catch (Exception $e) {
-					    $this->view->errorMessage = "Error al enviar el mensaje, revise que el correo ingresado sea un correo valido o comuniquese con el administrador";
+					    $this->view->errorMessage = "Error al enviar el mensaje, revise que el correo sea valido o envíe un correo a <b>contacto@retocamaraarmenia.com.co</b>";
 					}
 
 				}else{
-					$this->view->errorMessage ="Error, El usuario o correo ingresado son incorrectos";
+					$this->view->errorMessage ="El correo ingresado no fue encontrado en nuestra base de datos.";
 				}
 
 
-			}else $this->view->errorMessage = "Error, El usuario o correo ingresado son incorrectos";
+			
 	    }
 
-	    $this->view->form=$form;  
-                      
-    }
+	
+  }
+
+  public function resetpassAction()
+  {
+		$this->_helper->layout()->setLayout("layout_new_login");
+
+		$UsDB = Model_AclusuariosMapper::getInstance();
+		$recoveryURL = "/public".'/authentication/recovery';
+		if($this->getRequest()->isPost()){			
+			$pr = $this->getRequest()->getParams();
+			$password=$pr['password'];
+			$passwordRe=$pr['passwordRe'];			
+			$usuario = $UsDB->getById($pr['usuario']);
+			if ($pr["token"] == md5($usuario->getResetdate().$usuario->getId())) {
+				if ($password == $passwordRe) {
+					$UsDB->UpdateData(array("aclusuarios_id"=> $usuario->getId(), 
+																	"password0"=> $usuario->getPassword(),
+																	"resetdate"=> NULL,
+																	"password"=> md5($password)));
+					
+					$this->view->successMessage = "<br> Tu nueva contraseña fue asignada. Ya puedes ingresar de nuevo. </b>";
+				} else {
+					$this->view->errorMessage = "Debes escribir la contraseña dos veces exactamente igual";
+				}			
+			} else {
+				
+				$this->view->errorMessage = "Tu  Link para reasignar la contraseña ha caducado por favor intentalo de nuevo en el siguiente LINK:".'<a target="_self" href="'.$recoveryURL.'">'.$recoveryURL.'</a>';
+			}
+		} else {
+			$Data = $this->getRequest()->getParams();
+			if (isset($Data["token"]) && isset($Data["usuario"])) {
+				$usuario = $UsDB->getById($Data["usuario"]);		
+				if ($Data["token"] == md5($usuario->getResetdate().$usuario->getId())) {
+					$this->view->token = $Data["token"];
+					$this->view->usuario = $Data["usuario"];		  			
+				} else {
+					$this->view->wrongURLMessage = "Tu  URL a caducado o es erronea, por favor intentalo de nuevo en el siguiente LINK:".'<a target="_self" href="'.$recoveryURL.'">'.$recoveryURL.'</a>';
+				}		
+			} else {				
+					$this->view->wrongURLMessage = "Tu  URL a caducado o es erronea, por favor intentalo de nuevo en el siguiente LINK:".'<a target="_self" href="'.$recoveryURL.'">'.$recoveryURL.'</a>';
+			}	
+		}	
+  }
 }
 

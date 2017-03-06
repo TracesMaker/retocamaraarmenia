@@ -1,0 +1,53 @@
+<section class="mainContent full-width clearfix">
+  <div class="container">
+    <div class="row">
+    	<div class="col-md-3 col-sm-2 col-xs-1">
+    	</div>    	
+    	<div class="col-md-6 col-sm-8 col-xs-10">
+	    	<?php if ($this->errorMessage != "") {?>
+					<div class="alert alert-warning">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  <strong>Ups!</strong> <br><br><?php echo $this->errorMessage; ?>
+					</div>
+				<?php }  ?>
+				<?php if ($this->wrongURLMessage != "") {?>
+					<div class="alert alert-danger">
+					  <button type="button" class="close" data-dismiss="alert">&times;</button>
+					  <strong>Ups!</strong> <br><br><?php echo $this->wrongURLMessage; ?>
+					</div>
+				<?php } else if ($this->successMessage != "") {?>
+					<div class="alert alert-success">
+					  <strong>Yuhuu!</strong> <br><br><?php echo $this->successMessage; ?>
+					</div>
+					<br>
+					<a href="<?php echo $this->baseUrl(); ?>/default/authentication/login/">Ingresar</a>
+				<?php } else {  ?>
+	        <div class="panel panel-default formPanel">
+	          <div class="panel-heading bg-color-1 border-color-1">
+	            <h3 class="panel-title">Reasignar contraseña</h3>
+	          </div>
+	          <div class="panel-body">              
+	            <form action="<?php echo $this->baseUrl()?>/authentication/resetpass/" method="POST" role="form">
+	              <div class="form-group formField">
+	              	<label>Nueva contraseña</label>
+	                <input type="password" name="password" id="password" value="" class="form-control" >
+		              <input type="text" name="token" id="token" hidden value="<?php echo $this->token; ?>">
+		              <input type="text" name="usuario" id="usuario" hidden value="<?php echo $this->usuario; ?>">
+	              </div>
+	              <div class="form-group formField">
+	              	<label>Repetir nueva contraseña</label>
+	                <input type="password" name="passwordRe" id="passwordRe" value="" class="form-control" >
+	              </div>
+	              <div class="form-group formField">
+	                <input type="submit" class="btn btn-primary btn-block bg-color-3 border-color-3" value="Recuperar contraseña">
+	              </div>
+	            </form>
+	          </div>
+	        </div>
+				<?php } ?>
+      </div>
+      <div class="col-md-3 col-sm-2 col-xs-1">
+    	</div>
+		</div>
+	</div>
+</section>

@@ -15,7 +15,8 @@ class Model_Aclusuarios extends Model_DomainObjectAbstract
 	private $_manejodedatos = null;
 	private $_divulgacionpostulacion = null;
 	private $_role = null;
-	private $_roleObject = null;
+    private $_roleObject = null;
+	private $_resetdate = null;
     public function getNombre() {
         return $this->_nombre;
     }
@@ -69,6 +70,12 @@ class Model_Aclusuarios extends Model_DomainObjectAbstract
     }
     public function setRole($role) {
         $this->_role = $role;
+    }
+    public function getResetdate() {
+        return $this->_resetdate;
+    }
+    public function setResetdate($resetdate) {
+        $this->_resetdate = $resetdate;
     }
     public function getRoleObject() {
         return $this->_roleObject;
