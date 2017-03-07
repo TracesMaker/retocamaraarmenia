@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 3.5.8.1
 -- http://www.phpmyadmin.net
 --
@@ -748,7 +748,7 @@ CREATE TABLE IF NOT EXISTS `ve_solucionadores` (
   `diagramasolucion` longtext,
   `porquelasolucion` text,
   `inspiracion` text,
-  `requisitosusuario` text,,
+  `requisitosusuario` text,
   `personal` double DEFAULT NULL,
   `serviciotecnico` double DEFAULT NULL,
   `equipos` double DEFAULT NULL,
