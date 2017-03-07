@@ -19,13 +19,49 @@
           <div class="col-xs-12">
             <div class="tabCommon tabLeft">
               <ul class="nav nav-tabs col-sm-3">
-                <li class="active"><a data-toggle="tab" href="#DatosGenerales">Datos generales</a></li>
-                <li><a data-toggle="tab" href="#proponente">Datos del proponente</a></li>
-                <li><a data-toggle="tab" href="#solucion">Solución</a></li>
-                <li><a data-toggle="tab" href="#metodologia">Metodología</a></li>
-                <li><a data-toggle="tab" href="#presupuesto">Presupuesto</a></li>
-                <li><a data-toggle="tab" href="#capacidad">Capacidad</a></li>
-                <li><a data-toggle="tab" href="#intelectual">Propiedad intelectual</a></li>
+                <li class="active">
+                <a data-toggle="tab" href="#DatosGenerales">Datos generales</a>
+                <div class="progress" style="margin-bottom: -17px;">
+                  <div class="progress-bar section-1" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">                    
+                  </div>
+                </div>
+                </li>
+                <li><a data-toggle="tab" href="#proponente">Datos del proponente</a>
+                <div class="progress" style="margin-bottom: -17px;">
+                  <div class="progress-bar section-2" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">                    
+                  </div>
+                </div>
+                </li>
+                <li><a data-toggle="tab" href="#solucion">Solución</a>
+                <div class="progress" style="margin-bottom: -17px;">
+                  <div class="progress-bar section-3" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">                    
+                  </div>
+                </div>
+                </li>
+                <li><a data-toggle="tab" href="#metodologia">Metodología</a>
+                <div class="progress" style="margin-bottom: -17px;">
+                  <div class="progress-bar section-4" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">                    
+                  </div>
+                </div>
+                </li>
+                <li><a data-toggle="tab" href="#presupuesto">Presupuesto</a>
+                <div class="progress" style="margin-bottom: -17px;">
+                  <div class="progress-bar section-5" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">                    
+                  </div>
+                </div>
+                </li>
+                <li><a data-toggle="tab" href="#capacidad">Capacidad</a>
+                <div class="progress" style="margin-bottom: -17px;">
+                  <div class="progress-bar section-6" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">                    
+                  </div>
+                </div>
+                </li>
+                <li><a data-toggle="tab" href="#intelectual">Propiedad intelectual</a>
+                <div class="progress" style="margin-bottom: -17px;">
+                  <div class="progress-bar section-7" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">                    
+                  </div>
+                </div>
+                </li>
               </ul>
               <div class="tab-content col-sm-9">
                 <div id="DatosGenerales" class="tab-pane fade in active">
@@ -200,8 +236,21 @@
         </div>
       </div>
     </section>
-
+<div ><ul id="progreso"></ul></div>
 <script>
+
+function updateSectionProgress(section) {
+  let idSol = $('#solucionadores_id').val();
+  $.get('<?php echo $this->baseUrl()?>/reto/solucionadores/getprogreso', {solucion: idSol, seccion: section},function (data) {        
+        $('.progress-bar.section-'+section).css('width',data.progreso+'%');
+        // $("#progreso").append('<br><li>'+
+        //           'progreso: '+data.query+'<br>'+
+        //           'progreso: '+data.progreso+'<br>'+
+        //           'progresoEsperado: '+data.progresoEsperado+'<br>'+
+        //           'conteo: '+data.conteo+'<br>'+
+        //           'seccion: '+data.seccion+'<br>'+'</li>');
+      });
+}
 
 function clicksaveformsolucionadores()
 {
@@ -213,11 +262,12 @@ function clicksaveformsolucionadores()
             function(data) {
               html = '<div class="col-xs-12 message"><div class=" alert alert-success alert-dismissible alt" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="false">x</span></button><span class="successAlert"><i class="fa fa-check" aria-hidden="true"></i></span>Registro actualizado con éxito</div></div>';
                 if(data.success){
-                  $(".tab-content").append(html);
+                  $(".tab-content").append(html);                  
                   $('.message').slideUp( 2000 );
                    setTimeout(function() {
                       $('.message').remove();
                     }, 2000);
+                  updateSectionProgress(1);
                 }
                 
             });
@@ -242,6 +292,7 @@ function clicksaveformtrayectoria()
                    setTimeout(function() {
                       $('.message').remove();
                     }, 2000);
+                  updateSectionProgress(6);
                 }
                 
             });
@@ -294,6 +345,7 @@ function clicksaveformproponente()
                    setTimeout(function() {
                       $('.message').remove();
                     }, 2000);
+                  updateSectionProgress(2);
                 }
                 
             });
@@ -318,6 +370,7 @@ function clicksaveformsolucion()
                    setTimeout(function() {
                       $('.message').remove();
                     }, 2000);
+                  updateSectionProgress(3);
                 }
                 
             });
@@ -347,6 +400,7 @@ function clicksaveformpresupuesto()
                    setTimeout(function() {
                       $('.message').remove();
                     }, 2000);
+                  updateSectionProgress(5);
                 }
                 
             });
@@ -371,6 +425,7 @@ function clicksaveformpropiedad()
                    setTimeout(function() {
                       $('.message').remove();
                     }, 2000);
+                  updateSectionProgress(7);
                 }
                 
             });
@@ -466,8 +521,10 @@ $(document).ready(function () {
     solucionessimilares(basetxt); //
   });
 
-  
-
+  //Actualiza el progreso de todas las seeciones
+  for (var i = 8 - 1; i > 0; i--) {
+    updateSectionProgress(i);    
+  } 
 
 });
 

@@ -397,7 +397,7 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 				if ($isol != 0) {
 					$evalitem .= "+";
 				}
-				$evalitem .= " IF(ISNULL(".$item['columna']."),0,1) ";
+				$evalitem .= " IF(ISNULL(NULLIF(".$item['columna'].",'')),0,1) ";
 
 				$isol += 1;
 
@@ -421,33 +421,33 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 					$evalitem .= " + ";
 				}
  				if ($item['columna'] == "madurezsolucion"){
- 					$evalitem .= " IF(ISNULL(estadodemadurez),0,1) ";
+ 					$evalitem .= " IF(ISNULL(NULLIF(estadodemadurez,'')),0,1) ";
  				} else if ($item['columna'] == "diagramasolucion") {
- 					$evalitem .= " IF(ISNULL(diagramasolucion),0,1) ";
+ 					$evalitem .= " IF(ISNULL(NULLIF(diagramasolucion,'')),0,1) ";
  				} else if ($item['columna'] == "planteamientopresupuestal") {
  					$progresoEsperado += 6;
- 					$evalitem .= " IF(ISNULL(personal),0,1) ";
-					$evalitem .= "+ IF(ISNULL(serviciotecnico),0,1) ";
-					$evalitem .= "+ IF(ISNULL(equipos),0,1) ";
-					$evalitem .= "+ IF(ISNULL(software),0,1) ";
-					$evalitem .= "+ IF(ISNULL(materialeseinsumos),0,1) ";
-					$evalitem .= "+ IF(ISNULL(viajes),0,1) ";
-					$evalitem .= "+ IF(ISNULL(otrosrubros),0,1) ";
+ 					$evalitem .= " IF(ISNULL(NULLIF(personal,'')),0,1) ";
+					$evalitem .= "+ IF(ISNULL(NULLIF(serviciotecnico,'')),0,1) ";
+					$evalitem .= "+ IF(ISNULL(NULLIF(equipos,'')),0,1) ";
+					$evalitem .= "+ IF(ISNULL(NULLIF(software,'')),0,1) ";
+					$evalitem .= "+ IF(ISNULL(NULLIF(materialeseinsumos,'')),0,1) ";
+					$evalitem .= "+ IF(ISNULL(NULLIF(viajes,'')),0,1) ";
+					$evalitem .= "+ IF(ISNULL(NULLIF(otrosrubros,'')),0,1) ";
  				} else if ($item['columna'] == "esprotegida") {
  					$evalitem .= " IF(propiedadintelectual=1 AND !ISNULL(descripcionpropiedadintelecual),1,0) ";
- 					//$evalitem .= "+ IF(ISNULL(descripcionpropiedadintelecual),0,1) ";
+ 					//$evalitem .= "+ IF(ISNULL(NULLIF(descripcionpropiedadintelecual,'')),0,1) ";
  				} else if ($item['columna'] == "tienepolitica") {
  					$evalitem .= " IF(politicapropiedadintelectual=1 AND !ISNULL(descripcionpoliticapropiedadintelecual),1,0) ";
  					// $evalitem .= "+ IF(,0,1) ";
  				} else if ($item['columna'] == "elautoresproponente") {
  					$evalitem .= " IF(autenticidad=0 AND !ISNULL(descripcionautorpropiedad),1,0) ";
- 					// $evalitem .= "+ IF(ISNULL(descripcionautorpropiedad),0,1) ";
+ 					// $evalitem .= "+ IF(ISNULL(NULLIF(descripcionautorpropiedad,'')),0,1) ";
  				} else if ($item['columna'] == "exposiciondelasolucion") {
  					$progresoEsperado += 3;
- 					$evalitem .= " IF(ISNULL(cuando),0,1) ";
-					$evalitem .= "+ IF(ISNULL(conquien),0,1) ";
-					$evalitem .= "+ IF(ISNULL(presentacionpublica),0,1) ";
-					$evalitem .= "+ IF(ISNULL(acuerdoconfidencialidadconautor),0,1) ";
+ 					$evalitem .= " IF(ISNULL(NULLIF(cuando,'')),0,1) ";
+					$evalitem .= "+ IF(ISNULL(NULLIF(conquien,'')),0,1) ";
+					$evalitem .= "+ IF(ISNULL(NULLIF(presentacionpublica,'')),0,1) ";
+					$evalitem .= "+ IF(ISNULL(NULLIF(acuerdoconfidencialidadconautor,'')),0,1) ";
  				}
 
 				$icustom += 1;
