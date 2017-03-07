@@ -10,6 +10,8 @@ class Reto_ElementostangiblesController extends Zend_Controller_Action
 			$this->_helper->layout()->disableLayout();
 		$this->ElementostangiblesDB = Reto_Model_ElementostangiblesMapper::getInstance();
 		$this->_redirector = $this->_helper->getHelper('Redirector');
+		$_auth = new Zend_Session_Namespace('veoliaZend_Auth');
+		$this->solucionador = $_auth->solucionador;
 	}
     public function indexAction()
     {   	
@@ -19,7 +21,7 @@ class Reto_ElementostangiblesController extends Zend_Controller_Action
 
     public function listAction()
     {  
-        $this->ElementostangiblesDB->_populateFiltros(array("solucionador" => $this->getRequest()->getParam('solucionador')));
+        $this->ElementostangiblesDB->_populateFiltros(array("solucionador" => $this->solucionador));
     	$this->view->pagination = $this->ElementostangiblesDB->getList();
     	$this->view->permisos = $this->getPermisosBotonera();
     }
@@ -109,6 +111,7 @@ class Reto_ElementostangiblesController extends Zend_Controller_Action
 			$datosForm = $form->getValues();
 
 			if(!isset($datosForm["elementostangibles_id"]) || $datosForm["elementostangibles_id"] == 0){
+				$datosForm['solucionador'] = $this->solucionador;
 				$id = $this->ElementostangiblesDB->add($datosForm);
 			} else {
 				$this->ElementostangiblesDB->UpdateData($datosForm);

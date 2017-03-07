@@ -10,6 +10,8 @@ class Reto_ActividadesfundamentalesController extends Zend_Controller_Action
 			$this->_helper->layout()->disableLayout();
 		$this->ActividadesfundamentalesDB = Reto_Model_ActividadesfundamentalesMapper::getInstance();
 		$this->_redirector = $this->_helper->getHelper('Redirector');
+		$_auth = new Zend_Session_Namespace('veoliaZend_Auth');
+		$this->solucionador = $_auth->solucionador;
 	}
     public function indexAction()
     {  
@@ -19,7 +21,9 @@ class Reto_ActividadesfundamentalesController extends Zend_Controller_Action
     }
     public function  listAction()
     {  
-        $this->ActividadesfundamentalesDB->_populateFiltros(array("solucionador" => $this->getRequest()->getParam('solucionador')));
+    	
+        
+        $this->ActividadesfundamentalesDB->_populateFiltros(array("solucionador" => $this->solucionador));
     	$this->view->pagination = $this->ActividadesfundamentalesDB->getList();
     	$this->view->permisos = $this->getPermisosBotonera();    	
     }
@@ -109,6 +113,7 @@ class Reto_ActividadesfundamentalesController extends Zend_Controller_Action
 			$datosForm = $form->getValues();
 
 			if(!isset($datosForm["actividadesfundamentales_id"]) || $datosForm["actividadesfundamentales_id"] == 0){
+				$datosForm['solucionador'] = $this->solucionador;
 				$id = $this->ActividadesfundamentalesDB->add($datosForm);
 			} else {
 				$this->ActividadesfundamentalesDB->UpdateData($datosForm);

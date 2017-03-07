@@ -10,6 +10,8 @@ class Reto_RiesgosController extends Zend_Controller_Action
 			$this->_helper->layout()->disableLayout();
 		$this->RiesgosDB = Reto_Model_RiesgosMapper::getInstance();
 		$this->_redirector = $this->_helper->getHelper('Redirector');
+		$_auth = new Zend_Session_Namespace('veoliaZend_Auth');
+		$this->solucionador = $_auth->solucionador;
 	}
     public function indexAction()
     {  
@@ -19,7 +21,7 @@ class Reto_RiesgosController extends Zend_Controller_Action
     }
     public function listAction()
     {  
-        $this->RiesgosDB->_populateFiltros(array("solucionador" => $this->getRequest()->getParam('solucionador')));
+        $this->RiesgosDB->_populateFiltros(array("solucionador" => $this->solucionador));
     	$this->view->pagination = $this->RiesgosDB->getList();
     	$this->view->permisos = $this->getPermisosBotonera();
     }
@@ -112,6 +114,7 @@ class Reto_RiesgosController extends Zend_Controller_Action
 			$datosForm = $form->getValues();
 
 			if(!isset($datosForm["riesgos_id"]) || $datosForm["riesgos_id"] == 0){
+				$datosForm['solucionador'] = $this->solucionador;
 				$id = $this->RiesgosDB->add($datosForm);
 			} else {
 				$this->RiesgosDB->UpdateData($datosForm);

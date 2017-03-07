@@ -10,6 +10,8 @@ class Reto_OtrosdesarrollosController extends Zend_Controller_Action
 			$this->_helper->layout()->disableLayout();
 		$this->OtrosdesarrollosDB = Reto_Model_OtrosdesarrollosMapper::getInstance();
 		$this->_redirector = $this->_helper->getHelper('Redirector');
+		$_auth = new Zend_Session_Namespace('veoliaZend_Auth');
+		$this->solucionador = $_auth->solucionador;
 	}
     public function indexAction()
     {  
@@ -20,7 +22,7 @@ class Reto_OtrosdesarrollosController extends Zend_Controller_Action
 
     public function listAction()
     {  
-        $this->OtrosdesarrollosDB->_populateFiltros(array("solucionador" => $this->getRequest()->getParam('solucionador')));
+        $this->OtrosdesarrollosDB->_populateFiltros(array("solucionador" => $this->solucionador));
     	$this->view->pagination = $this->OtrosdesarrollosDB->getList();
     	$this->view->permisos = $this->getPermisosBotonera();
     }
@@ -111,6 +113,7 @@ class Reto_OtrosdesarrollosController extends Zend_Controller_Action
 			$datosForm = $form->getValues();
 
 			if(!isset($datosForm["otrosdesarrollos_id"]) || $datosForm["otrosdesarrollos_id"] == 0){
+				$datosForm['solucionador'] = $this->solucionador;
 				$id = $this->OtrosdesarrollosDB->add($datosForm);
 			} else {
 				$this->OtrosdesarrollosDB->UpdateData($datosForm);

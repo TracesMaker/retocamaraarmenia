@@ -10,6 +10,8 @@ class Reto_CaracteristicasprincipalesimplementacionController extends Zend_Contr
 			$this->_helper->layout()->disableLayout();
 		$this->CaracteristicasprincipalesimplementacionDB = Reto_Model_CaracteristicasprincipalesimplementacionMapper::getInstance();
 		$this->_redirector = $this->_helper->getHelper('Redirector');
+		$_auth = new Zend_Session_Namespace('veoliaZend_Auth');
+		$this->solucionador = $_auth->solucionador;
 	}
 
     public function indexAction()
@@ -22,10 +24,10 @@ class Reto_CaracteristicasprincipalesimplementacionController extends Zend_Contr
     public function listAction()
     {  	
     	$CaracteristicasprincipalessolucionDB = Reto_Model_CaracteristicasprincipalessolucionMapper::getInstance();
-        $this->CaracteristicasprincipalesimplementacionDB->_populateFiltros(array("solucionador" => $this->getRequest()->getParam('solucionador')));
+        $this->CaracteristicasprincipalesimplementacionDB->_populateFiltros(array("solucionador" => $this->solucionador));
     	$this->view->pagination = $this->CaracteristicasprincipalesimplementacionDB->getList();
     	$this->view->permisos = $this->getPermisosBotonera();
-    	$ArrayOption=$CaracteristicasprincipalessolucionDB->getArrayOption();
+    	$ArrayOption=$CaracteristicasprincipalessolucionDB->getArrayOptionInforme($this->solucionador);
     	$this->view->arrayatributos = $ArrayOption;
     }
 
@@ -114,6 +116,7 @@ class Reto_CaracteristicasprincipalesimplementacionController extends Zend_Contr
 		if ($form->isValid($formData)) {				
 			$datosForm = $form->getValues();
 			if(!isset($datosForm["caracteristicasprincipalesimplementacion_id"]) || $datosForm["caracteristicasprincipalesimplementacion_id"] == 0){
+				$datosForm['solucionador'] = $this->solucionador;
 				$id = $this->CaracteristicasprincipalesimplementacionDB->add($datosForm);
 			} else {
 				$this->CaracteristicasprincipalesimplementacionDB->UpdateData($datosForm);

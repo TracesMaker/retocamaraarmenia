@@ -47,11 +47,11 @@ class Reto_Form_Solucionadoresinformaciongeneralproponente extends EasyBib_Form
 		$celulardelproponente->setAttrib('class', ' form-control ');
  		$this->addElement($celulardelproponente);
 
-		$correoelectronicoproponente = new Zend_Form_Element_Text('correoelectronicoproponente');
-        $correoelectronicoproponente->setLabel('Correo electrónico:');
-		$correoelectronicoproponente->addValidator(new Zend_Validate_StringLength(array('max' => 256)));
-		$correoelectronicoproponente->setAttrib('class', ' form-control ');
- 		$this->addElement($correoelectronicoproponente);
+		// $correoelectronicoproponente = new Zend_Form_Element_Text('correoelectronicoproponente');
+  //       $correoelectronicoproponente->setLabel('Correo electrónico:');
+		// $correoelectronicoproponente->addValidator(new Zend_Validate_StringLength(array('max' => 256)));
+		// $correoelectronicoproponente->setAttrib('class', ' form-control ');
+ 	// 	$this->addElement($correoelectronicoproponente);
 
 
 		// $cancel = new Zend_Form_Element_Button('cancelsolucionadores');

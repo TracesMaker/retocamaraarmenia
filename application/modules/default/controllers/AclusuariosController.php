@@ -276,7 +276,6 @@ class AclusuariosController extends Zend_Controller_Action
 		$formData = $this->getRequest()->getPost();
 		if ($form->isValid($formData)) {
 			$datosForm = $form->getValues();
-
 			if(!isset($datosForm["aclusuarios_id"]) || $datosForm["aclusuarios_id"] == 0){
 				$datosForm["role"] = 3;
 				$datosForm["username"] = $datosForm["email"];

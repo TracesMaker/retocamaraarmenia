@@ -10,6 +10,8 @@ class Reto_RiesgostecnicosController extends Zend_Controller_Action
 			$this->_helper->layout()->disableLayout();
 		$this->RiesgostecnicosDB = Reto_Model_RiesgostecnicosMapper::getInstance();
 		$this->_redirector = $this->_helper->getHelper('Redirector');
+		$_auth = new Zend_Session_Namespace('veoliaZend_Auth');
+		$this->solucionador = $_auth->solucionador;
 	}
     public function indexAction()
     {  
@@ -20,7 +22,7 @@ class Reto_RiesgostecnicosController extends Zend_Controller_Action
 
     public function listAction()
     {  
-        $this->RiesgostecnicosDB->_populateFiltros(array("solucionador" => $this->getRequest()->getParam('solucionador')));
+        $this->RiesgostecnicosDB->_populateFiltros(array("solucionador" => $this->solucionador));
     	$this->view->pagination = $this->RiesgostecnicosDB->getList();
     	$this->view->permisos = $this->getPermisosBotonera();
     }
@@ -111,6 +113,7 @@ class Reto_RiesgostecnicosController extends Zend_Controller_Action
 			$datosForm = $form->getValues();
 
 			if(!isset($datosForm["riesgostecnicos_id"]) || $datosForm["riesgostecnicos_id"] == 0){
+				$datosForm['solucionador'] = $this->solucionador;
 				$id = $this->RiesgostecnicosDB->add($datosForm);
 			} else {
 				$this->RiesgostecnicosDB->UpdateData($datosForm);
