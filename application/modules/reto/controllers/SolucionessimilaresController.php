@@ -10,6 +10,8 @@ class Reto_SolucionessimilaresController extends Zend_Controller_Action
 			$this->_helper->layout()->disableLayout();
 		$this->SolucionessimilaresDB = Reto_Model_SolucionessimilaresMapper::getInstance();
 		$this->_redirector = $this->_helper->getHelper('Redirector');
+		$_auth = new Zend_Session_Namespace('veoliaZend_Auth');
+		$this->solucionador = $_auth->solucionador;
 	}
     public function indexAction()
     {  
@@ -20,7 +22,7 @@ class Reto_SolucionessimilaresController extends Zend_Controller_Action
 
     public function listAction()
     {  
-        $this->SolucionessimilaresDB->_populateFiltros(array("solucionador" => $this->getRequest()->getParam('solucionador')));
+        $this->SolucionessimilaresDB->_populateFiltros(array("solucionador" => $this->solucionador));
     	$this->view->pagination = $this->SolucionessimilaresDB->getList();
     	$this->view->permisos = $this->getPermisosBotonera();
     }
@@ -111,8 +113,10 @@ class Reto_SolucionessimilaresController extends Zend_Controller_Action
 			$datosForm = $form->getValues();
 
 			if(!isset($datosForm["solucionessimilares_id"]) || $datosForm["solucionessimilares_id"] == 0){
+				$datosForm['solucionador'] = $this->solucionador;
 				$id = $this->SolucionessimilaresDB->add($datosForm);
 			} else {
+				
 				$this->SolucionessimilaresDB->UpdateData($datosForm);
 				$id = $datosForm["solucionessimilares_id"];
 			}
