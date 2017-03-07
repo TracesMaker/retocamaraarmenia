@@ -94,18 +94,3 @@
 			</div>
 		</div>
 </div>
-<div ><ul id="progreso"></ul></div>
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		for (var i = 8 - 1; i > 0; i--) {
-		$.get('http://veolia/public/reto/solucionadores/getprogreso', {solucion: 2, seccion: i},function (data) {
-				$("#progreso").append('<li>'+
-									'progreso: '+data.progreso+'<br>'+
-									'progresoEsperado: '+data.progresoEsperado+'<br>'+
-									'conteo: '+data.conteo+'<br>'+
-									'seccion: '+data.seccion+'<br>'+'</li>');
-			});
-		}
-	});
-</script>
