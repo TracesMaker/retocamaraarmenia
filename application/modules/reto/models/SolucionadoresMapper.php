@@ -505,9 +505,9 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 
 			$progreso = $res['total'];
 		}
-
+		$varprogreso = $progresoEsperado > 0 ? (($progreso * 100) / $progresoEsperado):  0;
 		return array("query"=> $query,
-					"progreso" => (($progreso * 100) / $progresoEsperado),
+					"progreso" => $varprogreso,
 					"progresoEsperado" => $progresoEsperado,
 					"conteo" => $progreso,
 					"seccion" => $seccion);

@@ -7116,4 +7116,8 @@ footer .color-bar {
 .sectionTitle h2 {
     margin: 20px;
 }
+
+.nav-tabs>li{
+      margin-bottom: 17px!important;
+}
 /*# sourceMappingURL=style.css.map */
