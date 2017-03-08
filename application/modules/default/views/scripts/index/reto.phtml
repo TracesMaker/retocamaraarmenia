@@ -34,7 +34,9 @@
 			</div>
 			<?php 
 				if($obj->getId() == 1){ 
-				echo '<a download="' .$obj->getTitulo(). '" href="'.$this->baseUrl().'/Files/retopdf/'.$obj->getId().'.pdf" class="btn btn-primary" > <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar Anexo</a>';
+				echo '<a download="Desafío. ' .$obj->getTitulo(). '.pdf" href="'.$this->baseUrl().'/Files/retopdf/desafio1.pdf" class="btn btn-primary" > <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar Desafio completo</a> ';
+					
+				echo ' <a download="ANEXO 1. Portafolio de servicios.pdf" href="'.$this->baseUrl().'/Files/retopdf/anexo1.pdf" class="btn btn-primary" > <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Descargar Anexo</a>';
 				}
 			?>
 			<?php

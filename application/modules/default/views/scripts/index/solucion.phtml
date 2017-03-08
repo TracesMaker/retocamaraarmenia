@@ -175,6 +175,9 @@
                               <h4>Riesgos de funcionamiento</h4>
                               <p><b>¿Qué riesgos de funcionamiento se podrían presentar cuando la solución esté totalmente implementada?</b> <span style="color: #225c8a;">(Es importante considerar que estos riesgos corresponden al momento en que la solución ya esté desarrollada y en funcionamiento. Previamente se había preguntado por riesgos, pero durante la implementación)</span>  Máximo  10 riesgos</p>
                               <div id='div-riesgostecnicos'></div>
+                              <div class="form-actions">
+                                <button name="submitsolucionadores" id="submitsolucionadores" type="button" class="btn btn btn-primary saveform pull-right" onclick="clicksaveformmadurez();">Guardar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -209,6 +212,10 @@
                               <h4>Soluciones Similares</h4>
                               <p><b>¿Qué soluciones similares a la presentada en la propuesta has desarrollado previamente?</b> <span style="color: #225c8a;">(Diligencia el cuadro a continuación, agrega cuantas filas sean necesarias)</span></p>
                               <div id='div-solucionessimilares'></div>
+
+                              <div class="form-actions">
+                                <button name="submitsolucionadores" id="submitsolucionadores" type="button" class="btn btn btn-primary saveform pull-right" onclick="clicksaveformtrayectoria();">Guardar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -435,10 +442,47 @@ function clicksaveformpropiedad()
     }
 }
 
+function clicksendformpropiedad()
+{
+    var buttonSelect = $(this); 
+    buttonSelect.parents(".form-actions").find("button").button('loading');
+     $('#enviado').val(1);
+     
+      if ($("#propiedadform").valid()) {
+          if(confirm("Esta seguro que desea enviar el formulario?")){
+              $.post("<?php echo $this->baseUrl()?>/reto/solucionadores/propiedadintelectual", $("#propiedadform").serialize(),
+                  function(data) {
+                    html = '<div class="col-xs-12 message"><div class=" alert alert-success alert-dismissible alt" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="false">x</span></button><span class="successAlert"><i class="fa fa-check" aria-hidden="true"></i></span>Registro actualizado con éxito</div></div>';
+                      if(data.success){
+                        $(".tab-content").append(html);
+                        $('.message').slideUp( 2000 );
+                         setTimeout(function() {
+                            $('.message').remove();
+                          }, 2000);
+                        updateSectionProgress(7);
+                      }
+                  });
+          }
+        } else {
+          buttonSelect.parents(".form-actions").find("button").button('reset');
+          alert("Formulario invalido");
+      }
+}
+function clickestadodemadurezotro()
+{
+    if($('input[name=estadodemadurez]:checked').val() == 7){
+      $('#estadodemadurezotro').show();
+    }else{
+        $('#estadodemadurezotro').hide();
+        $('#estadodemadurezotro').val("");
+    }
+}
+
 $(document).ready(function () {
   
   basetxt = '<?php echo $this->baseUrl()?>';
   var filerequest = basetxt+"/reto/solucionadores/solucionysupertinenciafile";
+  clickestadodemadurezotro();
 
   $("#solucionfile").on('submit',(function(e) {
     e.preventDefault();
@@ -455,6 +499,9 @@ $(document).ready(function () {
         }
       });
   }));
+
+
+  
 
 
   //PRE carga el listado de actividades
