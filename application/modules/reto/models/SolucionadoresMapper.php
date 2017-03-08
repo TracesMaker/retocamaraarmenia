@@ -373,7 +373,7 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 
 		$secciones = array(
 			'1' => array('1','2','3','4','5'), 					//Datos Generales
-			'2' => array('26','27','28','29','30','31','32'), 	//Datos del proponente
+			'2' => array('26','27','28','29','30','31'), 	//Datos del proponente
 			'3' => array('6','7', '8', '9', '10', '11', '12'),	//Solución
 			'4' => array('13', '14', '15', '16', '17', '18'), 	//Metodología
 			'5' => array('19'), 									//Presupuesto
