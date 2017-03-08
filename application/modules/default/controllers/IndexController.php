@@ -22,7 +22,10 @@ class IndexController extends Zend_Controller_Action
         $filterreceived = "";
         $this->view->pagination = $this->RetoDB->getList();
         
-       
+        $_auth = new Zend_Session_Namespace('veoliaZend_Auth');
+        $id = $_auth->usuario_id;
+        $this->SolucionadoresDB->_populateFiltros(array("usuario" => $id));
+        $this->view->misretos = $this->SolucionadoresDB->getList();
 
     }
     public function retoAction()
@@ -30,6 +33,7 @@ class IndexController extends Zend_Controller_Action
         $id = $this->getRequest()->getParam('id');
         $Obj = $this->RetoDB->getById($id);
         $this->view->datos = $Obj;
+        
     }
     public function solucionAction()
     {
@@ -42,12 +46,21 @@ class IndexController extends Zend_Controller_Action
 
         $object = $this->SolucionadoresDB->getByPropiedad("reto", $reto);
 
-        if($object->getId()==""){
+        if($object->getId() == ""){
             $id = $this->SolucionadoresDB->Add(array('reto' => $reto ));
             $object = $this->SolucionadoresDB->getById($id);
         }
 
+        $_auth = new Zend_Session_Namespace('veoliaZend_Auth');
+        $_auth->solucionador = $object->getId();
+
+        $this->view->solucionador = $object;
+        $RetoDB = Reto_Model_RetoMapper::getInstance();
+        $this->view->reto = $RetoDB->getById($object->getReto());
+
+
         $datosArray = $this->SolucionadoresDB->_depopulate($object);
+
 
         // información de la propuesta
         $form_informaciongeneral = new Reto_Form_Solucionadoresinformaciongeneralpropuesta();

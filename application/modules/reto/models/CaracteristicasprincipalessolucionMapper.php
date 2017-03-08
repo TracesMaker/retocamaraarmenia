@@ -210,6 +210,16 @@ class Reto_Model_CaracteristicasprincipalessolucionMapper extends Model_DataMapp
         return self::$_instance;
     }
 
+    public function getArrayOptionInforme($solucionador){
+		$arrayOption = array();
+		$arrayOption[NULL]="Seleccione opción";
+		 $this->_populateFiltros(array("solucionador" => $solucionador));
+		foreach ($this->getList(false) as $Obj)
+			$arrayOption[$Obj->getId()] = $Obj->get_Label_model();
+		return $arrayOption;
+	}
+	
+
 
 
 }

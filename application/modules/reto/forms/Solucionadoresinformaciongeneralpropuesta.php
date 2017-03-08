@@ -12,7 +12,7 @@ class Reto_Form_Solucionadoresinformaciongeneralpropuesta extends EasyBib_Form
 		$this->addElement($solucionadores_id);
 
 		$titulo = new Zend_Form_Element_Text('titulo');
-        $titulo->setLabel('* Tìtulo de la solución:');    
+        $titulo->setLabel('* Título de la solución:');    
 		$titulo->addValidator(new Zend_Validate_StringLength(array('max' => 256)));
 		$titulo->setRequired(true);
 		$titulo->setAttrib('class', ' form-control required ');

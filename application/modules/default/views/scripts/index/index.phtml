@@ -1,15 +1,36 @@
 <!-- WHITE SECTION -->
 <section class="whiteSection full-width clearfix eventSection" id="ourEvents">
   <div class="container">
+   <?php 
+      if(Zend_Auth::getInstance()->hasIdentity()){
+      ?>
+      <div class="col-xs-12">
+        <div class="lowerPartTitle footerInfo">
+          <h4>Mis retos</h4>
+          <p>
+            <ul class="list-unstyled para-list">
+             <?php foreach ($this->misretos as  $key => $objmisretos) : ?>
+              <li><i class="fa fa-angle-double-right"></i><a href="<?php echo $this->baseUrl()?>/index/solucion/id/<?php echo $objmisretos->getReto(); ?>" class="btn btn-link">
+              <?php echo $objmisretos->getRetoObject()->get_Label_model(); ?></a></li>
+              <?php endforeach; ?>
+            </ul>
+          </p>
+        </div>
+      </div>
+       <?php 
+         }
+    ?>
     <div class="sectionTitle text-center">
       <h2>
         <span class="shape shape-left bg-color-4"></span>
-        <span>Retos</span>
+        <span>Retos activos</span>
         <span class="shape shape-right bg-color-4"></span>
       </h2>
     </div>
 
     <div class="row">
+    <div class="col-sm-3 col-xs-12 block">
+    </div>
       <?php foreach ($this->pagination as  $key => $obj) : ?>
         <!-- <div class="col-sm-6 col-xs-12 block">
           <div class="media eventContent bg-color-<?php echo $key+1; ?>">
@@ -30,7 +51,7 @@
             </div>
           </div>
         </div> -->
-        <div class="col-sm-4 col-xs-12 block">
+        <div class="col-sm-6 col-xs-12 block">
             <?php 
               if( strlen($obj->getImagen())>0){ 
               $filename = $obj->getImagen();

@@ -7,7 +7,9 @@
             <div class="sectionTitle text-center">
               <h2>
                 <span class="shape shape-left bg-color-4"></span>
-                <span>Reto 1</span>
+                <span>
+                <?php echo($this->reto->get_Label_model()); ?>
+                </span>
                 <span class="shape shape-right bg-color-4"></span>
               </h2>
             </div>
@@ -114,7 +116,7 @@
                                   <br>
                                   <?php echo $this->form_solucion->porquelasolucion; ?>
                                   <br><br><hr>
-                                  <h4>Caracteristicas Principales Solucion</h4>
+                                  <h4>Características principales solución</h4>
                                   <p><b>¿Cuáles son las características principales (atributos) de la solución?</b><span style="color: #225c8a;"> (Describe cada una de las características relevantes para dar solución al reto usando la tabla que se muestra a continuación. Algunos ejemplos de atributos son: alta velocidad, seguridad en el manejo, facilidad de escalamiento…).</span> Máximo 10 atributos</p>
                                   <div id='div-caracteristicasprincipalessolucion'></div>
                                   <hr>
@@ -163,11 +165,11 @@
                               <p>De los atributos mencionados en el numeral (CARACTERISTICAS PRINCIPALES SOLUCION), por favor define <b>¿Cuál es el grado de dificultad existente hoy día para alcanzar dicho atributo?</b> <span style="color: #225c8a;">(Para responder esta pregunta, por favor, ten en cuenta la experiencia nacional o internacional y el nivel de acceso que se pueda tener a las tecnologías previstas)</span></p>
                               <div id='div-caracteristicasprincipalesimplementacion'></div>
                               <hr>
-                              <p>A partir de lo expuesto durante todo el formulario, por favor define en la lista expuesta a continuación,  <b>¿Cuál es el estado de madurez de la solución?</b> <span style="color: #225c8a;">(Indica con una X,  la solución que se plantea en qué nivel de desarrollo está. Puede que esté a nivel de desarrollo conceptual, prototipo básico o alguna de las escalas que se muestra en la tabla a continuación).</span>  </p>
+                              <p>A partir de lo expuesto durante todo el formulario, por favor define en la lista expuesta a continuación,  <b>¿Cuál es el estado de madurez de la solución?</b> <span style="color: #225c8a;">(Indica la solución que se plantea en qué nivel de desarrollo está. Puede que esté a nivel de desarrollo conceptual, prototipo básico o alguna de las escalas que se muestra en la tabla a continuación).</span>  </p>
                               <?php echo $this->form_madurez; ?> 
                               <hr>
                               <h4>Otros Desarrollos</h4>
-                              <p><b>¿Qué otros desarrollos complementarios se deberían realizar en VEOLIA para una óptima implementación de la solución?</b> <span style="color: #225c8a;">( Algunos ejemplos son: infraestructura, adecuaciones físicas de terrenos, obtención de permisos)</span></p>
+                              <p><b>¿Qué otros desarrollos complementarios se deberían realizar en Cámara de Comercio de Armenia para una óptima implementación de la solución?</b> <span style="color: #225c8a;">( Algunos ejemplos son: infraestructura, adecuaciones físicas de terrenos, obtención de permisos)</span></p>
                               <div id='div-otrosdesarrollos'></div>
                               <hr>
                               <h4>Riesgos de funcionamiento</h4>

@@ -16,8 +16,8 @@ class Reto_Form_Caracteristicasprincipalesimplementacion extends EasyBib_Form
 		$CaracteristicasprincipalessolucionDB = Reto_Model_CaracteristicasprincipalessolucionMapper::getInstance();
 		$ArrayOption=$CaracteristicasprincipalessolucionDB->getArrayOption($atributobasico);
 		$atributobasico->setMultiOptions($ArrayOption);
-		$atributobasico->setRequired(true);
- 		$atributobasico->setAttrib('class', '    required ');
+		//$atributobasico->setRequired(true);
+ 		//$atributobasico->setAttrib('class', '    required ');
  		$atributobasico->addFilter('null');
  		$this->addElement($atributobasico);
 
@@ -26,7 +26,7 @@ class Reto_Form_Caracteristicasprincipalesimplementacion extends EasyBib_Form
 		$estadodeldesarrollo->setAttrib('cols', 2);
         $estadodeldesarrollo->setLabel('* Tecnología que puede dar soporte a la existencia de este atributo:');    
 		$estadodeldesarrollo->setRequired(true);
-		$estadodeldesarrollo->setAttrib('class', '  required ');
+		//$estadodeldesarrollo->setAttrib('class', '  required ');
  		$this->addElement($estadodeldesarrollo);
 
 		$gradodeldesarrollo = new Zend_Form_Element_Textarea('gradodeldesarrollo');
@@ -34,7 +34,7 @@ class Reto_Form_Caracteristicasprincipalesimplementacion extends EasyBib_Form
 		$gradodeldesarrollo->setAttrib('cols', 2);
         $gradodeldesarrollo->setLabel('* Grado de dificultad para involucrar la tecnología a la información:');    
 		$gradodeldesarrollo->setRequired(true);
-		$gradodeldesarrollo->setAttrib('class', '  required ');
+		//$gradodeldesarrollo->setAttrib('class', '  required ');
  		$this->addElement($gradodeldesarrollo);
 
 		$aspectospendientes = new Zend_Form_Element_Textarea('aspectospendientes');
@@ -42,7 +42,7 @@ class Reto_Form_Caracteristicasprincipalesimplementacion extends EasyBib_Form
 		$aspectospendientes->setAttrib('cols', 2);
         $aspectospendientes->setLabel('* Explicación del grado de dificultad otorgado:');    
 		$aspectospendientes->setRequired(true);
-		$aspectospendientes->setAttrib('class', '  required ');
+		//$aspectospendientes->setAttrib('class', '  required ');
  		$this->addElement($aspectospendientes);
 		$cancel = new Zend_Form_Element_Button('cancelcaracteristicasprincipalesimplementacion');
 		$cancel->setLabel('Cancelar');

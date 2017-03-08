@@ -163,7 +163,7 @@ class Reto_SolucionadoresController extends Zend_Controller_Action
 		if ($this->getRequest()->isPost()){
 			$this->Save($form);
 		} else {
-			$form->usuario->setValue($this->_getParam("aclusuarios_id"));
+			//$form->usuario->setValue($this->_getParam("aclusuarios_id"));
 		}
 	}
 
@@ -256,7 +256,7 @@ class Reto_SolucionadoresController extends Zend_Controller_Action
 				$id = $datosForm["solucionadores_id"];
 			}
 			$object = $this->SolucionadoresDB->getById($id);
-			if($this->_request->isXmlHttpRequest())
+			//if($this->_request->isXmlHttpRequest())
 				$this->_helper->json(array("success"=>true,"id"=>$id,"nombre"=>$object->get_Label_model()));
 			//else
 				//$this->_helper->redirector('index');
