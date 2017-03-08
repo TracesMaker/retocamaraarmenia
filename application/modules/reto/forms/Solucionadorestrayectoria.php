@@ -19,11 +19,13 @@ class Reto_Form_Solucionadorestrayectoria extends EasyBib_Form
 		$descripciontrayectoria->setAttrib('class', ' form-control required ');
  		$this->addElement($descripciontrayectoria);
 
-		$submit = new Zend_Form_Element_Button('submitsolucionadores');	
-		$submit->setLabel( 'Guardar');
-		$submit->setAttrib('class', 'btn btn-primary saveform pull-right');
-		$submit->setAttrib('onclick', 'clicksaveformtrayectoria();');
-		$this->addElement($submit);
+		// $submit = new Zend_Form_Element_Button('submitsolucionadores');	
+		// $submit->setLabel( 'Guardar');
+		// $submit->setAttrib('class', 'btn btn-primary saveform pull-right');
+		// $submit->setAttrib('onclick', 'clicksaveformtrayectoria();');
+		// $this->addElement($submit);
+
+		EasyBib_Form_Decorator::setFormDecorator($this, EasyBib_Form_Decorator::BOOTSTRAP, 'submitsolucionadores');
 	}
 	
 	public function _populateHidden($data)

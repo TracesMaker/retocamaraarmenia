@@ -5,11 +5,14 @@ class Reto_Form_Solucionadorespropiedadintelectual extends EasyBib_Form
 	{
 		$AgrupacionDB = Model_AgrupacionMapper::getInstance();
 		$this->setName('propiedadform');
-		$this->setAttrib('class','form-horizontal');
+		$this->setAttrib('class','');
 		 
 		$solucionadores_id = new Zend_Form_Element_Hidden('solucionadores_id');
 		$solucionadores_id->addFilter('Int');
 		$this->addElement($solucionadores_id);
+
+		$enviado = new Zend_Form_Element_Hidden('enviado');
+		$this->addElement($enviado);
 
 			$propiedadintelectual = new Zend_Form_Element_Select('propiedadintelectual');
 	        $propiedadintelectual->setLabel('La solución tecnologica presentada, como solución al reto, está protegida actualmente, por algún tipo de propiedad intelectual?:');
@@ -86,8 +89,14 @@ class Reto_Form_Solucionadorespropiedadintelectual extends EasyBib_Form
 		$submit->setAttrib('class', 'btn btn-primary saveform pull-right');
 		$submit->setAttrib('onclick', 'clicksaveformpropiedad();');
 		$this->addElement($submit);
+
+		$send = new Zend_Form_Element_Button('send');	
+		$send->setLabel( 'Enviar');
+		$send->setAttrib('class', 'btn btn-primary form-control saveform bg-color-1 btnArea');
+		$send->setAttrib('onclick', 'clicksendformpropiedad();');
+		$this->addElement($send);
 		
-		 EasyBib_Form_Decorator::setFormDecorator($this, EasyBib_Form_Decorator::BOOTSTRAP, 'submitsolucionadores');
+		 EasyBib_Form_Decorator::setFormDecorator($this, EasyBib_Form_Decorator::BOOTSTRAP, 'submitsolucionadores', 'send');
    
 
 	}

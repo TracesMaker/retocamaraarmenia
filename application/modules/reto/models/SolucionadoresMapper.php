@@ -174,6 +174,8 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 		if(array_key_exists("presentacionpublica", $data))$object->setPresentacionpublica($data["presentacionpublica"]);
 		if(array_key_exists("acuerdoconfidencialidadconautor", $data))$object->setAcuerdoconfidencialidadconautor($data["acuerdoconfidencialidadconautor"]);
 		if(array_key_exists("requisitosusuario", $data))$object->setRequisitosusuario($data["requisitosusuario"]);
+		if(array_key_exists("estadodemadurezotro", $data))$object->setEstadodemadurezotro($data["estadodemadurezotro"]);
+		if(array_key_exists("enviado", $data))$object->setEnviado($data["enviado"]);
 	if(array_key_exists("usuario", $data)){
 		$object->setUsuario($data["usuario"]);
 		if($this->getPerezoso()){
@@ -273,6 +275,8 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 		$_array["usuario"] = $object->getUsuario();
 		$_array["reto"] = $object->getReto();
 		$_array["estadodemadurez"] = $object->getEstadodemadurez();
+		$_array["estadodemadurezotro"] = $object->getEstadodemadurezotro();
+		$_array["enviado"] = $object->getEnviado();
  		return $_array;
 	}
 

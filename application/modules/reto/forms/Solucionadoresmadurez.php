@@ -5,7 +5,7 @@ class Reto_Form_Solucionadoresmadurez extends EasyBib_Form
 	{
 		$AgrupacionDB = Model_AgrupacionMapper::getInstance();
 		$this->setName('solucionadoresmadurezform');
-		$this->setAttrib('class','form-horizontal');
+		$this->setAttrib('class','');
 		 
 		$solucionadores_id = new Zend_Form_Element_Hidden('solucionadores_id');
 		$solucionadores_id->addFilter('Int');
@@ -20,13 +20,20 @@ class Reto_Form_Solucionadoresmadurez extends EasyBib_Form
 		$estadodemadurez->setRequired(true);	
 		$estadodemadurez->addFilter('null');
 		$estadodemadurez->setAttrib('class', ' form-control required  ');
+		$estadodemadurez->setAttrib('onchange', 'clickestadodemadurezotro()');
  		$this->addElement($estadodemadurez);
 
-		$submit = new Zend_Form_Element_Button('submitsolucionadores');	
-		$submit->setLabel( 'Guardar');
-		$submit->setAttrib('class', 'btn btn-primary saveform pull-right');
-		$submit->setAttrib('onclick', 'clicksaveformmadurez();');
-		$this->addElement($submit);
+ 		$estadodemadurezotro = new Zend_Form_Element_Text('estadodemadurezotro');
+        $estadodemadurezotro->setLabel('Por favor describalo');
+		$estadodemadurezotro->setAttrib('class', '  form-control ');
+ 		$this->addElement($estadodemadurezotro);
+
+		// $submit = new Zend_Form_Element_Button('submitsolucionadores');	
+		// $submit->setLabel( 'Guardar');
+		// $submit->setAttrib('class', 'btn btn-primary saveform pull-right');
+		// $submit->setAttrib('onclick', 'clicksaveformmadurez();');
+		// $this->addElement($submit);
+
 
 		// set decorators
         EasyBib_Form_Decorator::setFormDecorator($this, EasyBib_Form_Decorator::BOOTSTRAP, 'submitsolucionadores');

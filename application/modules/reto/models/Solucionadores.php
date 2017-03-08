@@ -45,9 +45,11 @@ class Reto_Model_Solucionadores extends Model_DomainObjectAbstract
 	private $_usuarioObject = null;
 	private $_reto = null;
 	private $_retoObject = null;
-	private $_estadodemadurez = null;
+    private $_estadodemadurez = null;
+	private $_estadodemadurezotro = null;
 	private $_estadodemadurezObject = null;
     private $_progreso = null;
+    private $_enviado = null;
     public function getTitulo() {
         return $this->_titulo;
     }
@@ -288,6 +290,12 @@ class Reto_Model_Solucionadores extends Model_DomainObjectAbstract
     }
     public function setEstadodemadurez($estadodemadurez) {
         $this->_estadodemadurez = $estadodemadurez;
+    }    
+    public function getEstadodemadurezotro() {
+        return $this->_estadodemadurezotro;
+    }
+    public function setEstadodemadurezotro($estadodemadurezotro) {
+        $this->_estadodemadurezotro = $estadodemadurezotro;
     }
     public function getEstadodemadurezObject() {
         return $this->_estadodemadurezObject;
@@ -302,6 +310,14 @@ class Reto_Model_Solucionadores extends Model_DomainObjectAbstract
 
     public function setProgreso ($progreso){
         $this->_progreso = $progreso;
+    }   
+
+    public function getEnviado (){
+        return $this->_enviado;
+    }
+
+    public function setEnviado ($enviado){
+        $this->_enviado = $enviado;
     }
 
 	public function get_Label_model(){
