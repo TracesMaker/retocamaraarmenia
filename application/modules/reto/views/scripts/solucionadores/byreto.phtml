@@ -31,7 +31,9 @@
 		</td>
 		</td>
 		<td class="hidden-phone">
-			[AsignarPorcentaje]
+			<div class="progress progress-striped">
+			  <div class="bar" style="width: <?php echo $obj->getProgreso(); ?>%;"><?php echo $obj->getProgreso(); ?>%</div>
+			</div>			
 		</td>
 		<td class="no-print" >
 		  <div class="btn-group" title="<?php echo $obj->get_Label_Model() ?>">
