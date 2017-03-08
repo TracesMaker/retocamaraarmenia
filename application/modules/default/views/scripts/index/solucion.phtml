@@ -15,6 +15,68 @@
             </div>
           </div>
         </div>
+        <?php if($this->solucionador->getEnviado()==1): ?>
+          <div class="container">
+            <div class="row progress-wizard" style="border-bottom:0;">
+
+              <div class="col-sm-4 col-xs-12 progress-wizard-step complete ">
+                <div class="progress"><div class="progress-bar"></div></div>
+                <span  class="progress-wizard-dot">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </span>
+                <div class="progressInfo">1. Inscripción</div>
+              </div>
+
+              <div class="col-sm-4 col-xs-12 progress-wizard-step complete">
+                <div class="progress"><div class="progress-bar"></div></div>
+                <span class="progress-wizard-dot">
+                  <i class="fa  fa-pencil-square-o" aria-hidden="true"></i>
+                </span>
+                <div class="progressInfo">2. Llenado de datos</div>
+              </div>
+
+              <div class="col-sm-4 col-xs-12 progress-wizard-step complete">
+                <div class="progress"><div class="progress-bar"></div></div>
+                <span  class="progress-wizard-dot">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </span>
+                <div class="progressInfo">3. Envio completado</div>
+              </div>
+            </div>
+           
+          </div>
+        <?php else: ?>
+        
+          <div class="container">
+            <div class="row progress-wizard" style="border-bottom:0;">
+
+              <div class="col-sm-4 col-xs-12 progress-wizard-step complete">
+                <div class="progress"><div class="progress-bar"></div></div>
+                <span  class="progress-wizard-dot">
+                  <i class="fa fa-user" aria-hidden="true"></i>
+                </span>
+                <div class="progressInfo">1. Inscripción</div>
+              </div>
+
+              <div class="col-sm-4 col-xs-12 progress-wizard-step active">
+                <div class="progress"><div class="progress-bar"></div></div>
+                <span href="checkout-step-2.html" class="progress-wizard-dot">
+                  <i class="fa  fa-pencil-square-o" aria-hidden="true"></i>
+                </span>
+                <div class="progressInfo">2. Llenado de datos</div>
+              </div>
+
+              <div class="col-sm-4 col-xs-12 progress-wizard-step incomplete">
+                <div class="progress"><div class="progress-bar"></div></div>
+                <span href="checkout-step-3.html" class="progress-wizard-dot">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                </span>
+                <div class="progressInfo">3. Envio completado</div>
+              </div>
+            </div>
+           
+          </div>
+
         <div class="row">
           <div class="col-xs-12">
             <div class="tabCommon tabLeft">
@@ -241,6 +303,7 @@
             </div>
           </div>
         </div>
+        <?php endif; ?>
       </div>
     </section>
 <div ><ul id="progreso"></ul></div>
