@@ -7120,4 +7120,8 @@ footer .color-bar {
 .nav-tabs>li{
       margin-bottom: 17px!important;
 }
+
+.whiteSection, .mainContent, .lightSection, .colorSection{
+      padding: 0;
+}
 /*# sourceMappingURL=style.css.map */
