@@ -23,11 +23,11 @@ class Reto_CaracteristicasprincipalesimplementacionController extends Zend_Contr
 
     public function listAction()
     {  	
-    	$CaracteristicasprincipalessolucionDB = Reto_Model_CaracteristicasprincipalessolucionMapper::getInstance();
+    	$CaracteristicasprincipalesimplementacionDB = Reto_Model_CaracteristicasprincipalesimplementacionMapper::getInstance();
         $this->CaracteristicasprincipalesimplementacionDB->_populateFiltros(array("solucionador" => $this->solucionador));
     	$this->view->pagination = $this->CaracteristicasprincipalesimplementacionDB->getList();
     	$this->view->permisos = $this->getPermisosBotonera();
-    	$ArrayOption=$CaracteristicasprincipalessolucionDB->getArrayOptionInforme($this->solucionador);
+    	$ArrayOption=$CaracteristicasprincipalesimplementacionDB->getArrayOptionInforme($this->solucionador);
     	$this->view->arrayatributos = $ArrayOption;
     }
 
