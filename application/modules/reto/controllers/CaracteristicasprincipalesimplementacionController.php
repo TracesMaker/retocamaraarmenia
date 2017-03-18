@@ -12,6 +12,7 @@ class Reto_CaracteristicasprincipalesimplementacionController extends Zend_Contr
 		$this->_redirector = $this->_helper->getHelper('Redirector');
 		$_auth = new Zend_Session_Namespace('veoliaZend_Auth');
 		$this->solucionador = $_auth->solucionador;
+		
 	}
 
     public function indexAction()
@@ -23,11 +24,12 @@ class Reto_CaracteristicasprincipalesimplementacionController extends Zend_Contr
 
     public function listAction()
     {  	
-    	$CaracteristicasprincipalesimplementacionDB = Reto_Model_CaracteristicasprincipalesimplementacionMapper::getInstance();
+    	$CaracteristicasprincipalessolucionDB = Reto_Model_CaracteristicasprincipalessolucionMapper::getInstance();
+    	
         $this->CaracteristicasprincipalesimplementacionDB->_populateFiltros(array("solucionador" => $this->solucionador));
     	$this->view->pagination = $this->CaracteristicasprincipalesimplementacionDB->getList();
     	$this->view->permisos = $this->getPermisosBotonera();
-    	$ArrayOption=$CaracteristicasprincipalesimplementacionDB->getArrayOptionInforme($this->solucionador);
+    	$ArrayOption=$CaracteristicasprincipalessolucionDB->getArrayOptionInforme($this->solucionador);
     	$this->view->arrayatributos = $ArrayOption;
     }
 

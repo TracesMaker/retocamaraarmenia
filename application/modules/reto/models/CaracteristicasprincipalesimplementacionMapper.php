@@ -84,8 +84,8 @@ class Reto_Model_CaracteristicasprincipalesimplementacionMapper extends Model_Da
 		if($this->_objectFilter->getAtributobasico() > 0) 
 			$select->where("a.atributobasico = ?",$this->_objectFilter->getAtributobasico());
 		
-		if($this->_objectFilter->getSolucionador()>0)
-			$select->where("a.solucionador = ?",$this->_objectFilter->getSolucionador());
+		if($this->_global->solucionadores_id>0)
+			$select->where("a.solucionador = ?",$this->_global->solucionadores_id);
 
 		if(strlen($this->_objectFilter->get_Fbuscar())>1){
 			$select->where(' a.estadodeldesarrollo like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.gradodeldesarrollo like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.aspectospendientes like "%'.$this->_objectFilter->get_Fbuscar().'%" ');
@@ -229,6 +229,15 @@ class Reto_Model_CaracteristicasprincipalesimplementacionMapper extends Model_Da
         }
         return self::$_instance;
     }
+
+    public function getArrayOptionInforme($solucionador){
+		$arrayOption = array();
+		$arrayOption[NULL]="Seleccione opción";
+		 $this->_populateFiltros(array("solucionador" => $solucionador));
+		foreach ($this->getList(false) as $Obj)
+			$arrayOption[$Obj->getId()] = $Obj->get_Label_model();
+		return $arrayOption;
+	}
 
 
 
