@@ -83,8 +83,9 @@ class Reto_Model_CaracteristicasprincipalesimplementacionMapper extends Model_Da
 	protected function BuildWhere($select){
 		if($this->_objectFilter->getAtributobasico() > 0) 
 			$select->where("a.atributobasico = ?",$this->_objectFilter->getAtributobasico());
-		if($this->_global->solucionadores_id>0)
-			$select->where("a.solucionador = ?",$this->_global->solucionadores_id);
+		
+		if($this->_objectFilter->getSolucionador()>0)
+			$select->where("a.solucionador = ?",$this->_objectFilter->getSolucionador());
 
 		if(strlen($this->_objectFilter->get_Fbuscar())>1){
 			$select->where(' a.estadodeldesarrollo like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.gradodeldesarrollo like "%'.$this->_objectFilter->get_Fbuscar().'%" OR a.aspectospendientes like "%'.$this->_objectFilter->get_Fbuscar().'%" ');

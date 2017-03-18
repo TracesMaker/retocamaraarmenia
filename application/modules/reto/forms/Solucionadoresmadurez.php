@@ -19,7 +19,7 @@ class Reto_Form_Solucionadoresmadurez extends EasyBib_Form
 		$estadodemadurez->setMultiOptions($ArrayOption);	
 		$estadodemadurez->setRequired(true);	
 		$estadodemadurez->addFilter('null');
-		$estadodemadurez->setAttrib('class', ' form-control required  ');
+		$estadodemadurez->setAttrib('class', 'required  ');
 		$estadodemadurez->setAttrib('onchange', 'clickestadodemadurezotro()');
  		$this->addElement($estadodemadurez);
 
