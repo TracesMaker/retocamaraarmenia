@@ -152,7 +152,8 @@ function caracteristicasprincipalessolucion(baseUrl){
 					$('#newcaracteristicasprincipalessolucion').modal('hide');
 					$('body').removeClass('modal-open');
 					$('.modal-backdrop').remove();
-          updateSectionProgress(3);
+					$('#atributobasico').append('<option value="'+data.id+'">'+data.nombre+'</option>');
+			        updateSectionProgress(3);
 					var Content_caracteristicasprincipalessolucion = $("#div-caracteristicasprincipalessolucion");
                     Request_caracteristicasprincipalessolucion = baseUrl+"/reto/caracteristicasprincipalessolucion/list";
       				Content_caracteristicasprincipalessolucion.load(Request_caracteristicasprincipalessolucion,function(response, status, xhr) {});
@@ -169,6 +170,7 @@ function caracteristicasprincipalessolucion(baseUrl){
 				if(data.id > 0){
 					var Content = $("#div-caracteristicasprincipalessolucion");
                     Request = baseUrl+"/reto/caracteristicasprincipalessolucion/list";
+                    $('#atributobasico').find('option[value='+data.id+']').remove();
       				Content.load(Request,function(response, status, xhr) {});
 				} else {
 					alert("No fue posible eliminar");					
