@@ -29,11 +29,11 @@ class Reto_Form_Solucionadoresinformaciongeneralproponente extends EasyBib_Form
 		$telefono->setAttrib('class', ' form-control ');
  		$this->addElement($telefono);
 
-		$paginaweb = new Zend_Form_Element_Text('paginaweb');
-        $paginaweb->setLabel('Página Web:');
-		$paginaweb->addValidator(new Zend_Validate_StringLength(array('max' => 256)));
-		$paginaweb->setAttrib('class', ' form-control ');
- 		$this->addElement($paginaweb);
+		// $paginaweb = new Zend_Form_Element_Text('paginaweb');
+  //       $paginaweb->setLabel('Página Web:');
+		// $paginaweb->addValidator(new Zend_Validate_StringLength(array('max' => 256)));
+		// $paginaweb->setAttrib('class', ' form-control ');
+ 	// 	$this->addElement($paginaweb);
 
 		$nombredepersonadecontacto = new Zend_Form_Element_Text('nombredepersonadecontacto');
         $nombredepersonadecontacto->setLabel('Nombre de persona de contacto:');
