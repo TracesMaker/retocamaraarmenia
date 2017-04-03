@@ -165,7 +165,7 @@ class AuthenticationController extends Zend_Controller_Action{
 									Nombre de usuario: ' . $username .'
 									Copia y pega la siguiente URL para que puedas reasignar tu contraseña: ' . $url . '
 																		
-									Si necesitas ayuda, por favor comunícate al correo contacto@retocamaraarmenia.com.co
+									Si necesitas ayuda, por favor comunícate al correo soporte@retocamaraarmenia.com.co
 
 									Atentamente,
 									El equipo de soporte Cámara de comercio de armenia';
@@ -178,13 +178,13 @@ class AuthenticationController extends Zend_Controller_Action{
 									<a href="'.$url.'">Reasignar contraseña: '.$url.'</a>
 									<br>
 									
-									Si necesitas ayuda, por favor comunícate al correo <br> <b>contacto@retocamaraarmenia.com.co</b>.<br>
+									Si necesitas ayuda, por favor comunícate al correo <br> <b>soporte@retocamaraarmenia.com.co</b>.<br>
 									<br>
 									Atentamente,
 									El equipo de soporte Cámara de comercio de armenia';		          
 
 					$mail = new Zend_Mail('UTF-8');
-					$mail->setFrom('contacto@retocamaraarmenia.com.co', 'Cámara de comercio de armenia');
+					$mail->setFrom('soporte@retocamaraarmenia.com.co', 'Cámara de comercio de armenia');
 					$mail->addTo($useremail, $username);
 					$mail->setSubject($asunto);
 					$mail->setBodyText($mensajeText);
@@ -194,7 +194,7 @@ class AuthenticationController extends Zend_Controller_Action{
 					    $mail->send();
 					    $this->view->successMessage = "Se ha enviado un mensaje a su correo, por favor revise en su bandeja principal o bandeja de spam. <b>Encontrará un correo</b> con las instrucciones de acceso.";					    
 					} catch (Exception $e) {
-					    $this->view->errorMessage = "Error al enviar el mensaje, revise que el correo sea valido o envíe un correo a <b>contacto@retocamaraarmenia.com.co</b>";
+					    $this->view->errorMessage = "Error al enviar el mensaje, revise que el correo sea valido o envíe un correo a <b>soporte@retocamaraarmenia.com.co</b>";
 					}
 
 				}else{
