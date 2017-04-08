@@ -1148,7 +1148,7 @@ aside {
 }
 @media (min-width: 768px) {
   .customModal .modal-dialog {
-    width: 350px;
+    width: 500px;
   }
 }
 .customModal .formPanel.panel {

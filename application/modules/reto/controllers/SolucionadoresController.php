@@ -511,7 +511,18 @@ class Reto_SolucionadoresController extends Zend_Controller_Action
 		$this->view->form=$form;
 		if ($this->getRequest()->isPost()){
 			$form->cleanForm();
-			$this->Save($form);
+			$enviado =  $this->getRequest()->getParam('enviado');
+			$solucionadores_id = $this->getRequest()->getParam('solucionadores_id');
+			$fecha_fin = $this->SolucionadoresDB->getFechafinBySolucionador($solucionadores_id);
+			//var_dump(date("Y-m-d G:i") < $fecha_fin['fechafin']." 18:00");
+			if(date("Y-m-d G:i") < $fecha_fin['fechafin']." 18:00"){
+				$this->Save($form);
+              }else{
+                $this->_helper->json(array(
+                	"success"=>false,
+                	"cerro"=>true)
+                );
+              }
 		}else{
 			$id = $this->_getParam('id', 0);
 			if($id == 0)

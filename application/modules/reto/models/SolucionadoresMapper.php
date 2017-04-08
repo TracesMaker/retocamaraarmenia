@@ -514,4 +514,20 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 
     }
 
+    public function getFechafinBySolucionador($solucionador) {
+
+    	$query = "SELECT fechafin FROM `ve_reto` 
+						join ve_solucionadores 
+						on ve_solucionadores.reto = ve_reto.reto_id
+						WHERE 
+						ve_solucionadores.solucionadores_id = ".$solucionador;
+		$db = $this->getDb();
+		$rst = $db->query($query);
+		return $rst->fetch();
+
+		
+	}
+
+    
+
 }
