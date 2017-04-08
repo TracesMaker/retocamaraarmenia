@@ -1,0 +1,271 @@
+<?php $obj = $this->datos; ?>
+<div class="box-header navbar-inner">
+	<h3><button class="btn btn closeform" title="Atras"><i class="icon-step-backward"></i></button><span class="break"></span> Evaluación de solucionador </h3>
+
+    <div class="box-icon btn-group">
+    	<button class="btn btn-inverse" title="Imprimir" onclick="window.print();" type="button"> <i class="icon-print"></i></button>
+    </div>
+</div>
+<div class="box-content">
+	<div>
+	<h4>Datos generales del proponente de la solución</h4>
+	<table class="table table-bordered table-striped table-condensed">
+		<tr> 
+			<td><strong>Nombre de la empresa/persona natural:</strong> <?php echo $obj["nombredelaempresa"]; ?></td> 
+		</tr>
+		<tr> 
+			<td><strong>Nit / C.C.:</strong> <?php echo $obj["nit"]; ?></td> 
+		</tr>
+		<tr> 
+			<td><strong>Teléfono:</strong> <?php echo $obj["telefono"]; ?></td> 
+		</tr>
+		<tr> 
+			<td><strong>Página Web:</strong> <?php echo $obj["paginaweb"]; ?></td> 
+		</tr>
+		<tr> 
+			<td><strong>Nombre de persona de contacto:</strong> <?php echo $obj["nombredepersonadecontacto"]; ?></td> 
+		</tr>
+		<tr> 
+			<td><strong>Número de Celular:</strong> <?php echo $obj["celulardelproponente"]; ?></td> 
+		</tr>
+		<tr> 
+			<td><strong>Correo electrónico:</strong> <?php echo $obj["correoelectronicoproponente"]; ?></td> 
+		</tr>
+	</table>
+	</div>
+	<hr>
+	<h4>Items a evaluar</h4>
+	<input type="hidden" name="evaluador" id="evaluador" value="<?php echo $this->evaluador; ?>">
+	<input type="hidden" name="reto" id="reto" value="<?php echo $obj['reto']; ?>">
+	<input type="hidden" name="solucionador" id="solucionador" value="<?php echo $obj['solucionadores_id']; ?>">
+	<?php foreach ($this->itemaevaluar as $key => $item) { ?>
+
+	<?php if ($item->getTabla() == "ve_solucionadores") { ?> 
+	<div class="row-fluid">
+	  <div class="span12">
+	  	<p class="text-info"><strong><?php echo $item->getTitulo(); ?></strong></p>
+		<blockquote>
+	  		<p><?php echo $obj[$item->getColumna()]; ?></p>
+  		</blockquote>
+	  </div>
+	</div>
+	<hr>
+	<?php } else if($item->getTabla() == "otratabla") { ?>
+	<div class="row-fluid">
+	  <div class="span12">
+	  	<p class="text-info"><strong><?php echo $item->getTitulo(); ?></strong></p>
+		<div class="loadTabla" tabla="<?php echo $item->getTabla(); ?>" >	<span class="label label-info">Cargando información...</span></div>
+	  </div>
+	</div>
+	<hr>
+	<?php } else if($item->getTabla() == "vistacustom") { ?>
+	<div class="row-fluid">
+	  <div class="span12">
+	  	<p class="text-info"><strong><?php echo $item->getTitulo(); ?></strong></p>		
+		<?php if ($item->getColumna() == "madurezsolucion"){ ?>
+			<blockquote>
+	  			<p><?php echo $this->estadosMadurez[$obj["estadodemadurez"]]; ?></p>
+  			</blockquote>
+		<?php } else if ($item->getColumna() == "diagramasolucion") { ?>
+			<?php if(strlen($obj["diagramasolucion"])>0){ ?>
+				<a target="_blank" href="<?php echo $this->baseUrl()?>/reto/solucionadores/descargar/file/diagramasolucion/id/<?php echo $obj['solucionadores_id']; ?>" >Descargar diagrama de solución</a>
+			<?php } ?>
+		<?php } else if ($item->getColumna() == "planteamientopresupuestal") { ?>
+			<table class="table table-bordered table-striped table-condensed">
+				<tr>	
+					<td>Personal </td> 
+					<td>
+						<p class="text-right precio">
+						<?php echo $obj['personal']; ?>
+						</p>						
+					</td> 
+				</tr>
+				<tr>	
+					<td>Servicios técnicos </td> 
+					<td>
+						<p class="text-right precio">
+						<?php echo $obj['serviciotecnico']; ?>							
+						</p>
+					</td> 
+				</tr>
+				<tr>	
+					<td>Equipos</td> 
+					<td>
+						<p class="text-right precio">
+						<?php echo $obj['equipos']; ?>							
+						</p>
+					</td> 
+				</tr>
+				<tr>	
+					<td>Software</td> 
+					<td>
+						<p class="text-right precio">
+						<?php echo $obj['software']; ?>							
+						</p>
+					</td> 
+				</tr>
+				<tr>	
+					<td>Materiales e insumos</td> 
+					<td>
+						<p class="text-right precio">
+						<?php echo $obj['materialeseinsumos']; ?>						
+						</p>
+					</td> 
+				</tr>
+				<tr>	
+					<td>Viajes</td> 
+					<td>
+						<p class="text-right precio">
+						<?php echo $obj['viajes']; ?>							
+						</p>
+					</td> 
+				</tr>
+				<tr>	
+					<td>Otros rubros necesarios para el desarrollo de la solución </td> 
+					<td>
+						<p class="text-right precio">
+						<?php echo $obj['otrosrubros']; ?>							
+						</p>
+					</td> 
+				</tr>
+				<tr class="success">
+					<td>TOTAL</td>
+					<td>
+						<p class="text-right precio">	
+						 <?php 
+							$totalPresupuesto =	intval($obj['personal']) +
+								intval($obj['serviciotecnico']) +
+								intval($obj['equipos']) +
+								intval($obj['software']) +
+								intval($obj['materialeseinsumos']) +
+								intval($obj['viajes']) +
+								intval($obj['otrosrubros']);
+							echo $totalPresupuesto;
+						  ?>
+						</p>
+					</td>
+				</tr>
+			</table>
+		<?php } else if ($item->getColumna() == "esprotegida") { ?>
+			<blockquote>
+	  			<p><?php if ($obj["propiedadintelectual"] == 0) {
+	  					echo "No.";
+	  				} else {
+	  					echo "Si. ".$obj["descripcionpropiedadintelecual"]; 
+	  				} ?>
+  				</p>
+  			</blockquote>
+		<?php } else if ($item->getColumna() == "tienepolitica") { ?>
+			<blockquote>
+	  			<p><?php if ($obj["politicapropiedadintelectual"] == 0) {
+	  					echo "No.";
+	  				} else {
+	  					echo "Si. ".$obj["descripcionpoliticapropiedadintelecual"]; 
+	  				} ?>
+  				</p>
+  			</blockquote>
+		<?php } else if ($item->getColumna() == "elautoresproponente") { ?>
+			<blockquote>
+	  			<p><?php if ($obj["autenticidad"] == 0) {
+	  					echo "No. ".$obj["descripcionautorpropiedad"];
+	  				} else {
+	  					echo "Si."; 
+	  				} ?>
+  				</p>
+  			</blockquote>
+		<?php } else if ($item->getColumna() == "exposiciondelasolucion") { ?>
+			<br>
+			<p class="text-info"><strong>¿Cuándo?</strong></p>
+			<blockquote>				
+	  			<p><?php echo $obj["cuando"]; ?></p>
+  			</blockquote>
+			<p class="text-info"><strong>¿Con quién?</strong></p>
+			<blockquote>				
+	  			<p><?php echo $obj["conquien"]; ?></p>
+  			</blockquote>
+			<p class="text-info"><strong>¿Se han hecho presentaciones públicas de esta solución?</strong></p>
+			<blockquote>				
+	  			<p><?php echo $obj["presentacionpublica"]; ?></p>
+  			</blockquote>
+			<p class="text-info"><strong>¿Se hizo algún acuerdo de confidencialidad con esta persona?</strong></p>
+			<blockquote>				
+	  			<p><?php echo $obj["acuerdoconfidencialidadconautor"]; ?></p>
+  			</blockquote>
+		<?php } ?>
+
+	  </div>
+	</div>
+	<hr>
+	<?php } ?>
+
+
+	<?php } ?>	
+	
+ </div>
+
+<script type="text/javascript">
+	<?php echo "var datosGuardados = ". json_encode($this->resultados).";"; ?>
+	$(document).ready(function(){ 	
+		$(document).on("click", ".guardarevaluacion", 
+			function(){ 
+				var myForm = $(this).parent().parent("form");
+				var myButton = $(this);
+				// if (myForm.valid()) {
+				if (true) {
+					myButton.button('loading');					
+					var dato = {
+						itemaevaluar: myForm.find('#itemaevaluar').val(),
+						concepto: myForm.find('#concepto').val(),
+						valor: myForm.find('#valor option:selected').val(),
+						evaluaciones_id: myForm.find('#evaluaciones_id').val(),
+						evaluador: $('#evaluador').val(),
+						reto: $('#reto').val(),
+						solucionador: $('#solucionador').val()
+					};
+					
+					myForm.find('.estadoRegistro').hide();
+					$.post('<?php echo $this->baseUrl()?>/reto/evaluaciones/add', dato, 
+						function (data) {
+							if (data.id<0) {
+								$('.notify').notify({message: { text: 'Intente guardar de nuevo.' }}).show();
+							} else {
+								myForm.find('#evaluaciones_id').val(data.id);
+								myForm.find('.estadoRegistro').show();
+							}
+							myButton.button('reset');					
+					}).fail(function() {
+						$('.notify').notify({message: { text: 'ERROR al guardar, intente de nuevo o comuniquese con el administrador.' }}).show();
+						myButton.button('reset');	
+					});
+				}
+	    	}
+	    );
+
+		$(':input').change(function(){$(this).parent().parent("form").find('.estadoRegistro').hide(); });
+		
+	    //Cargue de datos
+	    $('.estadoRegistro').hide();
+	    $.each(datosGuardados, function(index, value) {
+		    var updForm = $('#fr_'+value.itemaevaluar);
+		    updForm.find('#itemaevaluar').val(value.itemaevaluar);
+			updForm.find('#concepto').val(value.concepto);
+			updForm.find('#valor').val(value.valor);
+			updForm.find('#evaluaciones_id').val(value.evaluaciones_id);
+			updForm.find('.estadoRegistro').show();
+		}); 
+
+		$('.loadTabla').each(function (myDiv) {
+			$(this).load('<?php echo $this->baseUrl()?>/reto/caracteristicasprincipalessolucion/index/solucionador/'+$('#solucionador').val());
+		});
+
+		$('.precio').currency({
+		    region: 'USD', // The 3 digit ISO code you want to display your currency in
+		    thousands: ',', // Thousands separator
+		    decimal: '.',   // Decimal separator
+		    decimals: 0, // How many decimals to show
+		    hidePrefix: false, // Hide any prefix
+		    hidePostfix: false, // Hide any postfix
+		    convertFrom: '', // If converting, the 3 digit ISO code you want to convert from,
+		});
+	});
+</script>

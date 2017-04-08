@@ -453,10 +453,10 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 					$evalitem .= "+ IF(ISNULL(NULLIF(viajes,'')),0,1) ";
 					$evalitem .= "+ IF(ISNULL(NULLIF(otrosrubros,'')),0,1) ";
  				} else if ($item['columna'] == "esprotegida") {
- 					$evalitem .= " IF(propiedadintelectual=1 AND !ISNULL(descripcionpropiedadintelecual),1,0) ";
+ 					$evalitem .= " IF((propiedadintelectual=1 AND !ISNULL(descripcionpropiedadintelecual) AND (descripcionpropiedadintelecual <> '')) OR propiedadintelectual=0,1,0) ";
  					//$evalitem .= "+ IF(ISNULL(NULLIF(descripcionpropiedadintelecual,'')),0,1) ";
  				} else if ($item['columna'] == "tienepolitica") {
- 					$evalitem .= " IF(politicapropiedadintelectual=1 AND !ISNULL(descripcionpoliticapropiedadintelecual),1,0) ";
+ 					$evalitem .= " IF((politicapropiedadintelectual=1 AND !ISNULL(descripcionpoliticapropiedadintelecual) AND (descripcionpoliticapropiedadintelecual <> '')) OR politicapropiedadintelectual=0,1,0) ";
  					// $evalitem .= "+ IF(,0,1) ";
  				} else if ($item['columna'] == "elautoresproponente") {
  					$evalitem .= " IF(autenticidad=0 AND !ISNULL(descripcionautorpropiedad),1,0) ";

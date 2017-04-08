@@ -9,17 +9,6 @@
 	        <action>index</action>
 	        <icon>icon-home</icon>	
 	    </home>
-	    <solucionadores>
-            <label>Solucionadores</label>
-            <order>1</order>
-            <module>reto</module>
-            <controller>solucionadores</controller>
-            <action>index</action>
-            <resource>reto:solucionadores</resource>
-	  		<privilege>index</privilege>
-	  		<visible>1</visible>
-			<icon>icon-lightbulb</icon>
-		</solucionadores>
 	    <retos>
             <label>Retos</label>
             <order>2</order>

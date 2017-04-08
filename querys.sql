@@ -23,3 +23,5 @@ ALTER TABLE `ve_solucionadores` ADD `estadodemadurezotro` TEXT NOT NULL AFTER `e
 ALTER TABLE `ve_solucionadores` ADD `enviado` tinyint(1) DEFAULT '0';
 
 ALTER TABLE `ve_solucionadores` ADD `ultimaactualilzacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+
+INSERT INTO ve_aclacciones( accrecurso, accaccion ) VALUES ('reto:solucionadores', 'vistaimpresion');

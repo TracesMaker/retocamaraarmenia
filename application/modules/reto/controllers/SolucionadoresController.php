@@ -87,6 +87,28 @@ class Reto_SolucionadoresController extends Zend_Controller_Action
 		$this->view->estadosMadurez = $madurezDB->getArrayOption();
 	}
 
+	public function vistaimpresionAction()
+	{
+		$this->_helper->layout()->setLayout("layout_back");
+		$id = $this->getRequest()->getParam('id');
+		$Obj = $this->SolucionadoresDB->getById($id);
+		$this->view->datos = $this->SolucionadoresDB->_depopulate($Obj);
+
+		$ItemaevaluarDB = Reto_Model_ItemaevaluarMapper::getInstance();
+		$ItemaevaluarDB->_populateFiltros(array("sort" => "orden","evaluable" => 1));
+		$this->view->itemaevaluar = $ItemaevaluarDB->getList();
+
+		$_auth = new Zend_Session_Namespace('veoliaZend_Auth');
+		$this->view->evaluador = $_auth->usuario_id;
+
+		$EvaluacionesDB = Reto_Model_EvaluacionesMapper::getInstance();
+		
+		$this->view->resultados = $EvaluacionesDB->getDatosGuardados($this->view->datos['reto'], $this->view->datos['solucionadores_id'], $_auth->usuario_id);
+	
+		$madurezDB = Reto_Model_EstadosdemadurezMapper::getInstance();
+		$this->view->estadosMadurez = $madurezDB->getArrayOption();
+	}
+
 	public function reporteAction()
 	{
 		$this->_helper->layout()->setLayout("layout_back");
@@ -280,6 +302,7 @@ class Reto_SolucionadoresController extends Zend_Controller_Action
 		$rol = Zend_Registry::get('role');
 		$permisos = array();
 		$permisos["edit"] = ($auth->_acl->isAllowed($rol,"reto:solucionadores","edit"))? true : false;
+		$permisos["vistaimpresion"] = ($auth->_acl->isAllowed($rol,"reto:solucionadores","vistaimpresion"))? true : false;
 		$permisos["evaluar"] = ($auth->_acl->isAllowed($rol,"reto:solucionadores","evaluar"))? true : false;
 		$permisos["add"] = ($auth->_acl->isAllowed($rol,"reto:solucionadores","add"))? true : false;
 		$permisos["delete"] = ($auth->_acl->isAllowed($rol,"reto:solucionadores","delete"))? true : false;

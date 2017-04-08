@@ -149,17 +149,6 @@
                 }
             ?>
             <?php  
-              if($auth->_acl->isAllowed($rol,"reto:solucionadores","index")){
-                ?>
-                <li class="active dropdown singleDrop color-1">
-                  <a href="<?php echo $this->baseUrl()?>/reto/solucionadores" >
-                    <i class="fa fa-lightbulb-o bg-color-1" ></i> <span> Soluciones </span>
-                  </a>
-                </li>
-                <?php 
-                }
-            ?>
-            <?php  
               if($auth->_acl->isAllowed($rol,"default:aclusuarios","index")){
                 ?>
                  <li class="active dropdown singleDrop color-5">

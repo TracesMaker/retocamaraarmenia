@@ -10,6 +10,7 @@
 	<tr>
 		<th  class="sort hidden-phone" sort="nombredelaempresa" >Nombre de la empresa / persona natural</th>
 		<th  class="sort hidden-phone" sort="nombredepersonadecontacto" >Persona contacto</th>
+		<th  class="sort" sort="correo" >Correo</th>
 		<th  class="sort hidden-phone" sort="celulardelproponente" >Celular</th>
 		<th  class="sort hidden-phone"  >Progreso</th>
 		<th class="no-print" width="126px">Evaluar</th>
@@ -21,7 +22,10 @@
  foreach ($this->pagination as $obj) : ?>
 	<tr>
 		<td class="hidden-phone">
-			<?php echo $obj->getNombredelaempresa(); ?>
+			<?php echo $obj->getNombredelaempresa()." [".$obj->getUsuarioObject()->getNombre()."]"; ?>
+		</td>
+		<td class="hidden-phone">
+			<?php echo $obj->getUsuarioObject()->getEmail(); ?>
 		</td>
 		<td class="hidden-phone">
 			<?php echo $obj->getNombredepersonadecontacto(); ?>
@@ -32,13 +36,16 @@
 		</td>
 		<td class="hidden-phone">
 			<div class="progress progress-striped">
-			  <div class="bar" style="width: <?php echo $obj->getProgreso(); ?>%;"><?php echo $obj->getProgreso(); ?>%</div>
+			  <div class="bar" style="width: <?php echo $obj->getProgreso(); ?>%;"><?php echo round($obj->getProgreso(),2); ?>%</div>
 			</div>			
 		</td>
 		<td class="no-print" >
 		  <div class="btn-group" title="<?php echo $obj->get_Label_Model() ?>">
 			<?php if($this->permisos["evaluar"]  ): ?>
-				<a title="Evaluar" class="btn btn-success" type="button" href="<?php echo $this->baseUrl() ?>/reto/solucionadores/evaluar/id/<?php echo $obj->getId() ?>" ><i class="icon-tasks"></i></a>
+				<!-- <a title="Evaluar" class="btn btn-success" type="button" href="<?php echo $this->baseUrl() ?>/reto/solucionadores/evaluar/id/<?php echo $obj->getId() ?>" ><i class="icon-tasks"></i></a> -->
+			<?php endif ?>
+			<?php if($this->permisos["vistaimpresion"] AND $obj->getEnviado()): ?>
+				<a title="Evaluar" class="btn btn-success" type="button" href="<?php echo $this->baseUrl() ?>/reto/solucionadores/vistaimpresion/id/<?php echo $obj->getId() ?>" ><i class="icon-print"></i> Vista impresion</a>
 			<?php endif ?>
             </div>
 		</td>
@@ -52,7 +59,7 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#solucionadoresTable").dataTable({"bPaginate": true,"sPaginationType": "bootstrap", "bLengthChange": false});
+		$("#solucionadoresTable").dataTable({"bPaginate": false,"sPaginationType": "bootstrap", "bLengthChange": false});
 	});
 	
 </script>

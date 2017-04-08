@@ -90,13 +90,8 @@ class Reto_Form_Solucionadorespropiedadintelectual extends EasyBib_Form
 		$submit->setAttrib('onclick', 'clicksaveformpropiedad();');
 		$this->addElement($submit);
 
-		$send = new Zend_Form_Element_Button('send');	
-		$send->setLabel( 'Enviar');
-		$send->setAttrib('class', 'btn btn-primary form-control saveform bg-color-1 btnArea');
-		$send->setAttrib('onclick', 'clicksendformpropiedad();');
-		$this->addElement($send);
 		
-		 EasyBib_Form_Decorator::setFormDecorator($this, EasyBib_Form_Decorator::BOOTSTRAP, 'submitsolucionadores', 'send');
+		 EasyBib_Form_Decorator::setFormDecorator($this, EasyBib_Form_Decorator::BOOTSTRAP, 'submitsolucionadores');
    
 
 	}

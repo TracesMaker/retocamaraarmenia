@@ -21,7 +21,7 @@
             <div class="row progress-wizard" style="border-bottom:0;">
 
               <div class="col-sm-4 col-xs-12 progress-wizard-step complete ">
-                <div class="progress"><div class="progress-bar"></div></div>
+                <div class="progress"><div class="progress-bar" prg="0"></div></div>
                 <span  class="progress-wizard-dot">
                   <i class="fa fa-user" aria-hidden="true"></i>
                 </span>
@@ -29,7 +29,7 @@
               </div>
 
               <div class="col-sm-4 col-xs-12 progress-wizard-step complete">
-                <div class="progress"><div class="progress-bar"></div></div>
+                <div class="progress"><div class="progress-bar" prg="0"></div></div>
                 <span class="progress-wizard-dot">
                   <i class="fa  fa-pencil-square-o" aria-hidden="true"></i>
                 </span>
@@ -37,7 +37,7 @@
               </div>
 
               <div class="col-sm-4 col-xs-12 progress-wizard-step complete">
-                <div class="progress"><div class="progress-bar"></div></div>
+                <div class="progress"><div class="progress-bar" prg="0"></div></div>
                 <span  class="progress-wizard-dot">
                   <i class="fa fa-check" aria-hidden="true"></i>
                 </span>
@@ -52,7 +52,7 @@
             <div class="row progress-wizard" style="border-bottom:0;">
 
               <div class="col-sm-4 col-xs-12 progress-wizard-step complete">
-                <div class="progress"><div class="progress-bar"></div></div>
+                <div class="progress"><div class="progress-bar" prg="0"></div></div>
                 <span  class="progress-wizard-dot">
                   <i class="fa fa-user" aria-hidden="true"></i>
                 </span>
@@ -60,7 +60,7 @@
               </div>
 
               <div class="col-sm-4 col-xs-12 progress-wizard-step active">
-                <div class="progress"><div class="progress-bar"></div></div>
+                <div class="progress"><div class="progress-bar" prg="0"></div></div>
                 <span href="checkout-step-2.html" class="progress-wizard-dot">
                   <i class="fa  fa-pencil-square-o" aria-hidden="true"></i>
                 </span>
@@ -68,7 +68,7 @@
               </div>
 
               <div class="col-sm-4 col-xs-12 progress-wizard-step incomplete">
-                <div class="progress"><div class="progress-bar"></div></div>
+                <div class="progress"><div class="progress-bar" prg="0"></div></div>
                 <span href="checkout-step-3.html" class="progress-wizard-dot">
                   <i class="fa fa-check" aria-hidden="true"></i>
                 </span>
@@ -113,7 +113,7 @@
             <div class="tabCommon tabLeft">
               <ul class="nav nav-tabs col-sm-3">
                 <li style="margin-bottom: 0px!important;">                
-                 <h4 style="margin-bottom: 0px!important;">Pasos para diligencias la propuesta</h4>
+                 <h4 style="margin-bottom: 0px!important;">Pasos para diligenciar la propuesta</h4>
                 </li>
                 <li class="active">
                 <a data-toggle="tab" href="#DatosGenerales">1. Datos generales</a>
@@ -329,6 +329,7 @@
                               
                               <?php echo $this->form_intelectual; ?> 
                             </div>
+                            <button name="send" id="send" type="reset" class="btn btn btn-primary form-control saveform bg-color-1 btnArea" onclick="clicksendformpropiedad();">Enviar</button>
                         </div>
                     </div>
                   </div>
@@ -343,10 +344,31 @@
 <div ><ul id="progreso"></ul></div>
 <script>
 
+$('#send').hide();
+
 function updateSectionProgress(section) {
   let idSol = $('#solucionadores_id').val();
   $.get('<?php echo $this->baseUrl()?>/reto/solucionadores/getprogreso', {solucion: idSol, seccion: section},function (data) {        
         $('.progress-bar.section-'+section).css('width',data.progreso+'%');
+        $('.progress-bar.section-'+section).attr('prg',data.progreso);
+        
+        let cont = 0;
+        $('[class^="progress-bar"]').each(function(bar){          
+            cont += parseInt($(this).attr('prg'));          
+            if (parseInt($(this).attr('prg')) === 100 || cont >= 671) {
+              if(cont >= 671){
+                $('#send').show();        
+              } 
+            } else {
+              return;
+            }
+        });
+
+        if (section == 7) {
+          console.info(data.query)
+        }
+
+
         // $("#progreso").append('<br><li>'+
         //           'progreso: '+data.query+'<br>'+
         //           'progreso: '+data.progreso+'<br>'+
