@@ -15,6 +15,7 @@
             </div>
           </div>
         </div>
+        
         <?php if($this->solucionador->getEnviado()==1): ?>
           <div class="container">
             <div class="row progress-wizard" style="border-bottom:0;">
@@ -76,7 +77,37 @@
             </div>
            
           </div>
-
+        <?php 
+              $visible = "";
+              if(date("Y-m-d G:i") < $this->reto->getFechafin()." 18:00"){
+                $visible = "true";
+              }else{
+                $visible = "false";
+              }
+              $hoy =  date("Y-m-d");
+              if($hoy == $this->reto->getFechafin()){
+                $label_fecha = "HOY";
+              }else{
+                $label_fecha = $this->reto->getFechafin();
+              }
+        ?>
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="tabCommon tabLeft ">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-9 alert ">
+              <ul>
+                <li><h4>Recuerde que:</h4></li>
+                <li><h5>La fecha de cierre es <b><?php echo $label_fecha ; ?></b> hasta las 6:00 PM</h5></li>
+                <li><h5>Las propuestas <b>no enviadas</b> no se tendran en cuenta</h5></li>
+                <li><h5>El boton <b>ENVIAR</b> solo aparece al completar el 100% de los 7 pasos</h5></li>
+              </ul>
+            </div>
+            </div>
+          </div>
+        </div>
+          
         <div class="row">
           <div class="col-xs-12">
             <div class="tabCommon tabLeft">
@@ -512,10 +543,9 @@ function clicksendformpropiedad()
 {
     var buttonSelect = $(this); 
     buttonSelect.parents(".form-actions").find("button").button('loading');
-     $('#enviado').val(1);
-     
       if ($("#propiedadform").valid()) {
           if(confirm("Esta seguro que desea enviar el formulario?")){
+            $('#enviado').val(1);
               $.post("<?php echo $this->baseUrl()?>/reto/solucionadores/propiedadintelectual", $("#propiedadform").serialize(),
                   function(data) {
                     html = '<div class="col-xs-12 message"><div class=" alert alert-success alert-dismissible alt" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="false">x</span></button><span class="successAlert"><i class="fa fa-check" aria-hidden="true"></i></span>Registro actualizado con éxito</div></div>';
@@ -524,12 +554,18 @@ function clicksendformpropiedad()
                         $('.message').slideUp( 2000 );
                          setTimeout(function() {
                             $('.message').remove();
+                            location.reload();
                           }, 2000);
                         updateSectionProgress(7);
+                      }else{
+                        if(data.cerro){
+                          alert("Lo sentimos pero la convocatoria ha cerrado");
+                        }
                       }
                   });
           }
         } else {
+          $('#enviado').val(0);
           buttonSelect.parents(".form-actions").find("button").button('reset');
           alert("Formulario invalido");
       }
