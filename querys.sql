@@ -25,3 +25,5 @@ ALTER TABLE `ve_solucionadores` ADD `enviado` tinyint(1) DEFAULT '0';
 ALTER TABLE `ve_solucionadores` ADD `ultimaactualilzacion` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
 
 INSERT INTO ve_aclacciones( accrecurso, accaccion ) VALUES ('reto:solucionadores', 'vistaimpresion');
+INSERT INTO ve_aclpermisos (perpermiso, perrol, peraccion ) 
+	VALUES ('1', 3, (SELECT aclacciones_id FROM ve_aclacciones WHERE accrecurso = 'reto:solucionadores' AND accaccion = 'vistaimpresion') );

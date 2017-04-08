@@ -89,7 +89,9 @@ class Reto_SolucionadoresController extends Zend_Controller_Action
 
 	public function vistaimpresionAction()
 	{
-		$this->_helper->layout()->setLayout("layout_back");
+		if (Zend_Registry::get('role') != 3) {
+			$this->_helper->layout()->setLayout("layout_back");
+		}
 		$id = $this->getRequest()->getParam('id');
 		$Obj = $this->SolucionadoresDB->getById($id);
 		$this->view->datos = $this->SolucionadoresDB->_depopulate($Obj);
