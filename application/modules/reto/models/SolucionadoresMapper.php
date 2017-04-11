@@ -397,7 +397,7 @@ class Reto_Model_SolucionadoresMapper extends Model_DataMapperAbstract
 			'4' => array('13', '14', '15', '16', '17', '18'), 	//Metodología
 			'5' => array('19'), 									//Presupuesto
 			'6' => array('20','21'), 							//Capacidad
-			'7' => array('22','23','24','25')					//Propiedad intelectual
+			'7' => array('22','23')					//Propiedad intelectual
 			);
 
 		$iaeDB = Reto_Model_ItemaevaluarMapper::getInstance();
